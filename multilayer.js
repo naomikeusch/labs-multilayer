@@ -40,7 +40,7 @@ multilayer.controller('SelectorCtrl', function ($scope) {
         zoom: 11,
         center_lat: 40.70,
         center_lon: -73.97,
-        loaderControl: false,
+        loaderControl: true,
         zoomControl: false
     }).done(function (vis) {
         var map = vis.getNativeMap();
