@@ -46,7 +46,7 @@ multilayer.controller('SelectorCtrl', function ($scope) {
         var map = vis.getNativeMap();
 
         var sql = new cartodb.SQL({user: user});
-        sql.execute("SELECT name, show, viz_json as vizjson, sql, cartocss, interactivity, sql_user FROM " + table + " WHERE name IS NOT NULL ORDER BY name ASC")
+        sql.execute("SELECT name, show, viz_json as vizjson, sql, cartocss, interactivity, sql_user FROM " + table + " WHERE name IS NOT NULL ORDER BY layerorder ASC")
             .done(function (data) {
                 $scope.layers = data.rows;
                 for (var id = 0; id < $scope.layers.length; ++id) {
