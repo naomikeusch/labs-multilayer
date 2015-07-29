@@ -65,7 +65,7 @@ input[type=checkbox]:checked+label{
 }
 
 #selector ul{
-    margin: 0 20px 20px 20px;
+    margin: 0 20px 20px 1px;
 }
 
 #selector ul li{
