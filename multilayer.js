@@ -74,6 +74,7 @@ multilayer.controller('SelectorCtrl', function ($scope) {
                     cartodb.createLayer(map, layerOptions)
                         .addTo(map)
                         .done(addLayer(id, layer.show))
+                            cdb.vis.Vis.addInfowindow(map, layer.getSubLayer(0), ['cartodb_id']);
                         .error(function (error) {
                             console.log("error: " + error);
                         });
