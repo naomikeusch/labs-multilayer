@@ -65,7 +65,7 @@ input[type=checkbox]:checked+label{
 }
 
 #selector ul{
-    margin: 0 10px 10px 10px;
+    margin: 0 20px 20px 20px;
 }
 
 #selector ul li{
@@ -75,7 +75,7 @@ input[type=checkbox]:checked+label{
 
 #selector ul li:last-child{
     border-bottom: none;
-    padding-bottom: 1px;
+    padding-bottom: 0;
 }
 
 
