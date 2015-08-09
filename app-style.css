@@ -70,7 +70,7 @@ input[type=checkbox]:checked+label{
 
 #selector ul li{
     border-bottom: 1px solid rgba(0,0,0,0.15);
-    padding: 5px 5px 5px 5px;
+    padding: 5px 0 5px 5px;
 }
 
 #selector ul li:last-child{
