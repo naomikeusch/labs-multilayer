@@ -23,7 +23,7 @@ label{
     color: #999;
     display: inline-block;
     vertical-align: middle;
-    margin: 0 0 0 2px;
+    margin: 0 0 0 3px;
 }
 
 input[type=checkbox]:checked+label{
@@ -75,7 +75,7 @@ input[type=checkbox]:checked+label{
 
 #selector ul li:last-child{
     border-bottom: none;
-    padding-bottom: 0;
+    padding-bottom: 5px;
 }
 
 
