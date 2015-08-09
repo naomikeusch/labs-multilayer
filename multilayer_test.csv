@@ -1,0 +1,408 @@
+name,viz_json,created_at,updated_at,sql,cartocss,interactivity,show,sql_user,the_geom,cartodb_id,layerorder
+NYC Council Districts,https://andrewmartini.cartodb.com/api/v2/viz/7ed0ef5a-29b0-11e5-9825-0e853d047bba/viz.json,2015-02-25 07:21:25.732+00,2015-07-29 18:05:00.364076+00,,,,false,,,6,14
+"NY Congressional Districts
+",https://andrewmartini.cartodb.com/api/v2/viz/d0fb1b72-2a5d-11e5-a731-0e4fddd5de28/viz.json,2015-03-25 20:52:32.715+00,2015-07-29 18:05:06.221834+00,,,,false,,,21,20
+NY State Senate Districts,https://andrewmartini.cartodb.com/api/v2/viz/394257cc-2a5e-11e5-9e3f-0e853d047bba/viz.json,2015-03-25 20:53:43.917+00,2015-07-29 18:05:18.746841+00,,,,false,,,22,22
+"NY State Assembly Districts
+
+",https://andrewmartini.cartodb.com/api/v2/viz/8aa5a57e-2a5e-11e5-9807-0e9d821ea90d/viz.json,2015-03-25 22:25:55.037+00,2015-07-29 18:05:21.592529+00,,,,false,,,24,24
+NYC 2010 Census Tracts,https://andrewmartini.cartodb.com/api/v2/viz/8e9dcb04-9821-11e4-a998-0e9d821ea90d/viz.json,2015-03-27 19:57:52.653+00,2015-07-29 18:05:32.589896+00,,,,false,,,27,16
+City Boundary,,2015-07-14 17:37:13.314882+00,2015-07-29 18:05:39.99827+00,SELECT * FROM nyc_single,"#nyc_single {polygon-fill: #000000; polygon-opacity: 0; line-color: #000000; line-width: 2;line-opacity: 1;}",,false,andrewmartini,,28,1
+School Language Zone,,2015-07-14 23:21:28.658678+00,2015-07-29 18:06:10.781246+00,SELECT * FROM schlang_geo_04_30,"#schlang_geo_04_30 {
+  polygon-fill: #FFFFFF;
+  polygon-opacity: 0;
+  line-color: #909090;
+  line-width: 1;
+  line-opacity: 1;
+}",,false,,,30,60
+NYC Bike Routes,https://andrewmartini.cartodb.com/api/v2/viz/ff16c39a-2593-11e5-bd58-0e853d047bba/viz.json,2015-03-27 19:43:17.312+00,2015-07-29 18:05:57.398824+00,,,,false,,,26,30
+CBOs & Religious Institutions,https://andrewmartini.cartodb.com/api/v2/viz/4a36bc10-1444-11e5-84c6-0e853d047bba/viz.json,2015-07-14 23:09:25.281986+00,2015-07-29 18:06:03.023139+00,,,,false,,,29,50
+School Language Plurality,,2015-07-15 03:26:27.570268+00,2015-07-29 18:06:23.532845+00,"SELECT the_geom, the_geom_webmercator, cartodb_id, _plura, _plura_qt, _plura_grp FROM schlang_merge_05_04","#schlang_merge_05_04 {
+               polygon-opacity: 0.7;
+               line-color: #FFF;
+               line-width: 1;
+               line-opacity: 1;
+            }
+
+            #schlang_merge_05_04[_plura_grp=""French Creoles""] {
+               polygon-fill: #A53ED5;
+            }
+            #schlang_merge_05_04[_plura_grp=""Indo-European: Balto-Slavic""] {
+               polygon-fill: #0000a0;
+            }
+            #schlang_merge_05_04[_plura_grp=""Indo-European: Romance""] {
+               polygon-fill: #5CA2D1;
+            }
+            #schlang_merge_05_04[_plura_grp=""Indo-European: Germanic""] {
+               polygon-fill: #cccccc;
+            }
+            #schlang_merge_05_04[_plura_grp=""Indo-European: Other""] {
+               polygon-fill: #00ceff;  
+            }
+            #schlang_merge_05_04[_plura_grp=""Uralic""] {
+               polygon-fill: #00ceff;
+            }
+
+            #schlang_merge_05_04[_plura_grp=""Sino-Tibetan: Chinese""] {
+               polygon-fill: #ff0000;
+            }
+            #schlang_merge_05_04[_plura_grp=""South Asian""] {
+               polygon-fill: #ffa500;
+            }
+            #schlang_merge_05_04[_plura_grp=""E & SE Asia: other""] {
+               polygon-fill: #fb9a99;
+            }
+            #schlang_merge_05_04[_plura_grp=""Austronesian: Malayo-Polynesian""] {
+               polygon-fill: #fb9a99;
+            }
+
+            #schlang_merge_05_04[_plura_grp=""Afro-Asiatic: Semitic""] {
+               polygon-fill: #49db40;
+            }
+            #schlang_merge_05_04[_plura_grp=""Niger-Congo: Atlantic-Congo""] {
+               polygon-fill: #136400;
+            }
+            #schlang_merge_05_04[_plura_grp=""Niger-Congo: Mande""] {
+               polygon-fill: #229A00;
+            }
+
+            #schlang_merge_05_04 {
+               polygon-fill: #DDDDDD;
+            }   
+
+            /** language labels for _plura */
+            #schlang_merge_05_04::labels [zoom >= 12] {
+              text-name: [_plura];
+              text-face-name: 'Lato Bold';
+              text-size: 10;
+ text-transform: capitalize; 
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #000;
+              text-halo-fill: #FFF;
+              text-halo-radius: 1;
+              text-dy: 0;
+              text-allow-overlap: false;
+              text-placement: point;
+            text-transform: capitalize; text-placement-type: simple;
+            }
+
+            #schlang_merge_05_04::labels [zoom >= 13]  {
+              text-name: [_plura]+"" ""+[_plura_qt];
+              text-face-name: 'Lato Bold';
+              text-size: 11;
+            }
+
+            #schlang_merge_05_04::labels [zoom >= 14] {
+              text-name: [_plura]+"" ""+[_plura_qt];
+              text-face-name: 'Lato Bold';
+              text-size: 13;
+            }",,false,,,32,63
+NYC Subways,https://andrewmartini.cartodb.com/api/v2/viz/77a3e3a4-2aaf-11e5-8077-0e9d821ea90d/viz.json,2015-07-15 05:04:55.058633+00,2015-07-29 18:06:44.971497+00,SELECT * FROM routes_nyc_subway_may2015,,,false,,,34,32
+NYC Community Districts,,2015-02-25 07:13:51.468+00,2015-08-04 21:10:36.67334+00,"SELECT * FROM nycd WHERE (
+  (borocd <> 164) AND 
+  (borocd <> 595) AND 
+  (borocd <> 483) AND 
+  (borocd <> 484) AND 
+  (borocd <> 480) AND 
+  (borocd <> 226) AND
+  (borocd <> 355)
+  )
+  ","#nycd{
+  polygon-fill: #ffa500;
+  polygon-opacity: 0;
+  polygon-comp-op: multiply;
+  line-color: #ffa500;
+  line-width: 2;
+  line-opacity: 1;
+}
+
+#nycd::labels  [zoom >=13] {
+  text-name: [borocd];
+  text-face-name: 'Lato Bold';
+  text-size: 20;
+  text-label-position-tolerance: 0;
+  text-fill: #ffa500;
+  text-halo-fill: #FFF;
+  text-halo-radius: 1;
+  text-dy: 0;
+  text-allow-overlap: true;
+  text-placement: interior;
+  text-placement-type: dummy;
+}
+",,false,,,5,12
+NYC Borough pop density,,2015-02-05 15:54:42+00,2015-08-05 13:13:36.25327+00,"SELECT
+  *,
+  (pop_2014 / ST_area(
+      the_geom::geography 
+      )*1000) AS ppl_sq_m
+FROM
+  nybb","
+
+#nybb{
+  polygon-fill: #FFFFB2;
+  polygon-opacity: 0.8;
+  line-color: #FFF;
+  line-width: 0.5;
+  line-opacity: 1;
+}
+#nybb [ ppl_sq_m <= 28] {
+   polygon-fill: #BD0026;
+}
+#nybb [ ppl_sq_m <= 23] {
+   polygon-fill: #F03B20;
+}
+#nybb [ ppl_sq_m <= 18] {
+   polygon-fill: #FD8D3C;
+}
+#nybb [ ppl_sq_m <= 13] {
+   polygon-fill: #FECC5C;
+}
+#nybb [ ppl_sq_m <= 9] {
+   polygon-fill: #FFFFB2;
+}",,true,,,2,10
+School Language:  Non English %,,2015-07-28 22:01:41.827684+00,2015-07-29 19:35:20.987252+00,"SELECT cartodb_id,the_geom_webmercator, ((_total -english) *1.0 / _total*1.0) *100 as english_pct  FROM schlang_merge_05_04
+
+WHERE _total > 50","/** choropleth visualization */
+
+#schlang_merge_05_04{
+  polygon-fill: #FFFFB2;
+  polygon-opacity: 0.8;
+  line-color: #FFF;
+  line-width: 0.5;
+  line-opacity: 1;
+}
+#schlang_merge_05_04 [ english_pct <= 93.66279069767442] {
+   polygon-fill: #BD0026;
+}
+#schlang_merge_05_04 [ english_pct <= 55.02248875562219] {
+   polygon-fill: #F03B20;
+}
+#schlang_merge_05_04 [ english_pct <= 39.060402684563755] {
+   polygon-fill: #FD8D3C;
+}
+#schlang_merge_05_04 [ english_pct <= 25.311203319502074] {
+   polygon-fill: #FECC5C;
+}
+#schlang_merge_05_04 [ english_pct <= 13.133640552995391] {
+   polygon-fill: #FFFFB2;
+}",,false,,,37,65
+School Language: Qty Chinese Speakers,,2015-07-14 23:27:10.661099+00,2015-07-29 18:06:18.041741+00,"SELECT the_geom, the_geom_webmercator, cartodb_id, _st_chi_qty FROM schlang_merge_05_04 WHERE _st_chi_qty > 9","#schlang_merge_05_04 {
+  marker-fill-opacity: 0.7;
+  marker-line-color: #F11810;
+  marker-line-width: 1.5;
+  marker-line-opacity: 1;
+  marker-placement: point;
+  marker-multi-policy: largest;
+  marker-type: ellipse;
+  marker-fill: #F11810;
+  marker-allow-overlap: true;
+  marker-clip: false;
+  marker-comp-op: darken;
+}
+#schlang_merge_05_04 [ _st_chi_qty <= 1527] {
+   marker-width: 25.0;
+}
+#schlang_merge_05_04 [ _st_chi_qty <= 438] {
+   marker-width: 22.8;
+}
+#schlang_merge_05_04 [ _st_chi_qty <= 322] {
+   marker-width: 20.6;
+}
+#schlang_merge_05_04 [ _st_chi_qty <= 219] {
+   marker-width: 18.3;
+}
+#schlang_merge_05_04 [ _st_chi_qty <= 154] {
+   marker-width: 16.1;
+}
+#schlang_merge_05_04 [ _st_chi_qty <= 108] {
+   marker-width: 13.9;
+}
+#schlang_merge_05_04 [ _st_chi_qty <= 77] {
+   marker-width: 11.7;
+}
+#schlang_merge_05_04 [ _st_chi_qty <= 54] {
+   marker-width: 9.4;
+}
+#schlang_merge_05_04 [ _st_chi_qty <= 35] {
+   marker-width: 7.2;
+}
+#schlang_merge_05_04 [ _st_chi_qty <= 23] {
+   marker-width: 5.0;
+}",,false,,,31,62
+"School Language: Non-Eng  Non-Sp Plurality
+",,2015-07-15 03:36:35.228707+00,2015-07-29 18:06:29.230322+00,"SELECT the_geom, the_geom_webmercator, cartodb_id, _plurnes, _plurnes_qt, _plurnes_gr FROM schlang_merge_05_04","#schlang_merge_05_04 {
+             polygon-opacity: 0.7;
+             line-color: #FFF;
+             line-width: 1;
+             line-opacity: 1;
+          }
+
+          /** language group polygon fill */
+          #schlang_merge_05_04[_plurnes_gr=""Sino-Tibetan: Chinese""] {
+             polygon-fill: #ff0000;
+          }
+          #schlang_merge_05_04[_plurnes_gr=""South Asian""] {
+             polygon-fill: #ffa500;
+          }
+          #schlang_merge_05_04[_plurnes_gr=""E & SE Asia: other""] {
+             polygon-fill: #fb9a99;
+          }
+          #schlang_merge_05_04[_plurnes_gr=""Austronesian: Malayo-Polynesian""] {
+             polygon-fill: #fb9a99;
+          }
+
+
+          #schlang_merge_05_04[_plurnes_gr=""Afro-Asiatic: Semitic""] {
+             polygon-fill: #49db40;
+          }
+          #schlang_merge_05_04[_plurnes_gr=""Niger-Congo: Atlantic-Congo""] {
+             polygon-fill: #136400;
+          }
+          #schlang_merge_05_04[_plurnes_gr=""Niger-Congo: Mande""] {
+             polygon-fill: #229A00;
+          }
+
+          #schlang_merge_05_04[_plurnes_gr=""French Creoles""] {
+             polygon-fill: #A53ED5;
+          }
+          #schlang_merge_05_04[_plurnes_gr=""Indo-European: Balto-Slavic""] {
+             polygon-fill: #0000a0;
+          }
+          #schlang_merge_05_04[_plurnes_gr=""Indo-European: Romance""] {
+             polygon-fill: #5CA2D1;
+          }
+          #schlang_merge_05_04[_plurnes_gr=""Indo-European: Germanic""] {
+             polygon-fill: #5CA2D1;
+          }
+          #schlang_merge_05_04[_plurnes_gr=""Indo-European: Other""] {
+             polygon-fill: #00ceff; 
+          }
+          #schlang_merge_05_04[_plurnes_gr=""Uralic""] {
+             polygon-fill: #00ceff;
+          }
+
+          #schlang_merge_05_04 {
+             polygon-fill: #DDDDDD;
+          }
+
+          /** language labels for plurnes */
+          #schlang_merge_05_04::labels [zoom >= 12] {
+            text-name: [_plurnes];
+            text-face-name: 'Lato Bold';
+            text-size: 10;
+            text-wrap-before: true;
+            text-wrap-width: 20;
+ text-transform: capitalize;
+            text-label-position-tolerance: 10;
+            text-fill: #000;
+            text-halo-fill: #FFF;
+            text-halo-radius: 1;
+            text-dy: 0;
+            text-allow-overlap: false;
+            text-placement: point;
+            text-placement-type: simple;
+          }
+
+          #schlang_merge_05_04::labels [zoom >= 13]      {
+            text-name: [_plurnes]+"" ""+[_plurnes_qt];
+            text-face-name: 'Lato Bold';
+            text-size: 11;
+          }
+
+          #schlang_merge_05_04::labels [zoom >= 14]  {
+            text-name: [_plurnes]+"" ""+[_plurnes_qt];
+            text-face-name: 'Lato Bold';
+            text-size: 13;
+          }
+            #schlang_poly_v3_1::labels [_plurnes_qt < 9]{
+              text-name: [_plurnes_qt];
+              text-face-name: 'Lato Bold';
+              text-size: 0;
+              text-fill: #fff;
+              text-halo-radius: 0;
+            }",,false,,,33,64
+NYC Neighborhoods,,2015-02-19 08:32:33+00,2015-08-04 18:16:41.152071+00,SELECT * FROM neighborhoods,"Map {
+  buffer-size:128;
+}
+
+#neighborhoods{
+  polygon-fill: #00bfff;
+  polygon-opacity: 0.6;
+  line-color: #FFF;
+  line-width: 1;
+  line-opacity: 0.9;
+}
+#neighborhoods [zoom >=11]{
+  polygon-fill: #00bfff;
+  polygon-opacity: 0;
+  line-width: 0;
+  line-opacity: 0;
+  text-name: [ntaname3];
+  text-face-name: 'Lato Bold';
+  text-size: 9;
+  text-fill: #909090;
+  text-opacity: 0.8;
+  text-halo-fill: #FFF;
+  text-halo-radius: 0.8;
+  text-transform: uppercase;
+  text-wrap-width: 50;
+  text-wrap-before: true;
+  text-character-spacing: 1.1;
+  text-allow-overlap:false;
+  text-placement-type: simple;
+  text-placements:""W,E,N,12"";
+  text-label-position-tolerance:5;
+  text-min-distance:10;
+
+}
+#neighborhoods[zoom >=13]{
+  text-name: [ntaname3];
+  text-face-name: 'Lato Bold';
+  text-size: 12;
+  text-fill: #909090;
+  text-opacity: 0.9;
+  text-halo-fill: #FFF;
+  text-halo-radius: 1;
+  text-allow-overlap: true;
+  text-transform: uppercase;
+  text-wrap-width: 80;
+  text-wrap-before: true;
+  text-character-spacing: 1.2;
+}
+#neighborhoods[zoom >=14]{
+  text-name: [ntaname3];
+  text-face-name: 'Lato Bold';
+  text-size: 14;
+  text-fill: #909090;
+  text-opacity: 0.9;
+  text-halo-fill: #FFF;
+  text-halo-radius: 1;
+  text-allow-overlap: true;
+  text-transform: uppercase;
+  text-wrap-width: 80;
+  text-wrap-before: true;
+  text-character-spacing: 1.2;
+}
+#neighborhoods[zoom >=15]{
+  text-name: [ntaname3];
+  text-face-name: 'Lato Bold';
+  text-size: 18;
+  text-fill: #909090;
+  text-opacity: 0.9;
+  text-halo-fill: #FFF;
+  text-transform: uppercase;
+  text-wrap-width: 80;
+  text-wrap-before: true;
+  text-character-spacing: 1.3;
+}
+",,true,,,4,100
+"NYC Borough bounds
+",,2015-08-04 21:08:59.515408+00,2015-08-05 13:13:19.011+00,"SELECT the_geom, the_geom_webmercator, cartodb_id FROM nybb","#nybb{
+  polygon-fill: #1F78B4;
+  polygon-opacity: 0;
+  line-color: #1F78B4;
+  line-width: 2;
+  line-opacity: 1;
+}",,false,,,38,2
