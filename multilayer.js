@@ -44,10 +44,7 @@ multilayer.controller('SelectorCtrl', function ($scope) {
         zoomControl: false
     }).done(function (vis) {
         
-        vis.map.set({
-                     minZoom: 3,
-                    maxZoom: 6
-                    });
+
         var map = vis.getNativeMap();
 
         var sql = new cartodb.SQL({user: user});
