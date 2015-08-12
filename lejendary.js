@@ -31,9 +31,9 @@ currentLegend = null;
       }
       window.onload = function() {
           var customLegend = new cdb.geo.ui.Legend.Custom({
-            title: "Custom Legend",
+            title: "Boarders",
             data: [
-              { name: "Natural Parks",  value: "#58A062" },
+              { name: "NYC",  value: "#FF2900" },
               { name: "Villages",       value: "#F07971" },
               { name: "Rivers",         value: "#54BFDE" },
               { name: "Fields",         value: "#9BC562" },
