@@ -16,7 +16,7 @@ multilayer.controller('SelectorCtrl', function ($scope) {
     function addLayer(id, show, map) {
         return function (layer) {
             if (!show) {
-                map.remove();
+                layer.hide();
             }
             cdb.vis.Vis.addInfowindow(map, layer.getSubLayer(0), ['cartodb_id'])
             cartodbLayers[id] = layer;
