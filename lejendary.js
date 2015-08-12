@@ -70,9 +70,9 @@ currentLegend = null;
             intensity: { legend: intensityLegend, title: "Intensity Legend" }
           };
           legendsArray = [{
-            title: "Category Legend",
+            title: "Boarders",
             data: [
-              { name: "Natural Parks",  value: "#58A062" },
+              { name: "Postredist",  value: "#FF2900" },
               { name: "Villages",       value: "#F07971" },
               { name: "Rivers",         value: "#54BFDE" },
               { name: "Fields",         value: "#9BC562" },
