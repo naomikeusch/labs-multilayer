@@ -26,7 +26,7 @@ currentLegend = null;
           var li = '<li><a href="#" data-legend="' + type + '">' + legend.title + '</a></li>';
           $(".legend-selector").append(li);
         });
-        var li = '<li><a href="#" data-legend="stacked">Stacked</a></li>';
+        var li = '<li><a href="#" data-legend="stacked">Clear</a></li>';
         $(".legend-selector").append(li);
       }
       window.onload = function() {
