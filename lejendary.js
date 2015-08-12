@@ -63,7 +63,7 @@ currentLegend = null;
             left: "10", right: "20", color: "#f1f1f1"
           });
           legends = {
-            custom:    { legend: customLegend,    title: "Custom Legend" },
+            custom:    { legend: customLegend,    title: "Boarders" },
             bubble:    { legend: bubbleLegend,    title: "Bubble Legend" },
             density:   { legend: densityLegend,   title: "Density Legend" },
             category:  { legend: categoryLegend,  title: "Category Legend" },
