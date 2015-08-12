@@ -85,12 +85,12 @@ currentLegend = null;
           }];
           renderLegendList();
           $(".legend-selector a").click(selectLegend);
-          //var map_viz_url = 'https://naomikeusch.cartodb.com/api/v2/viz/62018d48-4108-11e5-a24d-0e4fddd5de28/viz.json';
+          
           var onVisDone = function(vis, layers) {
             layers[1].setInteraction(true);
             layers[1].on('featureOver', function(e, latlng, pos, data, layerNumber) {
               cartodb.log.log(e, latlng, pos, data, layerNumber);
             });
           };
-          //cartodb.createVis('map', map_viz_url, { legends: false, no_cdn: true }).done(onVisDone);
+         
       }
