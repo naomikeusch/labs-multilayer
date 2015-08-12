@@ -33,7 +33,7 @@ multilayer.controller('SelectorCtrl', function ($scope) {
         if ($scope.selectedLayers[id]) {
             layer.show();
         } else {
-            map.remove();
+            layer.hide();
         }
     };
 
