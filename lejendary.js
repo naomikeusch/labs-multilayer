@@ -34,7 +34,7 @@ currentLegend = null;
             title: "Boarders",
             data: [
               { name: "NYC",  value: "#FF2900" },
-              { name: "Villages",       value: "#F07971" },
+              { name: "Community Districts",       value: "#2167AB" },
               { name: "Rivers",         value: "#54BFDE" },
               { name: "Fields",         value: "#9BC562" },
               { name: "Caves",          value: "#FABB5C" }
