@@ -1,3 +1,4 @@
+<style type="text/css">
 html, body {
         position:relative;
       }
@@ -39,3 +40,4 @@ html, body {
       .legend-selector li a.selected {
         background:#f1f1f1;
       }
+</style>
