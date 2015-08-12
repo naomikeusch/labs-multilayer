@@ -92,5 +92,5 @@ currentLegend = null;
               cartodb.log.log(e, latlng, pos, data, layerNumber);
             });
           };
-          cartodb.createVis('map', map_viz_url, { legends: false, no_cdn: true }).done(onVisDone);
+          //cartodb.createVis('map', map_viz_url, { legends: false, no_cdn: true }).done(onVisDone);
       }
