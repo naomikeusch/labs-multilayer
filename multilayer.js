@@ -86,3 +86,4 @@ multilayer.controller('SelectorCtrl', function ($scope) {
             });
     });
 });
+window.onload = main;
