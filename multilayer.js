@@ -72,6 +72,11 @@ multilayer.controller('SelectorCtrl', function ($scope) {
                         };
                     }
                     cartodb.createLayer(map, layerOptions)
+                    
+                    vis.map.set({
+                     minZoom: 3,
+                    maxZoom: 6
+                    });
                         .addTo(map)
                         .done(addLayer(id, layer.show))
                         .error(function (error) {
