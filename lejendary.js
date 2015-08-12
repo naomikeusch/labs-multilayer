@@ -33,7 +33,7 @@ currentLegend = null;
           var customLegend = new cdb.geo.ui.Legend.Custom({
             title: "Boarders",
             data: [
-              { name: "NYC",  value: "#FF2900" },
+              { name: "City Council Districts",  value: "#FF2900" },
               { name: "Community Districts",       value: "#2167AB" },
               { name: "Rivers",         value: "#54BFDE" },
               { name: "Fields",         value: "#9BC562" },
