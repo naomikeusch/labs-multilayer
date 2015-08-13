@@ -32,22 +32,7 @@ var densityLegend = new cdb.geo.ui.Legend.Density({
                   });
                 })
                 
-              function createSelector(layer,num,violent) {
-             for (var i = 0; i < layer.getSubLayerCount(); i++) {
-              if (i === num) {
-                layer.getSubLayer(i).show();
-              } else {
-                layer.getSubLayer(i).hide();
-              }
-             }
-             if (violent){
-                $(densityLegendNon.render().el).hide()
-                $(densityLegend.render().el).show()
-             } else {
-                $(densityLegend.render().el).hide()
-                $(densityLegendNon.render().el).show()
-             }
-            }
+
 //end testing crime
 
 var multilayer = angular.module('multilayer', []);
