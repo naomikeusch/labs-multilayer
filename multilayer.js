@@ -86,8 +86,8 @@ multilayer.controller('SelectorCtrl', function ($scope) {
                 }
                 $scope.$apply();
             })
-            .error(function (errors) {
-                console.log("errors: " + errors);
+          /*  .error(function (errors) {
+                console.log("errors: " + errors); */
             });
     });
 });
