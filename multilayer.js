@@ -76,7 +76,7 @@ multilayer.controller('SelectorCtrl', function ($scope) {
                             }
                         };
                     }
-                    cartodb.createLayer(map, layerOptions, {legends:true})
+                    cartodb.createLayer(map, layerOptions)
                         .addTo(map)
                         .done(addLayer(id, layer.show, map))
                         .error(function (error) {
