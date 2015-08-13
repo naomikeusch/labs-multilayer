@@ -42,12 +42,12 @@
           type: 'cartodb',
           sublayers: [{
              sql: 'select * from city_council_districts',
-             cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0.3; line-color: #F00; }',
+             cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0.3; line-width: 2; line-color: #F00; }',
              interactivity: 'cartodb_id'
           },
           {
              sql: 'select * from nycd',
-             cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-color:  #2167AB; }',
+             cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color:  #2167AB; }',
              interactivity: 'cartodb_id'
           }
           ]
