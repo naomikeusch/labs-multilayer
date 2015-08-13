@@ -86,8 +86,12 @@ multilayer.controller('SelectorCtrl', function ($scope) {
                 }
                 $scope.$apply();
             })
-          /*  .error(function (errors) {
-                console.log("errors: " + errors); */
+            .error(function (errors) {
+                console.log("errors: " + errors); 
+                //edit
+         .on('done', function(lyr) {
+          L.control.layers(null, { 'maps': lyr }).addTo(map);
+          //end edit
             });
     });
 });
