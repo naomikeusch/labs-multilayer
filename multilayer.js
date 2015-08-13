@@ -60,7 +60,7 @@ multilayer.controller('SelectorCtrl', function ($scope) {
                     layer = $scope.layers[id];
                     layer.id = id;
                     //edit
-                    $scope.selectedLayers[id] = layer.show ? false : false;
+                    $scope.selectedLayers[id] = layer.show ? false : true;
                     if (layer.vizjson) {
                         layerOptions = layer.vizjson;
                     } else {
