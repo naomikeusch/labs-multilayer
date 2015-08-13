@@ -17,6 +17,14 @@ currentLegend = null;
           $(".legend-selector a.selected").removeClass("selected");
           $link.addClass("selected");
           currentLegend = legends[type].legend;
+          //Edit
+          cartodb.createLayer(map, layerOptions)
+                        .addTo(map)
+                        .done(addLayer(id, layer.show, map))
+                        .error(function (error) {
+                            console.log("error: " + error);
+                        });
+                        //end edit
         }
         currentLegend.addTo(".legends");
         //edit
