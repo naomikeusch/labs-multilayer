@@ -9,9 +9,7 @@ var title = getURLParameter('tt');
 var description = getURLParameter('d');
 var baseVizJsonUrl = "http://" + user + ".cartodb.com/api/v2/viz/" + uuid + "/viz.json";
 
-//testing crime
 
-//end testing crime
 
 var multilayer = angular.module('multilayer', []);
 multilayer.controller('SelectorCtrl', function ($scope) {
@@ -80,11 +78,11 @@ multilayer.controller('SelectorCtrl', function ($scope) {
                         };
                     }
                     cartodb.createLayer(map, layerOptions)
-                        .addTo(map)
+                       /* .addTo(map)
                         .done(addLayer(id, layer.show, map))
                         .error(function (error) {
-                            console.log("error: " + error);
-                        });
+                            console.log("error: " + error); */
+                        }); 
                 }
                 $scope.$apply();
             })
