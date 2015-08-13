@@ -55,13 +55,9 @@
         
           //Second, layers that come up by clicking maps
         cartodb.createLayer(map, {
-          user_name: 'xavijam',
+          user_name: 'naomikeusch',
           type: 'cartodb',
-          sublayers: [{
-            sql: 'select * from map',
-            cartocss: '#layer { polygon-fill: green; polygon-opacity: 0.3; line-color: #F00; }',
-            interactivity: 'cartodb_id'
-          },
+          sublayers: [
           {
             sql: 'select * from world_borders',
             cartocss: '#layer { polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #6B0FB2; line-width: 1;}',
