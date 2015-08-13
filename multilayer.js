@@ -9,6 +9,22 @@ var title = getURLParameter('tt');
 var description = getURLParameter('d');
 var baseVizJsonUrl = "http://" + user + ".cartodb.com/api/v2/viz/" + uuid + "/viz.json";
 
+//testing crime
+var densityLegend = new cdb.geo.ui.Legend.Density({
+         		title:   "<a href='http://www.fbi.gov/about-us/cjis/ucr/ucr'>Data From FBI Crime Reporting 2013</a>",
+            	left: "Low", right: "High", colors: [ "#FFFFB2", "#FED976", "#FEB24C", "#FD8D3C", "#FC4E2A", "#E31A1C", "#B10026"  ]
+            });
+            $('#map').append(densityLegend.render().el);
+            // Hide the legend for Violent crimes by default
+            $(densityLegend.render().el).hide()
+		    var densityLegendNon = new cdb.geo.ui.Legend.Density({
+                title: "  <a href='http://www.fbi.gov/about-us/cjis/ucr/ucr'>Data From FBI Crime Reporting 2013</a>",
+                left: "Low", right: "High", colors: [ "#FFFFCC", "#C7E9B4", "#7FCDBB", "#41B6C4", "#1D91C0", "#225EA8", "#0C2C84" ]
+            });
+            $('#map').append(densityLegendNon.render().el);
+            
+//end testing crime
+
 var multilayer = angular.module('multilayer', []);
 multilayer.controller('SelectorCtrl', function ($scope) {
     var cartodbLayers = [];
