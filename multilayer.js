@@ -23,6 +23,14 @@ var densityLegend = new cdb.geo.ui.Legend.Density({
             });
             $('#map').append(densityLegendNon.render().el);
             
+            cartodb.createLayer(map_object,'http://team.cartodb.com/api/v2/viz/5a9a49ce-b3a9-11e4-921d-0e9d821ea90d/viz.json')
+                .addTo(map_object)
+                .done(function(layer) {
+                  $("li").on('click', function(e) {
+                    var num = +$(e.target).attr('data');
+                    createSelector(layer,num,$(e.target).hasClass('vio'));
+                  });
+                })
 //end testing crime
 
 var multilayer = angular.module('multilayer', []);
