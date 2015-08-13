@@ -68,9 +68,11 @@ multilayer.controller('SelectorCtrl', function ($scope) {
                             user_name: layer.sql_user ? layer.sql_user : user,
                             type: "cartodb",
                             sublayers: [{
-                                sql: layer.sql,
-                                cartocss: layer.cartocss,
-                                interactivity: layer.interactivity
+                                //edit
+                                sql: 'select * from map',
+                                cartocss: '#layer { polygon-fill: green; polygon-opacity: 0.3; line-color: #F00; }',
+                                interactivity: 'cartodb_id'
+                                //end edit
                             }],
                             params: {
                                 id: id
