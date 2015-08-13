@@ -35,7 +35,8 @@
           attribution: 'Stamen'
         }).addTo(map);
 
-        // add cartodb layer with one sublayer
+        // add cartodb layer with one sublayer: DONT FORGET COMMAS IN BETWEEN LAYERS IN ARRAY
+            //First, layers that pop up by themselves
         cartodb.createLayer(map, {
           user_name: 'naomikeusch',
           type: 'cartodb',
@@ -52,16 +53,7 @@
           ]
         }).addTo(map);
         
-       /* cartodb.createLayer(map, {
-          user_name: 'naomikeusch',
-          type: 'cartodb',
-          sublayers: [{
-             sql: 'select * from nycd',
-             cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-color:  #2167AB; }',
-             interactivity: 'cartodb_id'
-          }]
-        }).addTo(map); */
-
+          //Second, layers that come up by clicking maps
         cartodb.createLayer(map, {
           user_name: 'xavijam',
           type: 'cartodb',
