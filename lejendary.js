@@ -14,15 +14,7 @@ currentLegend = null;
           });
           currentLegend = stackedLegend;
         } else { 
-              
-                //Edit
-          cartodb.createLayer(map, layerOptions)
-                        .addTo(map)
-                        .done(addLayer(id, layer.show, map))
-                        .error(function (error) {
-                            console.log("error: " + error);
-                        });
-                        //end edit
+
           $(".legend-selector a.selected").removeClass("selected");
           $link.addClass("selected");
           currentLegend = legends[type].legend;
