@@ -48,6 +48,9 @@
           ]
         }).addTo(map);
         
+        //Testing making variables for each layer
+        var council = sublayers[0];
+        
           //Second, layers that come up by clicking maps
         cartodb.createLayer(map, {
           user_name: 'naomikeusch',
@@ -88,6 +91,5 @@
       window.onload = main;
     </script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.js"></script>
-   <script src="multilayer.js"></script>
   </body>
 </html>
