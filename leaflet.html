@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Leaflet layer selector with CartoDB layers</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    <style> html, body, #map { height:100%; padding:0; margin:0 } </style>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+    
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+
+    <script>
+      function main() {
+
+        // create leaflet map
+        var map = L.map('map', { 
+          zoomControl: false,
+          center: [43, 0],
+          zoom: 3
+        })
+
+        // add a base layer
+        L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+          attribution: 'Stamen'
+        }).addTo(map);
+
+        // add cartodb layer with one sublayer
+        cartodb.createLayer(map, {
+          user_name: 'examples',
+          type: 'cartodb',
+          sublayers: [{
+             sql: 'select * from country_boundaries',
+             cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0.3; line-color: #F00; }',
+             interactivity: 'cartodb_id'
+          }]
+        }).addTo(map);
+
+        cartodb.createLayer(map, {
+          user_name: 'xavijam',
+          type: 'cartodb',
+          sublayers: [{
+            sql: 'select * from map',
+            cartocss: '#layer { polygon-fill: green; polygon-opacity: 0.3; line-color: #F00; }',
+            interactivity: 'cartodb_id'
+          }]
+        })
+        .on('done', function(lyr) {
+          L.control.layers(null, { 'maps': lyr }).addTo(map);
+        })
+        
+      }
+ 
+      window.onload = main;
+    </script>
+  </body>
+</html>
