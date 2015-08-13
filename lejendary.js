@@ -19,7 +19,8 @@ currentLegend = null;
           currentLegend = legends[type].legend;
         }
         currentLegend.addTo(".legends");
-        // $("#map .legends").html(currentLegend.render().$el);
+        //edit
+         $("#map .legends").html(currentLegend.render().$el);
       }
       function renderLegendList() {
         _.each(legends, function(legend, type) {
