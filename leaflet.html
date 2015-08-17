@@ -69,12 +69,6 @@
              cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0.3; line-width: 2; line-color: #F00; }',
              interactivity: 'cartodb_id'
           }
-          ],
-          [{
-             sql: 'select * from city_council_districts',
-             cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0.3; line-width: 2; line-color: #F00; }',
-             interactivity: 'cartodb_id'
-          }
           ]
         }).addTo(map);
 
@@ -83,6 +77,17 @@
           user_name: 'naomikeusch',
           type: 'cartodb',
           sublayers: [{
+            sql: 'select * from world_borders',
+            cartocss: '#layer { polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #6B0FB2; line-width: 2;}',
+            interactivity: 'cartodb_id'
+          },
+          {
+            sql: 'select * from bikeroutes_ny',
+            cartocss: '#layer { polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #229A00; line-width: 2; line-opacity: 1;}',
+            interactivity: 'cartodb_id'
+          }
+          ],
+          [{
             sql: 'select * from world_borders',
             cartocss: '#layer { polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #6B0FB2; line-width: 2;}',
             interactivity: 'cartodb_id'
