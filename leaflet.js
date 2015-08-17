@@ -45,7 +45,7 @@
           }
           ]
         })
-        .on(function(lyr) {
+        .on('base', function(lyr) {
           L.control.layers(baseMaps, { 'all': lyr }).addTo(map);
         })
         
