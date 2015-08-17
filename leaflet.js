@@ -2,8 +2,8 @@
         // create leaflet map
         var map = L.map('map', { 
           zoomControl: false,
-          center: [43, 0],
-          zoom: 3
+          center: [40.70, -73.97],
+          zoom: 13
         })
         // add a base layer
         L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
