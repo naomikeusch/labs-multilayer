@@ -22,9 +22,10 @@
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.js"></script>
       <!--  <script src="multilayer.js"></script> -->
 	<script>
+		var x =	L.marker([40.7130469, -74.007638]).bindPopup('World Trade Center')
 		var estops = new L.LayerGroup();
 
-		L.marker([40.7130469, -74.007638]).bindPopup('World Trade Center').addTo(estops),
+		x.addTo(estops),
 		L.marker([40.720678, -74.005203]).bindPopup('Canal Street').addTo(estops),
 		L.marker([40.726042, -74.003812]).bindPopup('Spring Street').addTo(estops),
 		L.marker([40.732175, -74.000628]).bindPopup('West 4th').addTo(estops);
