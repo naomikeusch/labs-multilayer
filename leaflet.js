@@ -5,6 +5,13 @@
           center: [40.70, -73.97],
           zoom: 13
         })
+        
+        //testing variables
+        var grayscale = L.tileLayer(mapboxUrl, {id: 'MapID', attribution: mapboxAttribution});
+        var baseMaps = {
+        "Grayscale": grayscale
+         };
+        
         // add a base layer
         L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
           attribution: 'Stamen'
@@ -21,9 +28,6 @@
           }
           ]
         }).addTo(map);
-        
-        //Testing making variables for each layer
-       // var council = sublayers[0];
         
           //Second, layers that come up by clicking maps
         cartodb.createLayer(map, {
@@ -42,7 +46,7 @@
           ]
         })
         .on(function(lyr) {
-          L.control.layers({ 'all': lyr }).addTo(map);
+          L.control.layers(baseMaps, { 'all': lyr }).addTo(map);
         })
         
         cartodb.createLayer(map, {
