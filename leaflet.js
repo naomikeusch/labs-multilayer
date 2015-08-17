@@ -41,8 +41,8 @@
           }
           ]
         })
-        .on('done', function(lyr) {
-          L.control.layers(null, { 'all': lyr }).addTo(map);
+        .on(function(lyr) {
+          L.control.layers({ 'all': lyr }).addTo(map);
         })
         
         cartodb.createLayer(map, {
