@@ -34,7 +34,7 @@
                          interactivity: 'cartodb_id'
                       }
                       ]
-                    })
+                    }) 
         //originally on, have to switch between
         var grayscale = L.tileLayer(mapboxUrl, {id: 'MapID', attribution: mapboxAttribution}),
             streets   = L.tileLayer(mapboxUrl, {id: 'MapID', attribution: mapboxAttribution});
@@ -46,7 +46,7 @@
 
         var overlayMaps = {
             "Council": council
-        };
+        }; 
 
         // create leaflet map
         var map = L.map('map', { 
@@ -54,7 +54,7 @@
           center: [43, 0],
           zoom: 3
           //include layers in definition of map
-          layers: [grayscale, cities]
+          layers: [grayscale, council]
         })
 
         // add a base layer
