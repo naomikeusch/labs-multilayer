@@ -62,7 +62,7 @@
         .on(function(lyr) {
           L.control.layers({ 'all': lyr }).addTo(map);
         })
-        L.control.layers(baseMaps, { 'all': lyr }).addTo(map);
+        L.control.layers(baseMaps, null).addTo(map);
       }
  
       window.onload = main;
