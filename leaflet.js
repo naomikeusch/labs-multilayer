@@ -77,7 +77,6 @@
         .on('done', function(lyr) {
           L.control.layers(null, { 'all': lyr }).addTo(map);
         })
+        L.control.layers(baseMaps, overlayMaps).addTo(map);
       }
-      L.control.layers(baseMaps, overlayMaps).addTo(map);
- 
       window.onload = main; 
