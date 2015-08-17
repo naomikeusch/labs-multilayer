@@ -26,6 +26,7 @@
                          <td><input type="checkbox" ng-model="selectedLayers[layer.id]" ng-change="layersUpdated(layer.id)" name="layer.id" /></td>
                             <td><label>{{ layer.name }}</label>
                             //edit
+                            <script>
                             cartodb.createLayer(map, {
                               user_name: 'naomikeusch',
                               type: 'cartodb',
@@ -44,6 +45,7 @@
                             .on('done', function(lyr) {
                               L.control.layers(null, { 'all': lyr }).addTo(map);
                             })
+                            </script>
                             //end edit
                             </td>
 
