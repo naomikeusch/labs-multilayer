@@ -54,9 +54,9 @@
         });
 
         // add a base layer
-       /* L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+        L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
           attribution: 'Stamen'
-        }).addTo(map); */
+        }).addTo(map); 
         L.control.layers(baseMaps, overlayMaps).addTo(map);
 
         // add cartodb layer with one sublayer: DONT FORGET COMMAS IN BETWEEN LAYERS IN ARRAY, AND MAKE SURE YOUR USERNAME AND SQL ARE CORRECT
