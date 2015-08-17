@@ -24,7 +24,7 @@
                 <li ng-repeat="layer in layers">
                     <table>
                         <tr>
-                         <td><input type="checkbox" ng-model="selectedLayers[layer.id]" ng-change="layersUpdated(layer.id)" name="layer.id" /></td>
+                         <td><input type="checkbox" ng-model="selectedLayers[layer.id]" ng-change="layersUpdated(layer.id)" name="layer.id" checked="checked" /></td>
                             <td><label> {{ layer.name }}</label></td>
                         </tr>
                     </table>
