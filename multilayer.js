@@ -44,7 +44,7 @@ multilayer.controller('SelectorCtrl', function ($scope) {
         center_lat: 40.70,
         center_lon: -73.97,
         loaderControl: false,
-        zoomControl: true
+        zoomControl: false
     }).done(function (vis) {
         var map = vis.getNativeMap();
 
@@ -65,12 +65,13 @@ multilayer.controller('SelectorCtrl', function ($scope) {
                         layerOptions = {
                             user_name: layer.sql_user ? layer.sql_user : user,
                             type: "cartodb",
-                            sublayers: [sublayers: [{
-                             sql: 'select * from city_council_districts',
-                             cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0.3; line-width: 2; line-color: #F00; }',
-                             interactivity: 'cartodb_id'
-                          }
-                          ],
+                            sublayers: [{
+                                //edit
+                                sql: 'select * from map',
+                                cartocss: '#layer { polygon-fill: green; polygon-opacity: 0.3; line-color: #F00; }',
+                                interactivity: 'cartodb_id'
+                                //end edit
+                            }],
                             params: {
                                 id: id
                             }
