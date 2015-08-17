@@ -27,6 +27,7 @@ multilayer.controller('SelectorCtrl', function ($scope) {
 
     $scope.title = title;
     $scope.description = description;
+    Hello
 
     $scope.selectedLayers = [];
 
