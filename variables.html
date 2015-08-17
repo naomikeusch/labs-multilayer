@@ -42,11 +42,11 @@
 				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 			mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ';
 
-	    var all   = L.tileLayer();
+	    var all   = new L.LayerGroup();
 	    estops.addTo(all),
 	    fstops.addTo(all);
 	    
-	    var nostops  = L.tileLayer();
+	    var nostops  = new L.LayerGroup();
 	    estops.addTo(nostops);
 	    
 	    //	    var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
