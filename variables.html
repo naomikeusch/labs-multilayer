@@ -49,14 +49,14 @@
 	    var nostops  = new L.LayerGroup();
 	    estops.addTo(nostops);
 	    
-	    //	    var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
+	    	    var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
 	//	    streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
 
 
 		var map = L.map('map', {
 			center: [40.70, -73.97],
 			zoom: 12,
-			layers: [all, estops]
+			layers: [grayscale, estops]
 		});
 
 		var baseLayers = {
