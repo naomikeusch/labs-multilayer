@@ -9,7 +9,7 @@
         
           var council =  L.layerGroup([littleton, denver, aurora, golden]);
         //originally on, have to switch between
-        var grayscale = L.tileLayer(mapboxUrl, {id: 'MapID', attribution: mapboxAttribution}),
+      /*  var grayscale = L.tileLayer(mapboxUrl, {id: 'MapID', attribution: mapboxAttribution}),
             streets   = L.tileLayer(mapboxUrl, {id: 'MapID', attribution: mapboxAttribution});
             
         var baseMaps = {
@@ -18,14 +18,14 @@
         };
         var overlayMaps = {
             "Council": council
-        };
+        }; */
         // create leaflet map
         var map = L.map('map', { 
           zoomControl: false,
           center: [40.70, -73.97],
           zoom: 13
           //include layers in definition of map
-          layers: [grayscale, council]
+        //  layers: [grayscale, council]
         });
         // add a base layer
         L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
@@ -77,6 +77,6 @@
         .on('done', function(lyr) {
           L.control.layers(null, { 'all': lyr }).addTo(map);
         })
-        L.control.layers(baseMaps, overlayMaps).addTo(map);
+        //L.control.layers(baseMaps, overlayMaps).addTo(map);
       }
       window.onload = main; 
