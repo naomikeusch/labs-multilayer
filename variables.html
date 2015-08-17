@@ -22,6 +22,11 @@
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.js"></script>
       <!--  <script src="multilayer.js"></script> -->
 	<script>
+		// testing icons and colors
+		var redMarker = L.AwesomeMarkers.icon({
+		    icon: 'coffee',
+		    markerColor: 'red'
+		  });
 		//stops for e
 		var x =	L.marker([40.7130469, -74.007638]).bindPopup('World Trade Center'),
 		    y = L.marker([40.720678, -74.005203]).bindPopup('Canal Street'),
@@ -35,7 +40,7 @@
 		a.addTo(estops);
 		
 		//stops for f
-		var b = L.marker([40.738463, -73.996024]).bindPopup('14th St'),
+		var b = L.marker([40.738463, -73.996024], {icon: redMarker}).bindPopup('14th St'),
 		    c = L.marker([40.749545, -73.987892]).bindPopup('34th St Harold Square'),
 		    d = L.marker([40.754127, -73.984769]).bindPopup('42nd St Bryant Park'),
 		    e = L.marker([40.758503, -73.981298]).bindPopup('47th-50th St Rockefeller Center');
@@ -64,7 +69,6 @@
 	    	d.addTo(all),
 	    	e.addTo(all);
 	    var nostops  = new L.LayerGroup();
-	   // estops.addTo(nostops);
 	    
 	    	    var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
 	//	    streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
