@@ -2,7 +2,7 @@
         
         //Testing making variables for each layer
         //added to
-     /*   var littleton = L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
+        var littleton = L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
         denver    = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
         aurora    = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.'),
         golden    = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
@@ -18,14 +18,14 @@
         };
         var overlayMaps = {
             "Council": council
-        }; */
+        };
         // create leaflet map
         var map = L.map('map', { 
           zoomControl: false,
           center: [40.70, -73.97],
           zoom: 13
           //include layers in definition of map
-         // layers: [grayscale, council]
+          layers: [grayscale, council]
         });
         // add a base layer
         L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
@@ -78,5 +78,6 @@
           L.control.layers(null, { 'all': lyr }).addTo(map);
         })
       }
+      L.control.layers(baseMaps, overlayMaps).addTo(map);
  
       window.onload = main; 
