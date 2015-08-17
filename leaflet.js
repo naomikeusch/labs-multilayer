@@ -7,11 +7,11 @@
         })
         
         //testing variables
-        var grayscale = L.tileLayer(mapboxUrl, {id: 'MapID', attribution: mapboxAttribution});
+       /* var grayscale = L.tileLayer(mapboxUrl, {id: 'MapID', attribution: mapboxAttribution});
         var baseMaps = {
         "Grayscale": grayscale
          };
-        
+        */
         // add a base layer
         L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
           attribution: 'Stamen'
