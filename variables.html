@@ -34,12 +34,19 @@
 		z.addTo(estops),
 		a.addTo(estops);
 		
+		//stops for f
+		var b = L.marker([40.738463, -73.996024]).bindPopup('14th St'),
+		    c = L.marker([40.749545, -73.987892]).bindPopup('34th St Harold Square'),
+		    d = L.marker([40.754127, -73.984769]).bindPopup('42nd St Bryant Park'),
+		    L.marker([40.758503, -73.981298]).bindPopup('47th-50th St Rockefeller Center');
+		    
+		
 		var fstops = new L.LayerGroup();
-
-		L.marker([40.738463, -73.996024]).bindPopup('14th St').addTo(fstops),
-		L.marker([40.749545, -73.987892]).bindPopup('34th St Harold Square').addTo(fstops),
-		L.marker([40.754127, -73.984769]).bindPopup('42nd St Bryant Park').addTo(fstops),
-		L.marker([40.758503, -73.981298]).bindPopup('47th-50th St Rockefeller Center').addTo(fstops);
+		
+		b.addTo(fstops),
+		c.addTo(fstops),
+		d.addTo(fstops),
+		e.addTo(fstops);
 
 
 	    var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
