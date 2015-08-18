@@ -20,7 +20,7 @@
             "Council": council
         }; */
         // create leaflet map
-        var sty = '#layer { polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #229A00; line-width: 2; line-opacity: 1;}';
+        
         var map = L.map('map', { 
           zoomControl: false,
           center: [40.70, -73.97],
@@ -40,7 +40,7 @@
           type: 'cartodb',
           sublayers: [{
              sql: 'select * from city_council_districts',
-             cartocss: sty,
+             cartocss: '#layer { polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #229A00; line-width: 2; line-opacity: 1;}',
              interactivity: 'cartodb_id'
           }
           ]
