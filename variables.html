@@ -68,34 +68,7 @@
 	//	var car = new L.LayerGroup();
 	//	world.addTo(car);
 	
-var	cartodb_sewer_line = new lvector.CartoDB({
-    user: "geojason",
-    table: "sewer_line",
-    scaleRange: [15, 20],
-    symbology: {
-        type: "range",
-        property: "pipe_dia",
-        ranges: [
-            {
-                range: [0, 8],
-                vectorOptions: {
-                    weight: 4,
-                    color: "#46461f",
-                    opacity: 0.8
-                }
-            },{
-                range: [8.00001, 100],
-                vectorOptions: {
-                    weight: 8,
-                    color: "#ff7800",
-                    opacity: 0.8
-                }
-            }
-        ]
-    },
-    popupTemplate: '<div class="iw-content"><h3>Sewer Line</h3><table class="condensed-table"><tr><th>Diameter</th><td>{pipe_dia} in.</td></tr><tr><th>Material</th><td>{pipe_mat}</td></tr><tr><th>Flows To</th><td>{wwtp} WWTP</td></tr></table></div>',
-    singlePopup: true
-});
+
 
 
 
