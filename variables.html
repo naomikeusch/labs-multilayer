@@ -104,11 +104,18 @@
 			"None": nostops
 		//	"Gray Scale": grayscale
 		};
-
+		var car = {user_name: 'naomikeusch',
+          type: 'cartodb',
+          sublayers: [           
+            {
+             sql: 'select * from nycd',
+             cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color:  #2167AB;}',
+             interactivity: 'cartodb_id'};
+		
 		var overlays = {
 			"E Train Stops": estops,
 			"F Train Stops": fstops,
-		//	"Carto Layers": car
+			"Carto Layers": car
 		};
 
 		L.control.layers(baseLayers, overlays).addTo(map);
