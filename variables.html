@@ -128,6 +128,21 @@
 	        var bus = new L.LayerGroup();
 	        sub.addTo(bus);
 	        sub.addTo(pts);
+	        
+	        var are = cartodb.createLayer(map, {
+	          user_name: 'naomikeusch',
+	          type: 'cartodb',
+	          sublayers: [{
+	             sql: 'select * from areas_of_interest_newyork',
+	             cartocss: '#layer { marker-fill-opacity: 1; marker-line-color: #5CA2D1; marker-line-width: 1; marker-line-opacity: 1;  marker-placement: point; marker-type: ellipse; marker-width: 10; marker-fill: #F84F40; marker-allow-overlap: true;}',
+	             interactivity: 'cartodb_id'}]
+	        })
+	        .on('done', function(lyr) {
+          	//L.control.layers(null, { 'NYC Subway Stops': lyr }).addTo(map);});
+          	L.control.layers(baseLayers1, more).addTo(map);});
+	        var era = new L.LayerGroup();
+	        are.addTo(era);
+	        are.addTo(pts);
 		
 		//checkboxes
 		var overlays = {
