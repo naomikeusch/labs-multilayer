@@ -82,7 +82,7 @@
 		
 		//Points baselayer
 		var baseLayers2 = {
-			"All Points": pts,
+			"All Points": all,
 			"Non": nostops
 		};
 		var pts = new L.LayerGroup();
@@ -175,7 +175,7 @@
 		
 		L.control.layers(baseLayers1, overlays).addTo(map);
 		L.control.layers(baseLayers1, more).addTo(map);
-		L.control.layers(baseLayers1, many).addTo(map);
+		L.control.layers(baseLayers2, many).addTo(map);
 	</script>
 </body>
 </html>
