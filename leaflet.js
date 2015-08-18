@@ -40,7 +40,7 @@
           type: 'cartodb',
           sublayers: [{
              sql: 'select * from city_council_districts',
-             cartocss: '#layer { polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #FFFFFF; line-width: 2; line-opacity: 1;}',
+             cartocss: '#layer { polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #FFF000; line-width: 2; line-opacity: 1;}',
              interactivity: 'cartodb_id'
           }
           ]
