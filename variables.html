@@ -144,7 +144,7 @@
 	          type: 'cartodb',
 	          sublayers: [{
 	             sql: 'select * from tracttemp_copy',
-	             cartocss: '#tracttemp_copy{{
+	             cartocss: '#tracttemp_copy{
 			  polygon-fill: #FFEDA0;
 			  polygon-opacity: 0.8;
 			  line-color: #FFF;
@@ -159,7 +159,7 @@
 			}
 			#tracttemp_copy [ totalpop <= 2771] {
 			   polygon-fill: #FFEDA0;
-			};}',
+			};',
 	             interactivity: 'cartodb_id'}]
 	        });
 	        
