@@ -74,12 +74,20 @@
 			zoom: 12,
 			layers: [grayscale, nostops]
 		});
-
-		var baseLayers = {
-			"All Train Lines": all,
+		//Boarders baselayer
+		var baseLayers1 = {
+			"All City Boarders": all,
 			"None": nostops
 		//	"Gray Scale": grayscale
 		};
+		
+		//Points baselayer
+		var baseLayers2 = {
+			"All Points": pts,
+			"None": nostops
+		};
+		var pts = new L.LayerGroup();
+			
 		
 		//carto layers
 		var nycd = cartodb.createLayer(map, {user_name: 'naomikeusch',
@@ -117,9 +125,10 @@
 	        })
 	        .on('done', function(lyr) {
           	//L.control.layers(null, { 'NYC Subway Stops': lyr }).addTo(map);});
-          	L.control.layers(baseLayers, more).addTo(map);});
+          	L.control.layers(baseLayers2, more).addTo(map);});
 	        var bus = new L.LayerGroup();
-	        sub.addTo(bus); 
+	        sub.addTo(bus);
+	        sub.addTo(pts);
 		
 		//checkboxes
 		var overlays = {
@@ -132,10 +141,9 @@
 		
 		var more = {
 			"NYC Subway Stops": bus,
-			"City Council Districts": ouc
 		};
 
-		L.control.layers(baseLayers, overlays).addTo(map);
+		L.control.layers(baseLayers1, overlays).addTo(map);
 		//L.control.layers(baseLayers, more).addTo(map);
 	</script>
 </body>
