@@ -126,11 +126,15 @@
 			"E Train Stops": estops,
 			"F Train Stops": fstops,
 			"nycd": dcyn,
-			"City Council Districts": ouc,
+			"City Council Districts": ouc
+			
+		};
+		
+		var more = {
 			"NYC Subway Stops": bus
 		};
 
-		L.control.layers(baseLayers, overlays).addTo(map);
+		L.control.layers(baseLayers, overlays, more).addTo(map);
 	</script>
 </body>
 </html>
