@@ -114,6 +114,10 @@
 	        var ouc = new L.LayerGroup();
 	        cou.addTo(ouc);
 	        cou.addTo(all);
+	        
+	        var more = {
+			"NYC Subway Stops": bus
+		};
 		
 		var sub = cartodb.createLayer(map, {
 	          user_name: 'naomikeusch',
@@ -139,9 +143,9 @@
 			
 		};
 		
-		var more = {
+		/*var more = {
 			"NYC Subway Stops": bus
-		};
+		}; */
 
 		L.control.layers(baseLayers1, overlays).addTo(map);
 		L.control.layers(baseLayers2, more).addTo(map);
