@@ -145,26 +145,7 @@
 	          type: 'cartodb',
 	          sublayers: [{
 	             sql: 'select * from tracttemp_copy',
-	            // cartocss: '#layer {polygon-fill: #FFEDA0; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;}',
-	             cartocss: '#layer {
-			  polygon-fill: #FFEDA0;
-			  polygon-opacity: 0.8;
-			  line-color: #FFF;
-			  line-width: 0.5;
-			  line-opacity: 1;
-			
-			if (totalpop <= 26908) {
-			   polygon-fill: #F03B20;
-			}
-			else if (totalpop <= 5723) {
-			   polygon-fill: #FEB24C;
-			}
-			else if (totalpop <= 2771) {
-			   polygon-fill: #FFEDA0;
-			}
-			else {
-			   polygon-fill: #FFEDA0;
-			} }'
+	             cartocss: '#layer {polygon-fill: #FFEDA0; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;}',
 	             interactivity: 'cartodb_id'}]
 	        });
 	        
