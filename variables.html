@@ -114,7 +114,7 @@
 	             sql: 'select * from nyc_subway_entrance',
 	             cartocss: '#layer { polygon-fill: #229A00; polygon-opacity: 1; line-color: #3B007F; line-width: 1; line-opacity: 1;}',
 	             interactivity: 'cartodb_id'}]
-	        });
+	        })
 	        .on('done', function(lyr) {
           L.control.layers(null, { 'all': lyr }).addTo(map);});
           
