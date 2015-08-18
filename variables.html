@@ -60,7 +60,7 @@
 	            sql: 'select * from world_borders',
 	            cartocss: '#layer { polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #6B0FB2; line-width: 2;}',
 	            interactivity: 'cartodb_id'
-	          }]}) //these are necessary, do not delete brackets/parentheses
+	          }]}); //these are necessary, do not delete brackets/parentheses/semicolon
 		
 		var car = new L.LayerGroup();
 		world.addTo(car);
