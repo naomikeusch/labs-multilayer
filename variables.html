@@ -112,15 +112,18 @@
              cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color:  #2167AB;}',
              interactivity: 'cartodb_id'}]
         })
-        .on('done', function(lyr) {
-          L.control.layers(null, { 'all': lyr }).addTo(map);
-        })
+       // .on('done', function(lyr) {
+          //L.control.layers(null, { 'all': lyr }).addTo(map);
+          
+       // })
         ;
+        var lay = new L.LayerGroup();
+        car.addTo(lay);
 		
 		var overlays = {
 			"E Train Stops": estops,
 			"F Train Stops": fstops,
-			"Carto Layers": car
+			"Carto Layers": lay
 		};
 
 		L.control.layers(baseLayers, overlays).addTo(map);
