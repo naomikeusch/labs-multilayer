@@ -85,8 +85,8 @@
 	    	b.addTo(all),
 	    	c.addTo(all),
 	    	d.addTo(all),
-	    	e.addTo(all),
-	    	car.addTo(all);
+	    	e.addTo(all);
+	    	
 	    var nostops  = new L.LayerGroup();
 	    
 	    	    var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
@@ -114,6 +114,7 @@
         });
         var lay = new L.LayerGroup();
         car.addTo(lay);
+        car.addTo(all);
 		
 		var overlays = {
 			"E Train Stops": estops,
