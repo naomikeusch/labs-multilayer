@@ -138,6 +138,36 @@
 	        var era = new L.LayerGroup();
 	        are.addTo(era);
 	        are.addTo(pts);
+	        
+	        var pop = cartodb.createLayer(map, {
+	          user_name: 'naomikeusch',
+	          type: 'cartodb',
+	          sublayers: [{
+	             sql: 'select * from tracttemp_copy',
+	             cartocss: '#tracttemp_copy{{
+			  polygon-fill: #FFEDA0;
+			  polygon-opacity: 0.8;
+			  line-color: #FFF;
+			  line-width: 0.5;
+			  line-opacity: 1;
+			}
+			#tracttemp_copy [ totalpop <= 26908] {
+			   polygon-fill: #F03B20;
+			}
+			#tracttemp_copy [ totalpop <= 5723] {
+			   polygon-fill: #FEB24C;
+			}
+			#tracttemp_copy [ totalpop <= 2771] {
+			   polygon-fill: #FFEDA0;
+			};}',
+	             interactivity: 'cartodb_id'}]
+	        });
+	        
+	        var opp = new L.LayerGroup();
+	        pop.addTo(opp);
+	        pop.addTo(pts);
+	        
+	        
 		
 		//checkboxes
 		var overlays = {
@@ -151,9 +181,14 @@
 		var more = {
 			"NYC Subway Stops": bus,
 			"Areas of Interest": era
-		}; 
+		};
+		
+		var many ={
+			"Total Population": opp
+		}
 		L.control.layers(baseLayers1, overlays).addTo(map);
 		L.control.layers(baseLayers1, more).addTo(map);
+		L.control.layers(baseLayers1, many).addTo(map);
 	</script>
 </body>
 </html>
