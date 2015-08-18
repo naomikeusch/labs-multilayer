@@ -156,11 +156,14 @@
 			if (totalpop <= 26908) {
 			   polygon-fill: #F03B20;
 			}
-			if (totalpop <= 5723) {
+			else if (totalpop <= 5723) {
 			   polygon-fill: #FEB24C;
 			}
-			if (totalpop <= 2771) {
-			   polygon-fill: #FFEDA0; 
+			else if (totalpop <= 2771) {
+			   polygon-fill: #FFEDA0;
+			}
+			else {
+			   polygon-fill: #FFEDA0;
 			}'
 	             interactivity: 'cartodb_id'}]
 	        });
