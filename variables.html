@@ -99,7 +99,8 @@
 	          type: 'cartodb',
 	          sublayers: [{
 	             sql: 'select * from nyc_subway_entrance',  // city_council_districts
-	             cartocss: '#layer { polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #FFF000; line-width: 2; line-opacity: 1;}',
+	             cartocss: '#layer { marker-fill-opacity: 1; marker-line-color: #3B007F; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point;marker-type: ellipse; marker-width: 10; marker-fill: #229A00; marker-allow-overlap: true;
+}',
 	             interactivity: 'cartodb_id'}]
 	        });
 	        
