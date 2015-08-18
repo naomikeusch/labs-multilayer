@@ -119,7 +119,7 @@
 	        cou.addTo(ouc);
 	        cou.addTo(all);
 		
-	/*	var sub = cartodb.createLayer(map, {
+		var sub = cartodb.createLayer(map, {
 	          user_name: 'naomikeusch',
 	          type: 'cartodb',
 	          sublayers: [{
@@ -132,10 +132,10 @@
           	L.control.layers(baseLayers1, more).addTo(map);});
 	        var bus = new L.LayerGroup();
 	        sub.addTo(bus);
-	        sub.addTo(pts); */
+	        sub.addTo(pts); 
 		
 		//checkboxes
-		var groupedOverlays = {
+		var overlays = {
 			"Stops": { "E Train Stops": estops,
 			"F Train Stops": fstops },
 			
@@ -145,14 +145,13 @@
 		};
 		
 	//	var options = { exclusiveGroups: ["Stops"] };
-	/*	var more = {
+		var more = {
 			"NYC Subway Stops": bus
-		}; */
+		}; 
 
-		//L.control.layers(baseLayers1, overlays).addTo(map);
+		L.control.layers(baseLayers1, overlays).addTo(map);
 		//L.control.layers(baseLayers1, more).addTo(map);
-		 L.control.groupedLayers(baseLayers1, groupedOverlays).addTo(map);
-    	//	map.addControl(layerControl);
+
 	</script>
 </body>
 </html>
