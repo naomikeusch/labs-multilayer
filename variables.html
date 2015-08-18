@@ -51,6 +51,19 @@
 		c.addTo(fstops),
 		d.addTo(fstops),
 		e.addTo(fstops);
+		
+		//testing carto layers
+		var world = cartodb.createLayer(map, {
+	          user_name: 'naomikeusch',
+	          type: 'cartodb',
+	          sublayers: [{
+	            sql: 'select * from world_borders',
+	            cartocss: '#layer { polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #6B0FB2; line-width: 2;}',
+	            interactivity: 'cartodb_id'
+	          }]}) //these are necessary, do not delete brackets/parentheses
+		
+		var car = new L.LayerGroup();
+		world.addTo(car);
 
 
 	    var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -87,7 +100,8 @@
 
 		var overlays = {
 			"E Train Stops": estops,
-			"F Train Stops": fstops
+			"F Train Stops": fstops,
+			"Carto Layers": car
 		};
 
 		L.control.layers(baseLayers, overlays).addTo(map);
