@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +13,6 @@
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="reset.css" />
         <link rel="stylesheet" href="app-style.css" />
-        <link rel="stylesheet" href="../src/leaflet.groupedlayercontrol.css" />
-        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
         
     </head>
 <body>
@@ -23,8 +22,6 @@
 	 <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.js"></script>
       <!--  <script src="multilayer.js"></script> -->
-      <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-      <script src="../src/leaflet.groupedlayercontrol.js"></script>
 	<script>
 		//stops for e
 		var x =	L.marker([40.7130469, -74.007638]).bindPopup('World Trade Center'),
@@ -56,7 +53,6 @@
 				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
 				'Imagery © <a href="http://mapbox.com">Mapbox</a>,' + 'CartoDB <a href = "https://cartodb.com/attributions">Attributions</a>',
 			mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ';
-
 	    var all   = new L.LayerGroup();
 	    	x.addTo(all),
 	    	y.addTo(all),
@@ -71,8 +67,6 @@
 	    
 	    	    var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
 	//	    streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
-
-
 		var map = L.map('map', {
 			center: [40.70, -73.97],
 			zoom: 12,
@@ -85,7 +79,7 @@
 		//	"Gray Scale": grayscale
 		};
 		
-		//Points baselayer cant have more than one base layer???
+		//Points baselayer
 		var baseLayers2 = {
 			"All Points": pts,
 			"Non": nostops
@@ -132,26 +126,22 @@
           	L.control.layers(baseLayers1, more).addTo(map);});
 	        var bus = new L.LayerGroup();
 	        sub.addTo(bus);
-	        sub.addTo(pts); 
+	        sub.addTo(pts);
 		
 		//checkboxes
 		var overlays = {
-			"Stops": { "E Train Stops": estops,
-			"F Train Stops": fstops },
-			
-			"Boarders": { "nycd": dcyn,
-			"City Council Districts": ouc }
+			"E Train Stops": estops,
+			"F Train Stops": fstops,
+			"nycd": dcyn,
+			"City Council Districts": ouc
 			
 		};
 		
-	//	var options = { exclusiveGroups: ["Stops"] };
 		var more = {
 			"NYC Subway Stops": bus
 		}; 
-
 		L.control.layers(baseLayers1, overlays).addTo(map);
 		//L.control.layers(baseLayers1, more).addTo(map);
-
 	</script>
 </body>
 </html>
