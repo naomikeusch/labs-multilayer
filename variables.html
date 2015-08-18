@@ -111,7 +111,11 @@
              sql: 'select * from nycd',
              cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color:  #2167AB;}',
              interactivity: 'cartodb_id'}]
-        });
+        })
+        .on('done', function(lyr) {
+          L.control.layers(null, { 'all': lyr }).addTo(map);
+        })
+        ;
 		
 		var overlays = {
 			"E Train Stops": estops,
