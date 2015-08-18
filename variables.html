@@ -145,11 +145,7 @@
 	          type: 'cartodb',
 	          sublayers: [{
 	             sql: 'select * from tracttemp_copy',
-	             cartocss: '#layer {polygon-fill: #FFEDA0;
-			  polygon-opacity: 0.8;
-			  line-color: #FFF;
-			  line-width: 0.5;
-			  line-opacity: 1;}',
+	             cartocss: '#layer {polygon-fill: #FFEDA0; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;}',
 	             interactivity: 'cartodb_id'}]
 	        });
 	        
@@ -175,7 +171,8 @@
 		
 		var many ={
 			"Total Population": opp
-		}
+		};
+		
 		L.control.layers(baseLayers1, overlays).addTo(map);
 		L.control.layers(baseLayers1, more).addTo(map);
 		L.control.layers(baseLayers1, many).addTo(map);
