@@ -65,8 +65,15 @@
 	    	
 	    var nostops  = new L.LayerGroup();
 	    
+	    
 	    	    var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
 	//	    streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+	
+		var pts = new L.LayerGroup();
+		sub.addTo(pts),
+		 are.addTo(pts),
+		 pop.addTo(pts);
+		
 		var map = L.map('map', {
 			center: [40.70, -73.97],
 			zoom: 12,
@@ -82,10 +89,10 @@
 		
 		//Points baselayer
 		var baseLayers2 = {
-			"All Points": all,
+			"All Points": pts,
 			"None": nostops
 		};
-		var pts = new L.LayerGroup();
+		
 		
 		var baseLayers3 = {
 			"Populations": all,
@@ -129,7 +136,7 @@
 	        });
 	        var bus = new L.LayerGroup();
 	        sub.addTo(bus);
-	        sub.addTo(pts);
+	        
 	        
 	        var are = cartodb.createLayer(map, {
 	          user_name: 'naomikeusch',
@@ -142,7 +149,7 @@
 	        
 	        var era = new L.LayerGroup();
 	        are.addTo(era);
-	        are.addTo(pts);
+	       
 
 		
 	        var pop = cartodb.createLayer(map, {
@@ -156,7 +163,7 @@
 	        
 	        var opp = new L.LayerGroup();
 	        pop.addTo(opp);
-	        pop.addTo(pts);
+	        
 	        
 	        
 		
