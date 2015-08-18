@@ -114,10 +114,6 @@
 	        var ouc = new L.LayerGroup();
 	        cou.addTo(ouc);
 	        cou.addTo(all);
-	        
-	        var more = {
-			"NYC Subway Stops": bus
-		};
 		
 		var sub = cartodb.createLayer(map, {
 	          user_name: 'naomikeusch',
@@ -129,7 +125,7 @@
 	        })
 	        .on('done', function(lyr) {
           	//L.control.layers(null, { 'NYC Subway Stops': lyr }).addTo(map);});
-          	L.control.layers(baseLayers2, more).addTo(map);});
+          	L.control.layers(baseLayers1, more).addTo(map);});
 	        var bus = new L.LayerGroup();
 	        sub.addTo(bus);
 	        sub.addTo(pts);
@@ -143,12 +139,12 @@
 			
 		};
 		
-		/*var more = {
+		var more = {
 			"NYC Subway Stops": bus
-		}; */
+		}; 
 
 		L.control.layers(baseLayers1, overlays).addTo(map);
-		L.control.layers(baseLayers2, more).addTo(map);
+		L.control.layers(baseLayers1, more).addTo(map);
 	</script>
 </body>
 </html>
