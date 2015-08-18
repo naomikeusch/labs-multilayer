@@ -99,8 +99,7 @@
 	          type: 'cartodb',
 	          sublayers: [{
 	             sql: 'select * from nyc_subway_entrance',  // city_council_districts
-	             cartocss: '#layer { marker-fill-opacity: 1; marker-line-color: #3B007F; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point;marker-type: ellipse; marker-width: 10; marker-fill: #229A00; marker-allow-overlap: true;
-}',
+	             cartocss: '#layer { marker-fill-opacity: 1; marker-line-color: #3B007F; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point;marker-type: ellipse; marker-width: 10; marker-fill: #229A00; marker-allow-overlap: true; }',
 	             interactivity: 'cartodb_id'}]
 	        });
 	        
@@ -108,7 +107,7 @@
 	        cou.addTo(ouc);
 	        cou.addTo(all);
 		
-		var sub = cartodb.createLayer(map, {
+	/*	var sub = cartodb.createLayer(map, {
 	          user_name: 'naomikeusch',
 	          type: 'cartodb',
 	          sublayers: [{
@@ -120,7 +119,7 @@
           	//L.control.layers(null, { 'NYC Subway Stops': lyr }).addTo(map);});
           	L.control.layers(baseLayers, more).addTo(map);});
 	        var bus = new L.LayerGroup();
-	        sub.addTo(bus);
+	        sub.addTo(bus); */
 		
 		//checkboxes
 		var overlays = {
@@ -131,9 +130,9 @@
 			
 		};
 		
-		var more = {
-			"NYC Subway Stops": bus
-		};
+	//	var more = {
+	//		"NYC Subway Stops": bus
+	//	};
 
 		L.control.layers(baseLayers, overlays).addTo(map);
 		//L.control.layers(baseLayers, more).addTo(map);
