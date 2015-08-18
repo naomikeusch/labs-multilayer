@@ -104,22 +104,39 @@
 			"None": nostops
 		//	"Gray Scale": grayscale
 		};
-		var car = cartodb.createLayer(map, {user_name: 'naomikeusch',
-          type: 'cartodb',
-          sublayers: [           
-            {
-             sql: 'select * from nycd',
-             cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color:  #2167AB;}',
-             interactivity: 'cartodb_id'}]
-        });
-        var lay = new L.LayerGroup();
-        car.addTo(lay);
-        car.addTo(all);
+		
+		//carto layers
+		var nycd = cartodb.createLayer(map, {user_name: 'naomikeusch',
+	          type: 'cartodb',
+	          sublayers: [           
+	            {
+	             sql: 'select * from nycd',
+	             cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color:  #2167AB;}',
+	             interactivity: 'cartodb_id'}]
+	        });
+	        var dcyn = new L.LayerGroup();
+	        nycd.addTo(dcyn);
+	        nycd.addTo(all);
+		
+		var cou = cartodb.createLayer(map, {
+	          user_name: 'naomikeusch',
+	          type: 'cartodb',
+	          sublayers: [{
+	             sql: 'select * from city_council_districts',
+	             cartocss: '#layer { polygon-fill: #FFFFFF; polygon-opacity: 0; line-color: #FFF000; line-width: 2; line-opacity: 1;}',
+	             interactivity: 'cartodb_id'}]
+	        });
+	        
+	        var ouc = new L.LayerGroup();
+	        cou.addTo(ouc);
+	        cou.addTo(all);
+		
 		
 		var overlays = {
 			"E Train Stops": estops,
 			"F Train Stops": fstops,
-			"Carto Layers": lay
+			"nycd": dcyn,
+			"City Council Districts": ouc
 		};
 
 		L.control.layers(baseLayers, overlays).addTo(map);
