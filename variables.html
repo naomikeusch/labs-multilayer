@@ -116,8 +116,8 @@
 	             interactivity: 'cartodb_id'}]
 	        })
 	        .on('done', function(lyr) {
-          	L.control.layers(null, { 'NYC Subway Stops': lyr }).addTo(map);});
-          
+          	//L.control.layers(null, { 'NYC Subway Stops': lyr }).addTo(map);});
+          	L.control.layers(baseLayers, more).addTo(map);});
 	        var bus = new L.LayerGroup();
 	        sub.addTo(bus);
 		
@@ -135,7 +135,7 @@
 		};
 
 		L.control.layers(baseLayers, overlays).addTo(map);
-		L.control.layers(baseLayers, more).addTo(map);
+		//L.control.layers(baseLayers, more).addTo(map);
 	</script>
 </body>
 </html>
