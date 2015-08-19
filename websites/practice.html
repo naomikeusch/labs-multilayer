@@ -101,7 +101,7 @@
 	});
 	var bus = new L.LayerGroup();
 	sub.addTo(bus);
-	sub.addTo(pts);
+//	sub.addTo(pts);
 	
 	var are = cartodb.createLayer(map, {
 	user_name: 'naomikeusch',
@@ -114,7 +114,7 @@
 	
 	var era = new L.LayerGroup();
 	are.addTo(era);
-	are.addTo(pts);
+//	are.addTo(pts);
 	
 	var pop = cartodb.createLayer(map, {
 	user_name: 'naomikeusch',
@@ -127,7 +127,7 @@
 	
 	var opp = new L.LayerGroup();
 	pop.addTo(opp);
-	pop.addTo(pts);
+//	pop.addTo(pts);
 	
 	//checkboxes
 	var overlays = {
