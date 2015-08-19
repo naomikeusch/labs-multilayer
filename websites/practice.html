@@ -131,17 +131,17 @@
 	
 	//checkboxes
 	var overlays = {
-	"Boarders": {
-	"Community Districts": dcyn,
-	"City Council Districts": ouc
-	},
-	"Key Places": {
-	"NYC Subway Stops": bus,
-	"Areas of Interest": era
-	},
-	"Populations": {
-	"Total Population": opp
-	}
+		"Boarders": {
+		"Community Districts": dcyn,
+		"City Council Districts": ouc
+		},
+		"Key Places": {
+		"NYC Subway Stops": bus,
+		"Areas of Interest": era
+		},
+		"Populations": {
+		"Total Population": opp
+		}
 	};
 	
 /*	var more = {
@@ -155,7 +155,7 @@
 	*/
 	var options = { exclusiveGroups: ["Key Places"] };
 	
-	var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, options);
+	var layerControl = L.control.groupedLayers(baseLayers1, overlays, options);
     	map.addControl(layerControl);
 //	L.control.layers(baseLayers2, more).addTo(map);
 //	L.control.layers(baseLayers3, many).addTo(map);
