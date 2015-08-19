@@ -53,7 +53,7 @@
 	};
 	
 	//Points baselayer
-	var baseLayers2 = {
+/*	var baseLayers2 = {
 	"All Points": all,
 	"None": nostops
 	};
@@ -63,7 +63,7 @@
 	"Non": nostops
 	};
 	var pts = new L.LayerGroup();
-	
+	*/
 	
 	//carto layers
 	var nycd = cartodb.createLayer(map, {user_name: 'naomikeusch',
@@ -131,11 +131,20 @@
 	
 	//checkboxes
 	var overlays = {
-	"nycd": dcyn,
+	"Boarders": {
+	"Community Districts": dcyn,
 	"City Council Districts": ouc
+	},
+	"Key Places": {
+	"NYC Subway Stops": bus,
+	"Areas of Interest": era
+	},
+	"Populations": {
+	"Total Population": opp
+	}
 	};
 	
-	var more = {
+/*	var more = {
 	"NYC Subway Stops": bus,
 	"Areas of Interest": era
 	};
@@ -143,10 +152,13 @@
 	var many ={
 	"Total Population": opp
 	};
+	*/
+	var options = { exclusiveGroups: ["Key Places"] };
 	
-	L.control.layers(baseLayers1, overlays).addTo(map);
-	L.control.layers(baseLayers2, more).addTo(map);
-	L.control.layers(baseLayers3, many).addTo(map);
+	L.control.layers(baseLayers1, overlays, options);
+	map.addControl(layerControl);
+//	L.control.layers(baseLayers2, more).addTo(map);
+//	L.control.layers(baseLayers3, many).addTo(map);
 	</script>
 </body>
 </html>
