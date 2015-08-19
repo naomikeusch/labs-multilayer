@@ -20,11 +20,11 @@
 	<script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.js"></script>
  <!-- <script src="multilayer.js"></script> -->
- <style type="cartocss/text" id="simple">
+<!-- <style type="cartocss/text" id="simple">
     	#tracttemp_copy{
         polygon-fill: #FFEDA0; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;
     } 
-</style>
+</style> -->
 	<script>
 	//stops for e
 	var x =	L.marker([40.7130469, -74.007638]).bindPopup('World Trade Center'),
@@ -152,7 +152,8 @@
 	type: 'cartodb',
 	sublayers: [{
 	sql: 'select * from tracttemp_copy',
-	cartocss: $("#simple").text();
+	cartocss: '#tracttemp_copy{polygon-fill: #FFEDA0; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;} #tracttemp_copy [ totalpop <= 26908] { polygon-fill: #F03B20;} #tracttemp_copy [ totalpop <= 5723] { polygon-fill: #FEB24C;} #tracttemp_copy [ totalpop <= 2771] { polygon-fill: #FFEDA0;}',
+	//cartocss: $("#simple").text();
 /*	if (totalpop <= 26908){
 		cartocss: '#layer {polygon-fill: #F03B20; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;}';
 	}
