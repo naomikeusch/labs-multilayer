@@ -21,31 +21,6 @@
  <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.js"></script> -->
 
 	<script>
-	//stops for e
-	var x =	L.marker([40.7130469, -74.007638]).bindPopup('World Trade Center'),
-	y = L.marker([40.720678, -74.005203]).bindPopup('Canal Street'),
-	z = L.marker([40.726042, -74.003812]).bindPopup('Spring Street'),
-	a = L.marker([40.732175, -74.000628]).bindPopup('West 4th');
-	
-	var estops = new L.LayerGroup();
-	x.addTo(estops),
-	y.addTo(estops),
-	z.addTo(estops),
-	a.addTo(estops);
-	
-	//stops for f
-	var b = L.marker([40.738463, -73.996024]).bindPopup('14th St'),
-	c = L.marker([40.749545, -73.987892]).bindPopup('34th St Harold Square'),
-	d = L.marker([40.754127, -73.984769]).bindPopup('42nd St Bryant Park'),
-	e = L.marker([40.758503, -73.981298]).bindPopup('47th-50th St Rockefeller Center');
-	
-	
-	var fstops = new L.LayerGroup();
-	
-	b.addTo(fstops),
-	c.addTo(fstops),
-	d.addTo(fstops),
-	e.addTo(fstops);
 	
 	var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
 	'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -157,8 +132,6 @@
 	
 	//checkboxes
 	var overlays = {
-	"E Train Stops": estops,
-	"F Train Stops": fstops,
 	"nycd": dcyn,
 	"City Council Districts": ouc
 	};
