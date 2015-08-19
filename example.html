@@ -1,42 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Basic Example</title>
+  <title>Life</title>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
   <link rel="stylesheet" href="leaflet.groupedlayercontrol.css" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+   <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+   <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
+   <style> html, body, #map { height:100%; padding:0; margin:0 } </style>
+   <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="reset.css" />
+   <link rel="stylesheet" href="app-style.css" />
 </head>
+
+ 
+
 <body>
   <div id="map" style="width: 600px; height: 400px"></div>
-
+  
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.js"></script>
   <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
   <script src="leaflet.groupedlayercontrol.js"></script>
+  
   <script>
-    var cities = new L.LayerGroup();
-    L.marker([39.61, -105.02]).bindPopup('Littleton, CO.').addTo(cities);
-    L.marker([39.74, -104.99]).bindPopup('Denver, CO.').addTo(cities);
-    L.marker([39.73, -104.8]).bindPopup('Aurora, CO.').addTo(cities);
-    L.marker([39.77, -105.23]).bindPopup('Golden, CO.').addTo(cities);
-    var restaurants = new L.LayerGroup();
-    L.marker([39.69, -104.85]).bindPopup('A restaurant').addTo(restaurants);
-    L.marker([39.69, -105.12]).bindPopup('A restaurant').addTo(restaurants);
-    var dogs = new L.LayerGroup();
-    L.marker([39.79, -104.95]).bindPopup('A dog').addTo(dogs);
-    L.marker([39.79, -105.22]).bindPopup('A dog').addTo(dogs);
-    var cats = new L.LayerGroup();
-    L.marker([39.59, -104.75]).bindPopup('A cat').addTo(cats);
-    L.marker([39.59, -105.02]).bindPopup('A cat').addTo(cats);
+  
+    var sub = cartodb.createLayer(map, {
+  	user_name: 'naomikeusch',
+  	type: 'cartodb',
+  	sublayers: [{
+  	sql: 'select * from nyc_subway_entrance',
+  	cartocss: '#layer {marker-fill-opacity: 1; marker-line-color: #3B007F; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point;marker-type: ellipse; marker-width: 10; marker-fill: #229A00; marker-allow-overlap: true;}',
+  	interactivity: 'cartodb_id'}]
+  	});
+  	var subway = new L.LayerGroup();
+  	sub.addTo(subway);
+    
+    
+    var are = cartodb.createLayer(map, {
+  	user_name: 'naomikeusch',
+  	type: 'cartodb',
+  	sublayers: [{
+  	sql: 'select * from areas_of_interest_newyork',
+  	cartocss: '#layer { marker-fill-opacity: 1; marker-line-color: #5CA2D1; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 10; marker-fill: #F84F40; marker-allow-overlap: true;}',
+  	interactivity: 'cartodb_id'}]
+  	});
+  	
+  	var areas = new L.LayerGroup();
+  	are.addTo(areas);
+    
+    
+    var cou = cartodb.createLayer(map, {
+	  user_name: 'naomikeusch',
+	  type: 'cartodb',
+	  sublayers: [{
+	  sql: 'select * from city_council_districts',
+	  cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color: #3B007F;}',
+  	interactivity: 'cartodb_id'}]
+	  });
+	
+	  var council = new L.LayerGroup();
+	  cou.addTo(council);
+    
+
+    var com = cartodb.createLayer(map, {user_name: 'naomikeusch',
+	  type: 'cartodb',
+  	sublayers: [ 
+	  {
+	  sql: 'select * from nycd',
+	  cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color: #2167AB;}',
+	  interactivity: 'cartodb_id'}]
+	  });
+    var community = new L.LayerGroup();
+    com.addTo(community);
+
     var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
         'Imagery � <a href="http://mapbox.com">Mapbox</a>',
       mbUrl = 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
+      
     var grayscale   = L.tileLayer(mbUrl, {id: 'examples.map-20v6611k', attribution: mbAttr}),
-      streets  = L.tileLayer(mbUrl, {id: 'examples.map-i875mjb7',   attribution: mbAttr});
+        streets  = L.tileLayer(mbUrl, {id: 'examples.map-i875mjb7',   attribution: mbAttr});
+        
     var map = L.map('map', {
       center: [39.73, -104.99],
       zoom: 10,
-      layers: [grayscale, cities]
+      layers: [grayscale, subway]
     });
     var baseLayers = {
       "Grayscale": grayscale,
@@ -44,13 +95,13 @@
     };
     // Overlay layers are grouped
     var groupedOverlays = {
-      "Landmarks": {
-        "Cities": cities,
-        "Restaurants": restaurants
+      "Key Places": {
+        "NYC Subway Stops": subway,
+        "Areas of intrest": areas
       },
-      "Random": {
-        "Dogs": dogs,
-        "Cats": cats
+      "Boarders": {
+        "Council Districts": council,
+        "Community Districts": community
       }
     };
     // Make the "Landmarks" group exclusive (use radio inputs)
