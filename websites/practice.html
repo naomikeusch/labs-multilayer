@@ -66,64 +66,69 @@
 	*/
 	
 	//carto layers
-	var nycd = cartodb.createLayer(map, {user_name: 'naomikeusch',
+/*	var nycd = cartodb.createLayer(map, {user_name: 'naomikeusch',
 	type: 'cartodb',
 	sublayers: [ 
 	{
 	sql: 'select * from nycd',
 	cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color: #2167AB;}',
 	interactivity: 'cartodb_id'}]
-	});
+	}); */
+	var nycd =  L.marker([39.61, -105.02]).bindPopup('Littleton, CO.').addTo(cities);
 	var dcyn = new L.LayerGroup();
 	nycd.addTo(dcyn);
 	nycd.addTo(all);
 	
-	var cou = cartodb.createLayer(map, {
+/*	var cou = cartodb.createLayer(map, {
 	user_name: 'naomikeusch',
 	type: 'cartodb',
 	sublayers: [{
 	sql: 'select * from city_council_districts',
 	cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color: #3B007F;}',
 	interactivity: 'cartodb_id'}]
-	});
+	}); */
 	
+	var cou =  L.marker([40.70, -73.97]).bindPopup('Littleton, CO.').addTo(cities);
 	var ouc = new L.LayerGroup();
 	cou.addTo(ouc);
 	cou.addTo(all);
 	
-	var sub = cartodb.createLayer(map, {
+/*	var sub = cartodb.createLayer(map, {
 	user_name: 'naomikeusch',
 	type: 'cartodb',
 	sublayers: [{
 	sql: 'select * from nyc_subway_entrance',
 	cartocss: '#layer {marker-fill-opacity: 1; marker-line-color: #3B007F; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point;marker-type: ellipse; marker-width: 10; marker-fill: #229A00; marker-allow-overlap: true;}',
 	interactivity: 'cartodb_id'}]
-	});
+	}); */
+	var sub =  L.marker([40.70, -74]).bindPopup('Littleton, CO.').addTo(cities);
 	var bus = new L.LayerGroup();
 	sub.addTo(bus);
 //	sub.addTo(pts);
 	
-	var are = cartodb.createLayer(map, {
+/*	var are = cartodb.createLayer(map, {
 	user_name: 'naomikeusch',
 	type: 'cartodb',
 	sublayers: [{
 	sql: 'select * from areas_of_interest_newyork',
 	cartocss: '#layer { marker-fill-opacity: 1; marker-line-color: #5CA2D1; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 10; marker-fill: #F84F40; marker-allow-overlap: true;}',
 	interactivity: 'cartodb_id'}]
-	});
-	
+	}); */
+	var are =  L.marker([40.70, -73.97]).bindPopup('Littleton, CO.').addTo(cities);
 	var era = new L.LayerGroup();
 	are.addTo(era);
 //	are.addTo(pts);
 	
-	var pop = cartodb.createLayer(map, {
+/*	var pop = cartodb.createLayer(map, {
 	user_name: 'naomikeusch',
 	type: 'cartodb',
 	sublayers: [{
 	sql: 'select * from tracttemp_copy',
 	cartocss: '#tracttemp_copy{polygon-fill: #FFEDA0; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;} #tracttemp_copy [ totalpop <= 26908] { polygon-fill: #F03B20;} #tracttemp_copy [ totalpop <= 5723] { polygon-fill: #FEB24C;} #tracttemp_copy [ totalpop <= 2771] { polygon-fill: #FFEDA0;}',
 	interactivity: 'cartodb_id'}]
-	});
+	}); */
+	
+	var pop =  L.marker([41, -73.97]).bindPopup('Littleton, CO.').addTo(cities);
 	
 	var opp = new L.LayerGroup();
 	pop.addTo(opp);
