@@ -1,26 +1,147 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Leaflet layer selector with CartoDB layers</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
-    <style> html, body, #map { height:100%; padding:0; margin:0 } </style>
-    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
-     <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="app-style.css" /> 
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
-  </head>
+<head>
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+ <title>Master?</title>
+ <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+ <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
+ <style> html, body, #map { height:100%; padding:0; margin:0 } </style>
+ <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+ <link rel="stylesheet" href="reset.css" />
+ <link rel="stylesheet" href="app-style.css" />
+ 
+ </head>
+<body>
+	<div id="map"></div>
 
-  
-  <body>
-    <div id="map"></div>
-    
-    <!-- include cartodb.js library -->
-    <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
-
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.js"></script>
-    <script src= "leaflet.js"> </script> 
-  </body>
+	<script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
+ 
+	<script>
+	
+	var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+	'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+	'Imagery © <a href="http://mapbox.com">Mapbox</a>,' + 'CartoDB <a href = "https://cartodb.com/attributions">Attributions</a>',
+	mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ';
+	
+	var all = new L.LayerGroup();
+	
+	var nostops = new L.LayerGroup();
+	
+	var grayscale = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
+	//	streets = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr});
+	var map = L.map('map', {
+	center: [40.70, -73.97],
+	zoom: 12,
+	layers: [grayscale, nostops]
+	});
+	//Boarders baselayer
+	var baseLayers1 = {
+	
+	"All City Boarders": all,
+	"None": nostops
+	//	"Gray Scale": grayscale
+	};
+	
+	//Points baselayer
+	var baseLayers2 = {
+	"All Points": all,
+	"None": nostops
+	};
+	
+	var baseLayers3 = {
+	"Populations": all,
+	"Non": nostops
+	};
+	var pts = new L.LayerGroup();
+	
+	
+	//carto layers
+	var nycd = cartodb.createLayer(map, {user_name: 'naomikeusch',
+	type: 'cartodb',
+	sublayers: [ 
+	{
+	sql: 'select * from nycd',
+	cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color: #2167AB;}',
+	interactivity: 'cartodb_id'}]
+	});
+	var dcyn = new L.LayerGroup();
+	nycd.addTo(dcyn);
+	nycd.addTo(all);
+	
+	var cou = cartodb.createLayer(map, {
+	user_name: 'naomikeusch',
+	type: 'cartodb',
+	sublayers: [{
+	sql: 'select * from city_council_districts',
+	cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color: #3B007F;}',
+	interactivity: 'cartodb_id'}]
+	});
+	
+	var ouc = new L.LayerGroup();
+	cou.addTo(ouc);
+	cou.addTo(all);
+	
+	var sub = cartodb.createLayer(map, {
+	user_name: 'naomikeusch',
+	type: 'cartodb',
+	sublayers: [{
+	sql: 'select * from nyc_subway_entrance',
+	cartocss: '#layer {marker-fill-opacity: 1; marker-line-color: #3B007F; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point;marker-type: ellipse; marker-width: 10; marker-fill: #229A00; marker-allow-overlap: true;}',
+	interactivity: 'cartodb_id'}]
+	});
+	var bus = new L.LayerGroup();
+	sub.addTo(bus);
+	sub.addTo(pts);
+	
+	var are = cartodb.createLayer(map, {
+	user_name: 'naomikeusch',
+	type: 'cartodb',
+	sublayers: [{
+	sql: 'select * from areas_of_interest_newyork',
+	cartocss: '#layer { marker-fill-opacity: 1; marker-line-color: #5CA2D1; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 10; marker-fill: #F84F40; marker-allow-overlap: true;}',
+	interactivity: 'cartodb_id'}]
+	});
+	
+	var era = new L.LayerGroup();
+	are.addTo(era);
+	are.addTo(pts);
+	
+	var pop = cartodb.createLayer(map, {
+	user_name: 'naomikeusch',
+	type: 'cartodb',
+	sublayers: [{
+	sql: 'select * from tracttemp_copy',
+	cartocss: '#tracttemp_copy{polygon-fill: #FFEDA0; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;} #tracttemp_copy [ totalpop <= 26908] { polygon-fill: #F03B20;} #tracttemp_copy [ totalpop <= 5723] { polygon-fill: #FEB24C;} #tracttemp_copy [ totalpop <= 2771] { polygon-fill: #FFEDA0;}',
+	interactivity: 'cartodb_id'}]
+	});
+	
+	var opp = new L.LayerGroup();
+	pop.addTo(opp);
+	pop.addTo(pts);
+	
+	
+	
+	//checkboxes
+	var overlays = {
+	"nycd": dcyn,
+	"City Council Districts": ouc
+	
+	};
+	
+	var more = {
+	"NYC Subway Stops": bus,
+	"Areas of Interest": era
+	};
+	
+	var many ={
+	"Total Population": opp
+	};
+	
+	L.control.layers(baseLayers1, overlays).addTo(map);
+	L.control.layers(baseLayers2, more).addTo(map);
+	L.control.layers(baseLayers3, many).addTo(map);
+	</script>
+</body>
 </html>
