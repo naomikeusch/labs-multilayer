@@ -42,25 +42,25 @@
         attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
       }).addTo(map);
 
-      var layerUrl = 'https://wtgeographer.cartodb.com/api/v2/viz/b195a1d2-31a4-11e5-8edf-0e0c41326911/viz.json';
+      var layerUrl = 'https://naomikeusch.cartodb.com/api/v2/viz/62018d48-4108-11e5-a24d-0e4fddd5de28/viz.json';
 
       var sublayers = [];
 
       var LayerActions = {
         all: function(){
-          sublayers[0].setSQL("SELECT * FROM completed_072315");
+          sublayers[0].setSQL("SELECT * FROM world_borders");
           return true;
         },
         small: function(){
-          sublayers[0].setSQL("SELECT * FROM completed_072315 WHERE voltage_st = '69'");
+          sublayers[0].setSQL("SELECT * FROM nycc_13b_postredist");
           return true;
         },
         medium: function(){
-          sublayers[0].setSQL("SELECT * FROM completed_072315 WHERE voltage_st = '115'");
+          sublayers[0].setSQL("SELECT * FROM nyc_subway_entrance");
           return true;
         },
         large: function(){
-          sublayers[0].setSQL("SELECT * FROM completed_072315 WHERE voltage_st = '230'");
+          sublayers[0].setSQL("SELECT * FROM areas_of_interest_newyork");
           return true;
         }
       }
@@ -70,7 +70,7 @@
         .on('done', function(layer) {
           // change the query for the first layer
           var subLayerOptions = {
-            sql: "SELECT * FROM completed_072315",
+            sql: "SELECT * FROM areas_of_interest_newyork",
             //cartocss: "#completed_072315{marker-fill: #F84F40; marker-width: 8; marker-line-color: white; marker-line-width: 2; marker-clip: false; marker-allow-overlap: true;}"
           }
 
