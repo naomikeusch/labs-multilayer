@@ -1511,8 +1511,8 @@
                     .addTo(map_object)
                     .done(function(layer) {
                         // Activate desired data columns here to display in popup content
-                         var infowindow = cdb.vis.Vis.addInfowindow(map_object, layer.getSubLayer(0), ['_plura', '_plura_pcta', '_plura_grp', '_plura_qt', '_total', '_plurne', '_plurnes', '_plurne_qty', '_plurne_grp', '_plurne_pct', '_plurnes', '_nonensp_qy', '_nonensp_pt', '_non_en_qty', '_non_en_pct', '_plurnes_gr', 'school', '_plurnes_qt','_plurnes_pc', '_plurnes_pb', '_aa_all_qty', '_aa_all_pct', '_as_se_qty', '_as_se_pct', '_nc_ac_qty', '_nc_ac_pct', '_nc_m_qty', '_nc_m_pct', '_st_chi_qty', '_st_chi_pct', '_au_mp_qty', '_au_mp_pct', '_s_asia_qty', '_s_asia_pct', 'sch_name', 'sch_addr', 'sch_zip', 'sch_pcpl', 'sch_pcpl_ph', 'sch_type', '_p_ne_tie', '_p_ne_ti_n', '_p_nes_ti', '_p_nes_ti_n' ])
-                         infowindow.model.set('template', $('#infowindow_template').html());
+                       //  var infowindow = cdb.vis.Vis.addInfowindow(map_object, layer.getSubLayer(0), ['_plura', '_plura_pcta', '_plura_grp', '_plura_qt', '_total', '_plurne', '_plurnes', '_plurne_qty', '_plurne_grp', '_plurne_pct', '_plurnes', '_nonensp_qy', '_nonensp_pt', '_non_en_qty', '_non_en_pct', '_plurnes_gr', 'school', '_plurnes_qt','_plurnes_pc', '_plurnes_pb', '_aa_all_qty', '_aa_all_pct', '_as_se_qty', '_as_se_pct', '_nc_ac_qty', '_nc_ac_pct', '_nc_m_qty', '_nc_m_pct', '_st_chi_qty', '_st_chi_pct', '_au_mp_qty', '_au_mp_pct', '_s_asia_qty', '_s_asia_pct', 'sch_name', 'sch_addr', 'sch_zip', 'sch_pcpl', 'sch_pcpl_ph', 'sch_type', '_p_ne_tie', '_p_ne_ti_n', '_p_nes_ti', '_p_nes_ti_n' ])
+                        // infowindow.model.set('template', $('#infowindow_template').html());
                         sublayer = layer.getSubLayer(0);
                         createSelector(sublayer);
                     })
