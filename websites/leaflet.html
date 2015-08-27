@@ -18,6 +18,11 @@
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
    <link rel="stylesheet" href="/resources/demos/style.css">
  
+ <!--new-->
+ <style>
+  .ui-menu { width: 200px; }
+  .ui-widget-header { padding: 0.2em; }
+  </style>
  </head>
 <body>
 	<div id="map"></div>
@@ -148,7 +153,25 @@
 	L.control.layers(baseLayers1, overlays).addTo(map);
 	L.control.layers(baseLayers2, more).addTo(map);
 	L.control.layers(baseLayers3, many).addTo(map);
+	
+	//new
+	$(function() {
+	    $( "#menu" ).menu({
+	      items: "> :not(.ui-widget-header)"
+	    });
+	  });
 	</script>
+	<!-- new -->
+	<ul id="menu">
+	  <li class="ui-widget-header">Category 1</li>
+	  <li>Option 1</li>
+	  <li>Option 2</li>
+	  <li>Option 3</li>
+	  <li class="ui-widget-header">Category 2</li>    
+	  <li>Option 4</li>
+	  <li>Option 5</li>
+	  <li>Option 6</li>
+	</ul>
 </body>
 </html>
 
