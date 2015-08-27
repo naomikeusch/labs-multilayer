@@ -172,9 +172,13 @@
  -->
   <script>
   
+  var nostops = new L.LayerGroup();
+	
+ var grayscale = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
   var map = L.map('map', {
 	center: [40.70, -73.97],
-	zoom: 12
+	zoom: 12,
+	layers: [grayscale, nostops]
 	});
   $(function() {
     $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
