@@ -31,9 +31,16 @@
     #menu a:hover { 
       color: #F84F40;
     }
+    .ui-menu { width: 200px; }
+  .ui-widget-header { padding: 0.2em; }
   </style>
 
   <script>
+  $(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
+    });
+  });
     var map;
 
     function init() {
