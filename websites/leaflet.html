@@ -17,9 +17,6 @@
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
    <link rel="stylesheet" href="/resources/demos/style.css">
-   
-   <link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css'/>
-<script src='http://code.jquery.com/ui/1.9.2/jquery-ui.js' type='text/javascript'></script>
  
  <!--new-->
  <style>
@@ -158,18 +155,16 @@
 	L.control.layers(baseLayers3, many).addTo(map);
 	
 	//new
-$(function() {
-    $( "#menu" ).menu({
-      items: "> :not(.ui-widget-header)"
-    });
-  }); 
-
-
+	$(function() {
+	    $( "#menu" ).menu({
+	      items: "> :not(.ui-widget-header)"
+	    });
+	  });
 	</script>
 	<!-- new -->
 	<div id="menu">
 	  <li class="ui-widget-header">Category 1</li>
-	  <li>First</li>
+	  <li>Option 1</li>
 	  <li>Option 2</li>
 	  <li>Option 3</li>
 	  <li class="ui-widget-header">Category 2</li>    
