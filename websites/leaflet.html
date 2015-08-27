@@ -158,23 +158,11 @@
 	L.control.layers(baseLayers3, many).addTo(map);
 	
 	//new
-/*	$(function() {
-	    $( "#menu" ).menu({
-	      items: "> :not(.ui-widget-header)"
-	      select: function(event, ui) {
-            alert(ui.item.children().attr('tag'));
-        }
-	    });
-	  }); */
-	  
-	  var menu = $('#menu');
-	  $(document).ready(function(){
-    menu.menu({
-        select: function(event, ui) {
-            alert(ui.item.children().attr('tag'));
-        }
+$(function() {
+    $( "#menu" ).menu({
+      items: "> :not(.ui-widget-header)"
     });
-});
+  }); 
 
 
 	</script>
