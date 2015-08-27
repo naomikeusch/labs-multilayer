@@ -171,6 +171,11 @@
 
  -->
   <script>
+  
+  var map = L.map('map', {
+	center: [40.70, -73.97],
+	zoom: 12
+	});
   $(function() {
     $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
       _renderItem: function( ul, item ) {
