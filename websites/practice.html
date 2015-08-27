@@ -1,162 +1,1525 @@
 <!DOCTYPE html>
 <html>
-<head>
- <meta charset="utf-8">
- <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
- <title>Practice</title>
- <!-- edit -->
- <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
- <link rel="stylesheet" href="leaflet.groupedlayercontrol.css" />
+    <head>
+        <title>
+            TESTING | DOE Language by School Zone 
+        </title>
  
- <!--end edit-->
- <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
- <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
- <style> html, body, #map { height:100%; padding:0; margin:0 } </style>
- <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
- <link rel="stylesheet" href="reset.css" />
- <link rel="stylesheet" href="app-style.css" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
  
- </head>
-<body>
-	<div id="map"></div>
-	<script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
-	<!--edit-->
-	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-  	<script src="leaflet.groupedlayercontrol.js"></script>
-	
-	<!--end edit-->
-	
-	<script>
-	
-	var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-	'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-	'Imagery © <a href="http://mapbox.com">Mapbox</a>,' + 'CartoDB <a href = "https://cartodb.com/attributions">Attributions</a>',
-	mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ';
-	var all = new L.LayerGroup();
-	
-	var nostops = new L.LayerGroup();
-	
-	var grayscale = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
-	//	streets = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr});
-	var map = L.map('map', {
-	center: [40.70, -73.97],
-	zoom: 12,
-	layers: [grayscale, nostops]
-	});
-	//Boarders baselayer
-	var baseLayers1 = {
-	
-	"All City Boarders": all,
-	"None": nostops
-	//"Gray Scale": grayscale
-	};
-	
-	//Points baselayer
-/*	var baseLayers2 = {
-	"All Points": all,
-	"None": nostops
-	};
-	
-	var baseLayers3 = {
-	"Populations": all,
-	"Non": nostops
-	};
-	var pts = new L.LayerGroup();
-	*/
-	
-	//carto layers
-	var nycd = cartodb.createLayer(map, {user_name: 'naomikeusch',
-	type: 'cartodb',
-	sublayers: [ 
-	{
-	sql: 'select * from nycd',
-	cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color: #2167AB;}',
-	interactivity: 'cartodb_id'}]
-	}); 
-	var dcyn = new L.LayerGroup();
-	nycd.addTo(dcyn);
-	nycd.addTo(all);
-	
-	var cou = cartodb.createLayer(map, {
-	user_name: 'naomikeusch',
-	type: 'cartodb',
-	sublayers: [{
-	sql: 'select * from city_council_districts',
-	cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color: #3B007F;}',
-	interactivity: 'cartodb_id'}]
-	}); 
-	var ouc = new L.LayerGroup();
-	cou.addTo(ouc);
-	cou.addTo(all);
-	
-	var sub = cartodb.createLayer(map, {
-	user_name: 'naomikeusch',
-	type: 'cartodb',
-	sublayers: [{
-	sql: 'select * from nyc_subway_entrance',
-	cartocss: '#layer {marker-fill-opacity: 1; marker-line-color: #3B007F; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point;marker-type: ellipse; marker-width: 10; marker-fill: #229A00; marker-allow-overlap: true;}',
-	interactivity: 'cartodb_id'}]
-	}); 
-	var bus = new L.LayerGroup();
-	sub.addTo(bus);
-//	sub.addTo(pts);
-	
-	var are = cartodb.createLayer(map, {
-	user_name: 'naomikeusch',
-	type: 'cartodb',
-	sublayers: [{
-	sql: 'select * from areas_of_interest_newyork',
-	cartocss: '#layer { marker-fill-opacity: 1; marker-line-color: #5CA2D1; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 10; marker-fill: #F84F40; marker-allow-overlap: true;}',
-	interactivity: 'cartodb_id'}]
-	}); 
-	var era = new L.LayerGroup();
-	are.addTo(era);
-//	are.addTo(pts);
-	
-	var pop = cartodb.createLayer(map, {
-	user_name: 'naomikeusch',
-	type: 'cartodb',
-	sublayers: [{
-	sql: 'select * from tracttemp_copy',
-	cartocss: '#tracttemp_copy{polygon-fill: #FFEDA0; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;} #tracttemp_copy [ totalpop <= 26908] { polygon-fill: #F03B20;} #tracttemp_copy [ totalpop <= 5723] { polygon-fill: #FEB24C;} #tracttemp_copy [ totalpop <= 2771] { polygon-fill: #FFEDA0;}',
-	interactivity: 'cartodb_id'}]
-	}); 
-	
-	var opp = new L.LayerGroup();
-	pop.addTo(opp);
-//	pop.addTo(pts);
-	
-	//checkboxes
-	var overlays = {
-		"Boarders": {
-		"Community Districts": dcyn,
-		"City Council Districts": ouc
-		},
-		"Key Places": {
-		"NYC Subway Stops": bus,
-		"Areas of Interest": era
-		},
-		"Populations": {
-		"Total Population": opp
-		}
-	};
-	
-/*	var more = {
-	"NYC Subway Stops": bus,
-	"Areas of Interest": era
-	};
-	
-	var many ={
-	"Total Population": opp
-	};
-	*/
-	var options = { exclusiveGroups: ["Key Places"] };
-	
-	var layerControl = L.control.groupedLayers(baseLayers1, overlays, options);
-    	map.addControl(layerControl);
-//	L.control.layers(baseLayers2, more).addTo(map);
-//	L.control.layers(baseLayers3, many).addTo(map);
-	</script>
-</body>
+        <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+ 
+        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" type="text/css" /> 
+ 
+        <link rel="stylesheet" href="http://academy.cartodb.com/css/cdbui.css" type="text/css" />
+ 
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+        <link rel="stylesheet" href="/resources/demos/style.css">
+
+        <style type="text/css">
+            html, body, #map {
+                height: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            #cartocss {
+                position: absolute;
+                top: 55px;
+                right: 5px;
+            }
+            #sql {
+                position: absolute;
+                bottom: 25px;
+                right: 5px;
+            }
+            .layer_selector {
+                background: rgba(255,255,255,0.9);
+                border-radius: 5px;
+                padding: 0;
+                border: 2px solid #999;
+                width: 220px;
+            }
+            
+            .layer_selector > p {
+                padding: 5px 5px;
+                border-bottom: 1px solid #999;
+            }
+            
+            .layer_selector ul {
+                padding: 0; margin: 0;
+                list-style-type: none;
+            }
+            .layer_selector li {
+                padding: 3px 5px;
+                font-family: Helvetica, Arial, sans-serif;
+                font-size: 13px;
+                line-height: 120%;
+                color: #444;
+                cursor: pointer;
+            }
+            .layer_selector li:not(:last-child) {
+                border-bottom: 1px solid #999;
+            }
+            .layer_selector li:hover {
+                background-color: #F0F0F0;
+                cursor: pointer;
+            }
+            .layer_selector li.sql_selected,
+            .layer_selector li.cartocss_selected {
+                background-color: #A6CEE3;
+            }
+            </style>
+ 
+            <style type="text/css">
+            .my-legend {
+              position: absolute;
+              top: 70px;
+              left: 10px;
+            }
+            
+            .my-legend {
+              background: rgba(255,255,255,0.9);
+              border-radius: 5px;
+              padding: 2px;
+              border: 2px solid #999;
+              width: 230px;
+              }
+            .my-legend .legend-title {
+              text-align: left;
+              margin-bottom: 3px;
+              font-weight: bold;
+              font-size: 90%;
+              }
+            .my-legend .legend-scale ul {
+              margin: 0;
+              margin-bottom: 1px;
+              padding: 0;
+              float: left;
+              list-style: none;
+              }
+            .my-legend .legend-scale ul li {
+              font-size: 75%;
+              list-style: none;
+              margin-left: 0px;
+              margin-right: 0px;
+              line-height: 13px;
+              margin-bottom: 1px;
+              }
+            .my-legend ul.legend-labels li span {
+              display: block;
+              float: left;
+              height: 11px;
+              width: 14px;
+              margin-right: 2px;
+              margin-left: 4px;
+              border: 1px solid #000;
+              }
+            .my-legend a {
+              color: #777;
+              }
+          </style>
+
+            <style type="cartocss/html" id="simple">
+            /** simple visualization */
+            #schlang_merge_05_04{
+                polygon-fill: #6b675b;
+                polygon-opacity: 0.5;
+                line-color: #ffffff;
+                line-width: 1;
+                line-opacity: 1;
+            }   
+            </style>
+ 
+            <style type="cartocss/html" id="_plura">
+            /** language group color for _plura polygon fill */
+            #schlang_merge_05_04 {
+               polygon-opacity: 0.7;
+               line-color: #FFF;
+               line-width: 1;
+               line-opacity: 1;
+            }
+            #schlang_merge_05_04[_plura_grp="French Creoles"] {
+               polygon-fill: #A53ED5;
+            }
+            #schlang_merge_05_04[_plura_grp="Indo-European: Balto-Slavic"] {
+               polygon-fill: #0000a0;
+            }
+            #schlang_merge_05_04[_plura_grp="Indo-European: Romance"] {
+               polygon-fill: #5CA2D1;
+            }
+            #schlang_merge_05_04[_plura_grp="Indo-European: Germanic"] {
+               polygon-fill: #cccccc;
+            }
+            #schlang_merge_05_04[_plura_grp="Indo-European: Other"] {
+               polygon-fill: #00ceff;  
+            }
+            #schlang_merge_05_04[_plura_grp="Uralic"] {
+               polygon-fill: #00ceff;
+            }
+            #schlang_merge_05_04[_plura_grp="Sino-Tibetan: Chinese"] {
+               polygon-fill: #ff0000;
+            }
+            #schlang_merge_05_04[_plura_grp="South Asian"] {
+               polygon-fill: #ffa500;
+            }
+            #schlang_merge_05_04[_plura_grp="E & SE Asia: other"] {
+               polygon-fill: #fb9a99;
+            }
+            #schlang_merge_05_04[_plura_grp="Austronesian: Malayo-Polynesian"] {
+               polygon-fill: #fb9a99;
+            }
+            #schlang_merge_05_04[_plura_grp="Afro-Asiatic: Semitic"] {
+               polygon-fill: #49db40;
+            }
+            #schlang_merge_05_04[_plura_grp="Niger-Congo: Atlantic-Congo"] {
+               polygon-fill: #136400;
+            }
+            #schlang_merge_05_04[_plura_grp="Niger-Congo: Mande"] {
+               polygon-fill: #229A00;
+            }
+            #schlang_merge_05_04 {
+               polygon-fill: #DDDDDD;
+            }   
+            /** language labels for _plura */
+            #schlang_merge_05_04::labels [zoom >= 12] {
+              text-name: [_plura];
+              text-face-name: 'Lato Bold';
+              text-size: 10;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #000;
+              text-halo-fill: #FFF;
+              text-halo-radius: 1;
+              text-dy: 0;
+              text-allow-overlap: false;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 13]  {
+              text-name: [_plura]+" "+[_plura_qt];
+              text-face-name: 'Lato Bold';
+              text-size: 11;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] {
+              text-name: [_plura]+" "+[_plura_qt];
+              text-face-name: 'Lato Bold';
+              text-size: 13;
+            }
+            </style>  
+ 
+             <style type="cartocss/html" id="_plurne_grp">
+            /** language group color for _plurne_ polygon fill */
+            #schlang_merge_05_04 {
+               polygon-opacity: 0.7;
+               line-color: #FFF;
+               line-width: 1;
+               line-opacity: 1;
+            }
+            #schlang_merge_05_04[_plurne_grp="French Creoles"] {
+               polygon-fill: #A53ED5;
+            }
+            #schlang_merge_05_04[_plurne_grp="Indo-European: Balto-Slavic"]  {
+               polygon-fill: #0000a0;
+            }
+            #schlang_merge_05_04[_plurne_grp="Indo-European: Romance"]  {
+               polygon-fill: #5CA2D1;
+            }
+            #schlang_merge_05_04[_plurne_grp="Indo-European: Germanic"]  {
+               polygon-fill: #cccccc;
+            }
+            #schlang_merge_05_04[_plurne_grp="Indo-European: Other"]  { 
+               polygon-fill: #00ceff;  
+            }
+            #schlang_merge_05_04[_plurne_grp="Uralic"]  {
+               polygon-fill: #00ceff;
+            }
+            #schlang_merge_05_04[_plurne_grp="Sino-Tibetan: Chinese"]  {
+               polygon-fill: #ff0000;
+            }
+            #schlang_merge_05_04[_plurne_grp="South Asian"]  {
+               polygon-fill: #ffa500;
+            }
+            #schlang_merge_05_04[_plurne_grp="E & SE Asia: other"] {
+               polygon-fill: #fb9a99;
+            }
+            #schlang_merge_05_04[_plurne_grp="Austronesian: Malayo-Polynesian"]  {
+               polygon-fill: #fb9a99;
+            }
+            #schlang_merge_05_04[_plurne_grp="Afro-Asiatic: Semitic"]  {
+               polygon-fill: #49db40;
+            }
+            #schlang_merge_05_04[_plurne_grp="Niger-Congo: Atlantic-Congo"] {
+               polygon-fill: #136400;
+            }
+            #schlang_merge_05_04[_plurne_grp="Niger-Congo: Mande"] {
+               polygon-fill: #229A00;
+            }
+            #schlang_merge_05_04 {
+               polygon-fill: #DDDDDD;
+            }   
+            /** language labels for _plurne */
+            #schlang_merge_05_04::labels [zoom >= 12] {
+              text-name: [_plurne];
+              text-face-name: 'Lato Bold';
+              text-size: 10;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #000;
+              text-halo-fill: #FFF;
+              text-halo-radius: 1;
+              text-dy: 0;
+              text-allow-overlap: false;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] {
+              text-name: [_plurne]+" "+[_plurne_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 11;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] {
+              text-name: [_plurne]+" "+[_plurne_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 13;
+            }
+            #schlang_poly_v3_1::labels [_plurne_qty <= 9]{
+              text-name: [_plurne];
+              text-face-name: 'Lato Bold';
+              text-size: 0;
+              text-fill: #fff;
+              text-halo-radius: 0;
+            }
+            </style> 
+ 
+          <style type="cartocss/html" id="_plurnes_gr">
+          /** plurnes visualization */
+          #schlang_merge_05_04 {
+             polygon-opacity: 0.7;
+             line-color: #FFF;
+             line-width: 1;
+             line-opacity: 1;
+          }
+          /** language group polygon fill */
+          #schlang_merge_05_04[_plurnes_gr="Sino-Tibetan: Chinese"] {
+             polygon-fill: #ff0000;
+          }
+          #schlang_merge_05_04[_plurnes_gr="South Asian"] {
+             polygon-fill: #ffa500;
+          }
+          #schlang_merge_05_04[_plurnes_gr="E & SE Asia: other"] {
+             polygon-fill: #fb9a99;
+          }
+          #schlang_merge_05_04[_plurnes_gr="Austronesian: Malayo-Polynesian"] {
+             polygon-fill: #fb9a99;
+          }
+          #schlang_merge_05_04[_plurnes_gr="Afro-Asiatic: Semitic"] {
+             polygon-fill: #49db40;
+          }
+          #schlang_merge_05_04[_plurnes_gr="Niger-Congo: Atlantic-Congo"] {
+             polygon-fill: #136400;
+          }
+          #schlang_merge_05_04[_plurnes_gr="Niger-Congo: Mande"] {
+             polygon-fill: #229A00;
+          }
+          #schlang_merge_05_04[_plurnes_gr="French Creoles"] {
+             polygon-fill: #A53ED5;
+          }
+          #schlang_merge_05_04[_plurnes_gr="Indo-European: Balto-Slavic"] {
+             polygon-fill: #0000a0;
+          }
+          #schlang_merge_05_04[_plurnes_gr="Indo-European: Romance"] {
+             polygon-fill: #5CA2D1;
+          }
+          #schlang_merge_05_04[_plurnes_gr="Indo-European: Germanic"] {
+             polygon-fill: #5CA2D1;
+          }
+          #schlang_merge_05_04[_plurnes_gr="Indo-European: Other"] {
+             polygon-fill: #00ceff; 
+          }
+          #schlang_merge_05_04[_plurnes_gr="Uralic"] {
+             polygon-fill: #00ceff;
+          }
+          #schlang_merge_05_04 {
+             polygon-fill: #DDDDDD;
+          }
+          /** language labels for plurnes */
+          #schlang_merge_05_04::labels [zoom >= 12] {
+            text-name: [_plurnes];
+            text-face-name: 'Lato Bold';
+            text-size: 10;
+            text-wrap-before: true;
+            text-wrap-width: 20;
+            text-label-position-tolerance: 10;
+            text-fill: #000;
+            text-halo-fill: #FFF;
+            text-halo-radius: 1;
+            text-dy: 0;
+            text-allow-overlap: false;
+            text-placement: point;
+            text-placement-type: simple;
+          }
+          #schlang_merge_05_04::labels [zoom >= 13]      {
+            text-name: [_plurnes]+" "+[_plurnes_qt];
+            text-face-name: 'Lato Bold';
+            text-size: 11;
+          }
+          #schlang_merge_05_04::labels [zoom >= 14]  {
+            text-name: [_plurnes]+" "+[_plurnes_qt];
+            text-face-name: 'Lato Bold';
+            text-size: 13;
+          }
+            #schlang_poly_v3_1::labels [_plurnes_qt < 9]{
+              text-name: [_plurnes_qt];
+              text-face-name: 'Lato Bold';
+              text-size: 0;
+              text-fill: #fff;
+              text-halo-radius: 0;
+            }
+            </style>  
+ 
+
+            <!-- Group selector section - to be broken out into new layer selector, with toggle/checkbox option  -->
+            <style type="cartocss/html" id="bubble-chinese-grp">   /** #ff0000 */
+            /** graduated lang code */   
+              #schlang_merge_05_04{
+              marker-fill-opacity: 0.0;
+              marker-line-color: #ff0000;
+              marker-line-width: 0;
+              marker-line-opacity: 0;
+              marker-placement: point;
+              marker-multi-policy: largest;
+              marker-type: ellipse;
+              marker-fill: #ff0000;
+              marker-allow-overlap: true;
+              marker-clip: false;
+              marker-comp-op: darken;
+            }
+            #schlang_merge_05_04 [ _st_chi_qty <= 1600]  {
+               marker-width: 23.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _st_chi_qty <= 400] {
+               marker-width: 15.5;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _st_chi_qty <= 200] {
+               marker-width: 11.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _st_chi_qty <= 50] {
+               marker-width: 7.5;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _st_chi_qty < 10] {
+               marker-width: 5.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _st_chi_qty <= 5] {
+               marker-width: 0;
+               marker-fill-opacity: 0.0;
+               marker-line-width: 0;
+               marker-line-opacity: 0;
+            }
+            #schlang_merge_05_04 [ _st_chi_qty <= 1600] [zoom >= 12] {marker-width: 34;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 400] [zoom >= 12] {marker-width: 23;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 200] [zoom >= 12] {marker-width: 17;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 50] [zoom >= 12] {marker-width: 11;}
+            #schlang_merge_05_04 [ _st_chi_qty < 10] [zoom >= 12] {marker-width: 8;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 5] [zoom >= 12] {marker-width: 0;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 1600] [zoom >= 13] {marker-width: 52;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 400] [zoom >= 13] {marker-width: 35;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 200] [zoom >= 13] {marker-width: 25;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 50] [zoom >= 13] {marker-width: 17;}
+            #schlang_merge_05_04 [ _st_chi_qty < 10] [zoom >= 13] {marker-width: 11;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 5] [zoom >= 13] {marker-width: 0.0;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 1600] [zoom >= 14] {marker-width: 78;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 400] [zoom >= 14] {marker-width: 52;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 200] [zoom >= 14] {marker-width: 37;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 50] [zoom >= 14] {marker-width: 25;}
+            #schlang_merge_05_04 [ _st_chi_qty < 10] [zoom >= 14] {marker-width: 15;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 5] [zoom >= 14] {marker-width: 0.0;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 1600] [zoom >= 15] {marker-width: 116;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 400] [zoom >= 15] {marker-width: 78;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 200] [zoom >= 15] {marker-width: 56;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 50] [zoom >= 15] {marker-width: 38;}
+            #schlang_merge_05_04 [ _st_chi_qty < 10] [zoom >= 15] {marker-width: 21;}
+            #schlang_merge_05_04 [ _st_chi_qty <= 5] [zoom >= 15] {marker-width: 0.0;}
+            /** label size behavior at specific zoom levels for specific quantites */
+            /** label on at z13 */
+            #schlang_merge_05_04::labels [zoom >= 13] [_st_chi_qty > 5] {  /** label size for single-digit values */
+              text-name: [_st_chi_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 8;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF; 
+              text-halo-fill: #000000;
+              text-halo-radius: 0.1;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_st_chi_qty >= 10] {
+              text-name: [_st_chi_qty];
+              text-size: 11;
+              text-fill: #FFFFFF; 
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_st_chi_qty >= 50] {
+              text-name: [_st_chi_qty];
+              text-size: 11;
+              text-fill: #FFFFFF;              
+              text-halo-radius: 0.2;
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_st_chi_qty >= 400] {
+              text-name: [_st_chi_qty];
+              text-size: 15;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_st_chi_qty > 5] {  /** label size for single-digit values */
+              text-name: [_st_chi_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 10;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF; 
+              text-halo-fill: #000000;
+              text-halo-radius: 0.1;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_st_chi_qty >= 10] {
+              text-name: [_st_chi_qty];
+              text-fill: #FFFFFF; 
+              text-size: 12;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_st_chi_qty >= 50] {
+              text-name: [_st_chi_qty];
+              text-size: 12;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.2;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_st_chi_qty >= 400] {
+              text-name: [_st_chi_qty];
+              text-size: 15;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_st_chi_qty >= 10] {
+              text-name: [_st_chi_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 15;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF;
+              text-halo-fill: #000;
+              text-halo-radius: 0.4;
+              text-dy: 0;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_st_chi_qty >= 50] {
+              text-name: [_st_chi_qty];
+              text-size: 16;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_st_chi_qty >= 400] {
+              text-name: [_st_chi_qty];
+              text-size: 18;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+ 
+            </style>
+
+            <style type="cartocss/html" id="bubble-s-asian-grp">    /** #ffa500  */
+            /** graduated lang code */
+              #schlang_merge_05_04{
+              marker-fill-opacity: 0.0;
+              marker-line-color: #ffa500;
+              marker-line-width: 0;
+              marker-line-opacity: 0;
+              marker-placement: point;
+              marker-multi-policy: largest;
+              marker-type: ellipse;
+              marker-fill: #ffa500;
+              marker-allow-overlap: true;
+              marker-clip: false;
+              marker-comp-op: darken;
+            }
+            #schlang_merge_05_04 [ _s_asia_qty <= 1600]  {
+               marker-width: 23.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _s_asia_qty <= 400] {
+               marker-width: 15.5;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _s_asia_qty <= 200] {
+               marker-width: 11.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _s_asia_qty <= 50] {
+               marker-width: 7.5;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _s_asia_qty < 10] {
+               marker-width: 5.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _s_asia_qty <= 5] {
+               marker-width: 0;
+               marker-fill-opacity: 0.0;
+               marker-line-width: 0;
+               marker-line-opacity: 0;
+            }
+            #schlang_merge_05_04 [ _s_asia_qty <= 1600] [zoom >= 12] {marker-width: 34;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 400] [zoom >= 12] {marker-width: 23;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 200] [zoom >= 12] {marker-width: 17;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 50] [zoom >= 12] {marker-width: 11;}
+            #schlang_merge_05_04 [ _s_asia_qty < 10] [zoom >= 12] {marker-width: 8;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 5] [zoom >= 12] {marker-width: 0;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 1600] [zoom >= 13] {marker-width: 52;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 400] [zoom >= 13] {marker-width: 35;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 200] [zoom >= 13] {marker-width: 25;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 50] [zoom >= 13] {marker-width: 17;}
+            #schlang_merge_05_04 [ _s_asia_qty < 10] [zoom >= 13] {marker-width: 11;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 5] [zoom >= 13] {marker-width: 0.0;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 1600] [zoom >= 14] {marker-width: 78;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 400] [zoom >= 14] {marker-width: 52;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 200] [zoom >= 14] {marker-width: 37;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 50] [zoom >= 14] {marker-width: 25;}
+            #schlang_merge_05_04 [ _s_asia_qty < 10] [zoom >= 14] {marker-width: 15;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 5] [zoom >= 14] {marker-width: 0.0;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 1600] [zoom >= 15] {marker-width: 116;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 400] [zoom >= 15] {marker-width: 78;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 200] [zoom >= 15] {marker-width: 56;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 50] [zoom >= 15] {marker-width: 38;}
+            #schlang_merge_05_04 [ _s_asia_qty < 10] [zoom >= 15] {marker-width: 21;}
+            #schlang_merge_05_04 [ _s_asia_qty <= 5] [zoom >= 15] {marker-width: 0.0;}
+            /** label size behavior at specific zoom levels for specific quantites */
+            /** label on at z13 */
+            #schlang_merge_05_04::labels [zoom >= 13] [_s_asia_qty > 5] {  /** label size for single-digit values */
+              text-name: [_s_asia_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 8;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF; 
+              text-halo-fill: #000000;
+              text-halo-radius: 0.1;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_s_asia_qty >= 10] {
+              text-name: [_s_asia_qty];
+              text-size: 11;
+              text-fill: #FFFFFF; 
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_s_asia_qty >= 50] {
+              text-name: [_s_asia_qty];
+              text-size: 11;
+              text-fill: #FFFFFF;              
+              text-halo-radius: 0.2;
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_s_asia_qty >= 400] {
+              text-name: [_s_asia_qty];
+              text-size: 15;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_s_asia_qty > 5] {  /** label size for single-digit values */
+              text-name: [_s_asia_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 10;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF; 
+              text-halo-fill: #000000;
+              text-halo-radius: 0.1;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_s_asia_qty >= 10] {
+              text-name: [_s_asia_qty];
+              text-fill: #FFFFFF; 
+              text-size: 12;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_s_asia_qty >= 50] {
+              text-name: [_s_asia_qty];
+              text-size: 12;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.2;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_s_asia_qty >= 400] {
+              text-name: [_s_asia_qty];
+              text-size: 15;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_s_asia_qty >= 10] {
+              text-name: [_s_asia_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 15;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF;
+              text-halo-fill: #000;
+              text-halo-radius: 0.4;
+              text-dy: 0;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_s_asia_qty >= 50] {
+              text-name: [_s_asia_qty];
+              text-size: 16;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_s_asia_qty >= 400] {
+              text-name: [_s_asia_qty];
+              text-size: 18;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+ 
+            </style>
+ 
+            <style type="cartocss/html" id="bubble-e-eurs-grp">   /** color: #0f3b82 */
+            /** graduated lang code */
+              #schlang_merge_05_04{
+              marker-fill-opacity: 0.0;
+              marker-line-color: #0f3b82;
+              marker-line-width: 0;
+              marker-line-opacity: 0;
+              marker-placement: point;
+              marker-multi-policy: largest;
+              marker-type: ellipse;
+              marker-fill: #0f3b82;
+              marker-allow-overlap: true;
+              marker-clip: false;
+              marker-comp-op: darken;
+            }
+            #schlang_merge_05_04 [ _e_eurs_qty <= 1600]  {
+               marker-width: 23.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _e_eurs_qty <= 400] {
+               marker-width: 15.5;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _e_eurs_qty <= 200] {
+               marker-width: 11.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _e_eurs_qty <= 50] {
+               marker-width: 7.5;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _e_eurs_qty < 10] {
+               marker-width: 5.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _e_eurs_qty <= 5] {
+               marker-width: 0;
+               marker-fill-opacity: 0.0;
+               marker-line-width: 0;
+               marker-line-opacity: 0;
+            }
+            #schlang_merge_05_04 [ _e_eurs_qty <= 1600] [zoom >= 12] {marker-width: 34;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 400] [zoom >= 12] {marker-width: 23;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 200] [zoom >= 12] {marker-width: 17;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 50] [zoom >= 12] {marker-width: 11;}
+            #schlang_merge_05_04 [ _e_eurs_qty < 10] [zoom >= 12] {marker-width: 8;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 5] [zoom >= 12] {marker-width: 0;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 1600] [zoom >= 13] {marker-width: 52;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 400] [zoom >= 13] {marker-width: 35;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 200] [zoom >= 13] {marker-width: 25;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 50] [zoom >= 13] {marker-width: 17;}
+            #schlang_merge_05_04 [ _e_eurs_qty < 10] [zoom >= 13] {marker-width: 11;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 5] [zoom >= 13] {marker-width: 0.0;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 1600] [zoom >= 14] {marker-width: 78;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 400] [zoom >= 14] {marker-width: 52;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 200] [zoom >= 14] {marker-width: 37;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 50] [zoom >= 14] {marker-width: 25;}
+            #schlang_merge_05_04 [ _e_eurs_qty < 10] [zoom >= 14] {marker-width: 15;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 5] [zoom >= 14] {marker-width: 0.0;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 1600] [zoom >= 15] {marker-width: 116;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 400] [zoom >= 15] {marker-width: 78;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 200] [zoom >= 15] {marker-width: 56;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 50] [zoom >= 15] {marker-width: 38;}
+            #schlang_merge_05_04 [ _e_eurs_qty < 10] [zoom >= 15] {marker-width: 21;}
+            #schlang_merge_05_04 [ _e_eurs_qty <= 5] [zoom >= 15] {marker-width: 0.0;}
+            /** label size behavior at specific zoom levels for specific quantites */
+            /** label on at z13 */
+            #schlang_merge_05_04::labels [zoom >= 13] [_e_eurs_qty > 5] {  /** label size for single-digit values */
+              text-name: [_e_eurs_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 8;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF; 
+              text-halo-fill: #000000;
+              text-halo-radius: 0.1;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_e_eurs_qty >= 10] {
+              text-name: [_e_eurs_qty];
+              text-size: 11;
+              text-fill: #FFFFFF; 
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_e_eurs_qty >= 50] {
+              text-name: [_e_eurs_qty];
+              text-size: 11;
+              text-fill: #FFFFFF;              
+              text-halo-radius: 0.2;
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_e_eurs_qty >= 400] {
+              text-name: [_e_eurs_qty];
+              text-size: 15;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_e_eurs_qty > 5] {  /** label size for single-digit values */
+              text-name: [_e_eurs_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 10;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF; 
+              text-halo-fill: #000000;
+              text-halo-radius: 0.1;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_e_eurs_qty >= 10] {
+              text-name: [_e_eurs_qty];
+              text-fill: #FFFFFF; 
+              text-size: 12;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_e_eurs_qty >= 50] {
+              text-name: [_e_eurs_qty];
+              text-size: 12;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.2;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_e_eurs_qty >= 400] {
+              text-name: [_e_eurs_qty];
+              text-size: 15;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_e_eurs_qty >= 10] {
+              text-name: [_e_eurs_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 15;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF;
+              text-halo-fill: #000;
+              text-halo-radius: 0.4;
+              text-dy: 0;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_e_eurs_qty >= 50] {
+              text-name: [_e_eurs_qty];
+              text-size: 16;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_e_eurs_qty >= 400] {
+              text-name: [_e_eurs_qty];
+              text-size: 18;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+ 
+            </style>
+ 
+            <style type="cartocss/html" id="bubble_mus4_grp">    /** #229a00 */
+            /** graduated lang code */
+              #schlang_merge_05_04{
+              marker-fill-opacity: 0.0;
+              marker-line-color: #229a00;
+              marker-line-width: 0;
+              marker-line-opacity: 0;
+              marker-placement: point;
+              marker-multi-policy: largest;
+              marker-type: ellipse;
+              marker-fill: #229a00;
+              marker-allow-overlap: true;
+              marker-clip: false;
+              marker-comp-op: darken;
+            }
+            #schlang_merge_05_04 [ _mus4_qty <= 1600]  {
+               marker-width: 23.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _mus4_qty <= 400] {
+               marker-width: 15.5;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _mus4_qty <= 200] {
+               marker-width: 11.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _mus4_qty <= 50] {
+               marker-width: 7.5;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _mus4_qty < 10] {
+               marker-width: 5.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _mus4_qty <= 5] {
+               marker-width: 0;
+               marker-fill-opacity: 0.0;
+               marker-line-width: 0;
+               marker-line-opacity: 0;
+            }
+            #schlang_merge_05_04 [ _mus4_qty <= 1600] [zoom >= 12] {marker-width: 34;}
+            #schlang_merge_05_04 [ _mus4_qty <= 400] [zoom >= 12] {marker-width: 23;}
+            #schlang_merge_05_04 [ _mus4_qty <= 200] [zoom >= 12] {marker-width: 17;}
+            #schlang_merge_05_04 [ _mus4_qty <= 50] [zoom >= 12] {marker-width: 11;}
+            #schlang_merge_05_04 [ _mus4_qty < 10] [zoom >= 12] {marker-width: 8;}
+            #schlang_merge_05_04 [ _mus4_qty <= 5] [zoom >= 12] {marker-width: 0;}
+            #schlang_merge_05_04 [ _mus4_qty <= 1600] [zoom >= 13] {marker-width: 52;}
+            #schlang_merge_05_04 [ _mus4_qty <= 400] [zoom >= 13] {marker-width: 35;}
+            #schlang_merge_05_04 [ _mus4_qty <= 200] [zoom >= 13] {marker-width: 25;}
+            #schlang_merge_05_04 [ _mus4_qty <= 50] [zoom >= 13] {marker-width: 17;}
+            #schlang_merge_05_04 [ _mus4_qty < 10] [zoom >= 13] {marker-width: 11;}
+            #schlang_merge_05_04 [ _mus4_qty <= 5] [zoom >= 13] {marker-width: 0.0;}
+            #schlang_merge_05_04 [ _mus4_qty <= 1600] [zoom >= 14] {marker-width: 78;}
+            #schlang_merge_05_04 [ _mus4_qty <= 400] [zoom >= 14] {marker-width: 52;}
+            #schlang_merge_05_04 [ _mus4_qty <= 200] [zoom >= 14] {marker-width: 37;}
+            #schlang_merge_05_04 [ _mus4_qty <= 50] [zoom >= 14] {marker-width: 25;}
+            #schlang_merge_05_04 [ _mus4_qty < 10] [zoom >= 14] {marker-width: 15;}
+            #schlang_merge_05_04 [ _mus4_qty <= 5] [zoom >= 14] {marker-width: 0.0;}
+            #schlang_merge_05_04 [ _mus4_qty <= 1600] [zoom >= 15] {marker-width: 116;}
+            #schlang_merge_05_04 [ _mus4_qty <= 400] [zoom >= 15] {marker-width: 78;}
+            #schlang_merge_05_04 [ _mus4_qty <= 200] [zoom >= 15] {marker-width: 56;}
+            #schlang_merge_05_04 [ _mus4_qty <= 50] [zoom >= 15] {marker-width: 38;}
+            #schlang_merge_05_04 [ _mus4_qty < 10] [zoom >= 15] {marker-width: 21;}
+            #schlang_merge_05_04 [ _mus4_qty <= 5] [zoom >= 15] {marker-width: 0.0;}
+            /** label size behavior at specific zoom levels for specific quantites */
+            /** label on at z13 */
+            #schlang_merge_05_04::labels [zoom >= 13] [_mus4_qty > 5] {  /** label size for single-digit values */
+              text-name: [_mus4_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 8;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF; 
+              text-halo-fill: #000000;
+              text-halo-radius: 0.1;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_mus4_qty >= 10] {
+              text-name: [_mus4_qty];
+              text-size: 11;
+              text-fill: #FFFFFF; 
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_mus4_qty >= 50] {
+              text-name: [_mus4_qty];
+              text-size: 11;
+              text-fill: #FFFFFF;              
+              text-halo-radius: 0.2;
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_mus4_qty >= 400] {
+              text-name: [_mus4_qty];
+              text-size: 15;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_mus4_qty > 5] {  /** label size for single-digit values */
+              text-name: [_mus4_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 10;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF; 
+              text-halo-fill: #000000;
+              text-halo-radius: 0.1;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_mus4_qty >= 10] {
+              text-name: [_mus4_qty];
+              text-fill: #FFFFFF; 
+              text-size: 12;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_mus4_qty >= 50] {
+              text-name: [_mus4_qty];
+              text-size: 12;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.2;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_mus4_qty >= 400] {
+              text-name: [_mus4_qty];
+              text-size: 15;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_mus4_qty >= 10] {
+              text-name: [_mus4_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 15;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF;
+              text-halo-fill: #000;
+              text-halo-radius: 0.4;
+              text-dy: 0;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_mus4_qty >= 50] {
+              text-name: [_mus4_qty];
+              text-size: 16;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_mus4_qty >= 400] {
+              text-name: [_mus4_qty];
+              text-size: 18;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+ 
+            </style>
+ 
+            <style type="cartocss/html" id="bubble-fr-sum-grp">
+            /** graduated lang code */
+              #schlang_merge_05_04{
+              marker-fill-opacity: 0.0;
+              marker-line-color: #A53ED5;
+              marker-line-width: 0;
+              marker-line-opacity: 0;
+              marker-placement: point;
+              marker-multi-policy: largest;
+              marker-type: ellipse;
+              marker-fill: #A53ED5;
+              marker-allow-overlap: true;
+              marker-clip: false;
+              marker-comp-op: darken;
+            }
+            #schlang_merge_05_04 [ _fr_sum_qty <= 1600]  {
+               marker-width: 23.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _fr_sum_qty <= 400] {
+               marker-width: 15.5;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _fr_sum_qty <= 200] {
+               marker-width: 11.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _fr_sum_qty <= 50] {
+               marker-width: 7.5;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _fr_sum_qty < 10] {
+               marker-width: 5.0;
+               marker-fill-opacity: 0.8;
+               marker-line-width: 1.5;
+               marker-line-opacity: 1;
+            }
+            #schlang_merge_05_04 [ _fr_sum_qty <= 5] {
+               marker-width: 0;
+               marker-fill-opacity: 0.0;
+               marker-line-width: 0;
+               marker-line-opacity: 0;
+            }
+            #schlang_merge_05_04 [ _fr_sum_qty <= 1600] [zoom >= 12] {marker-width: 34;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 400] [zoom >= 12] {marker-width: 23;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 200] [zoom >= 12] {marker-width: 17;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 50] [zoom >= 12] {marker-width: 11;}
+            #schlang_merge_05_04 [ _fr_sum_qty < 10] [zoom >= 12] {marker-width: 8;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 5] [zoom >= 12] {marker-width: 0;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 1600] [zoom >= 13] {marker-width: 52;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 400] [zoom >= 13] {marker-width: 35;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 200] [zoom >= 13] {marker-width: 25;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 50] [zoom >= 13] {marker-width: 17;}
+            #schlang_merge_05_04 [ _fr_sum_qty < 10] [zoom >= 13] {marker-width: 11;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 5] [zoom >= 13] {marker-width: 0.0;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 1600] [zoom >= 14] {marker-width: 78;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 400] [zoom >= 14] {marker-width: 52;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 200] [zoom >= 14] {marker-width: 37;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 50] [zoom >= 14] {marker-width: 25;}
+            #schlang_merge_05_04 [ _fr_sum_qty < 10] [zoom >= 14] {marker-width: 15;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 5] [zoom >= 14] {marker-width: 0.0;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 1600] [zoom >= 15] {marker-width: 116;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 400] [zoom >= 15] {marker-width: 78;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 200] [zoom >= 15] {marker-width: 56;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 50] [zoom >= 15] {marker-width: 38;}
+            #schlang_merge_05_04 [ _fr_sum_qty < 10] [zoom >= 15] {marker-width: 21;}
+            #schlang_merge_05_04 [ _fr_sum_qty <= 5] [zoom >= 15] {marker-width: 0.0;}
+            /** label size behavior at specific zoom levels for specific quantites */
+            /** label on at z13 */
+            #schlang_merge_05_04::labels [zoom >= 13] [_fr_sum_qty > 5] {  /** label size for single-digit values */
+              text-name: [_fr_sum_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 8;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF; 
+              text-halo-fill: #000000;
+              text-halo-radius: 0.1;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_fr_sum_qty >= 10] {
+              text-name: [_fr_sum_qty];
+              text-size: 11;
+              text-fill: #FFFFFF; 
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_fr_sum_qty >= 50] {
+              text-name: [_fr_sum_qty];
+              text-size: 11;
+              text-fill: #FFFFFF;              
+              text-halo-radius: 0.2;
+            }
+            #schlang_merge_05_04::labels [zoom >= 13] [_fr_sum_qty >= 400] {
+              text-name: [_fr_sum_qty];
+              text-size: 15;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_fr_sum_qty > 5] {  /** label size for single-digit values */
+              text-name: [_fr_sum_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 10;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF; 
+              text-halo-fill: #000000;
+              text-halo-radius: 0.1;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_fr_sum_qty >= 10] {
+              text-name: [_fr_sum_qty];
+              text-fill: #FFFFFF; 
+              text-size: 12;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_fr_sum_qty >= 50] {
+              text-name: [_fr_sum_qty];
+              text-size: 12;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.2;
+            }
+            #schlang_merge_05_04::labels [zoom >= 14] [_fr_sum_qty >= 400] {
+              text-name: [_fr_sum_qty];
+              text-size: 15;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_fr_sum_qty >= 10] {
+              text-name: [_fr_sum_qty];
+              text-face-name: 'Lato Bold';
+              text-size: 15;
+              text-wrap-before: true;
+              text-wrap-width: 20;
+              text-label-position-tolerance: 10;
+              text-fill: #FFFFFF;
+              text-halo-fill: #000;
+              text-halo-radius: 0.4;
+              text-dy: 0;
+              text-allow-overlap: true;
+              text-placement: point;
+              text-placement-type: simple;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_fr_sum_qty >= 50] {
+              text-name: [_fr_sum_qty];
+              text-size: 16;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+            #schlang_merge_05_04::labels [zoom >= 15] [_fr_sum_qty >= 400] {
+              text-name: [_fr_sum_qty];
+              text-size: 18;
+              text-fill: #FFFFFF; 
+              text-halo-radius: 0.4;
+            }
+ 
+            </style>
+    </head>
+    <body>
+        <div id="map"></div>
+ 
+        <div id="cartocss" class="layer_selector">
+            <p>Plurality Selectors</p>
+            <ul>
+                <li data="_plura" data-type="cartocss">Plurality language
+                </li>
+                <li data="_plurne_grp" data-type="cartocss">... excluding English
+                </li>
+                <li data="_plurnes_gr" data-type="cartocss">... excluding English & Spanish
+                </li> 
+                <li data="simple" data-type="cartocss">Reset
+                </li>
+                <li> </li>
+            </ul>
+            
+            <p>Group Selectors </p>  <!-- WANT : toggle on/off layers -->
+            <ul>
+                <li data="bubble-chinese-grp" data-type="cartocss">Group: Sino-Tibetan:Chinese
+                </li>
+                <li data="bubble-s-asian-grp" data-type="cartocss">Group: South Asian
+                </li>
+                <li data="bubble-e-eurs-grp" data-type="cartocss">Group: Europe - Slavic & Uralic
+                </li>
+                <li data="bubble_mus4_grp" data-type="cartocss">Group: Muslim Languages
+                </li>
+                <li data="bubble-fr-sum-grp" data-type="cartocss">Group: French & Haitian Creole
+                </li>
+ 
+                <li data="simple" data-type="cartocss">Reset
+                </li>
+            </ul>
+        </div> 
+ 
+         <div id="sql" class="layer_selector">
+            <p>(SQL) Filter data by: </p>
+            <ul>
+                <li data=" WHERE _non_en_pct > 0.25" data-type="sql"> Non-English > 25%
+                </li>
+                <li data=" WHERE _non_en_pct > 0.50" data-type="sql"> Non-English > 50%
+                </li>
+                <li data=" WHERE _non_en_pct > 0.75" data-type="sql"> Non-English > 75%
+                </li>
+                <li data=" WHERE _nonensp_pt > 0.10" data-type="sql"> Non-English, Non-Span > 10%
+                </li>
+                <li data=" WHERE _nonensp_pt > 0.25" data-type="sql"> Non-English, Non-Span > 25%
+                </li>
+                <li data=" WHERE _nonensp_pt > 0.50" data-type="sql"> Non-English, Non-Span > 50%
+                </li>
+                <li data="" data-type="sql">Reset</li>
+            </ul>
+        </div>
+
+        <div id="my-legend" class='my-legend'>
+        <div class='legend-title'>Plurality Language Groups: </div>
+        <div class='legend-scale'>
+          <ul class='legend-labels'>
+            <li><span style='background:#ff0000;'></span>Sino-Tibetan: Chinese</li>
+            <li><span style='background:#ffa500;'></span>South Asian</li>
+            <li><span style='background:#fb9a99;'></span>Other E & SE Asian</li>
+            <li><span style='background:#49db40;'></span>Afro-Asiatic: Semitic</li>
+            <li><span style='background:#136400;'></span>Niger-Congo: Atlantic-Congo</li>
+            <li><span style='background:#229A00;'></span>Niger-Congo: Mande</li>
+            <li><span style='background:#A53ED5;'></span>French Creoles</li>
+            <li><span style='background:#0000a0;'></span>Indo-Eur: Balto-Slavic</li>
+            <li><span style='background:#5CA2D1;'></span>Indo-Eur: Romance & Germanic</li>
+            <li><span style='background:#00ceff;'></span>Uralic & Other European</li>
+            <li><span style='background:#DDDDDD;'></span>English & other</li>
+          </ul>
+        </div>
+        </div>
+
+        <!-- include cartodb.js library -->
+        <script src="http://libs.cartocdn.com/cartodb.js/v3/3.13/cartodb.js" type="text/javascript"></script> 
+ 
+        <!-- <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>  --> 
+ 
+        <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
+        <![endif]-->
+ 
+        <!-- Place your code in the script tags below -->
+        <script type="infowindow/html" id="infowindow_template">
+          <div class="cartodb-popup dark v2">
+            <a href="#close" class="cartodb-popup-close-button close">x</a>
+             <div class="cartodb-popup-content-wrapper">
+               <div class="cartodb-popup-header">
+               </div>
+               <div class="cartodb-popup-content">
+               
+                  <h4>school:</h4>
+                  <p>Name: {{sch_name}}</p>
+                  <p>Code: {{school}}</p>
+                  <p>{{sch_addr}}, {{sch_zip}}</p>
+                  <p>Type: {{sch_type}} </P>
+                  <p>Principal: {{sch_pcpl}}, {{sch_pcpl_ph}}
+                  <p>Total students: {{_total}}</p>
+                  <hr>
+                  <h4>Language plurality </h4>
+                  <p>{{_plura}}</p>
+                  <p>Quantity: {{_plura_qt}}</p>
+                  <p>Percent: {{_plura_pcta}}</p>
+                  <p>Grouping/Family:  {{_plura_grp}} </p>
+                  <hr>
+                  <h4>Non-English (NE) stats</h4>
+                  <p>Sum of all NE: {{_non_en_qty}}</p>
+                  <p>Perecent NE: {{_non_en_pct}}</p>
+                  <p>Top NE language: {{_plurne}}</p>
+                  <p> (number of ties: {{_p_ne_tie}}, {{_p_ne_ti_n}} )</p>
+                  <p>Quantity, this language: {{_plurne_qty}} </p>
+                  <p>Percent of total, this language: {{_plurne_pct}} </p>
+                  <p>Grouping/Family: {{_plurne_grp}}</p>
+                  <hr>
+                  <h4>Non-English, Non-Spanish (NES) stats</h4>
+                  <p>Sum of NES: {{_nonensp_qy}}</p>
+                  <p>Percent NES: {{_nonensp_pt}}</p>
+                  <p>Top NES language: {{_plurnes}}</p>
+                  <p> (number of ties: {{_p_nes_ti}},  {{_p_nes_ti_n}} )</p>
+                  <p>Qty, this language: {{_plurnes_qt}}</p>
+                  <p>Percent of total, this langauge: {{_plurnes_pc}} </p>
+                  <p>Percentage of the NES remainder that this language occupies: {{_plurnes_pb}} </p>
+                  <p>Grouping/Family: {{_plurnes_gr}}</p>
+                  <hr>
+                  <h4>Language Grouping/Family stats: </h4>
+                  <ul> <p> ** Note: values of 0 appear as blanks </p>
+                    <li><p> Afro-Asiatic: Qty: {{_aa_all_qty}}, Pct: {{_aa_all_pct}} </li>
+                    <li><p> Niger-Congo, Atlantic-Congo, Qty: {{_nc_ac_qty}}, Pct: {{_nc_ac_pct}} </li>
+                    <li><p> Niger-Congo, Mande, Qty: {{_nc_m_qty}}, Pct: {{_nc_m_pct}} </li>
+                    <li><p> Asian, Chinese: Qty: {{_st_chi_qty}}, Pct: {{_st_chi_pct}} </li>
+                    <li><p> Asian, South: Qty: {{_s_asia_qty}}, Pct: {{_s_asia_pct}} </li>
+                    <li><p> Asian, Southeast & East (incl Korean, Japanese): Qty: {{_as_se_qty}}  , Pct: {{_as_se_pct}} </li>
+                    <li><p> Malayo-Polynesian: Qty: {{_au_mp_qty}}, Pct: {{_au_mp_pct}} </li>
+                    <li><p>
+                 </ul>
+                  <h4>others to add later</h4>
+                  <h4>_e_eurs_pct</h4>
+                  <p>{{_e_eurs_pct}}</p>
+                  <h4>_e_eurs_qty</h4>
+                  <p>{{_e_eurs_qty}}</p>
+                  <h4>_fr_sum_pct</h4>
+                  <p>{{_fr_sum_pct}}</p>
+                  <h4>_fr_sum_qty</h4>
+                  <p>{{_fr_sum_qty}}</p>
+                  <h4>_ie_big_pct</h4>
+                  <p>{{_ie_big_pct}}</p>
+                  <h4>_ie_big_qty</h4>
+                  <p>{{_ie_big_qty}}</p>
+                  <h4>_ie_ia_pct</h4>
+                  <p>{{_ie_ia_pct}}</p>
+                  <h4>_ie_ia_qty</h4>
+                  <p>{{_ie_ia_qty}}</p>
+                  <h4>_ie_ir_pct</h4>
+                  <p>{{_ie_ir_pct}}</p>
+                  <h4>_ie_ir_qt</h4>
+                  <p>{{_ie_ir_qt}}</p>
+                  <h4>_mus4_pct</h4>
+                  <p>{{_mus4_pct}}</p>
+                  <h4>_mus4_qty</h4>
+                  <p>{{_mus4_qty}}</p>
+                  <h4>_turk_pct</h4>
+                  <p>{{_turk_pct}}</p>
+                  <h4>_turk_qty</h4>
+                  <p>{{_turk_qty}}</p>
+               </div>
+             </div>
+             <div class="cartodb-popup-tip-container"></div>
+           </div>
+        </script> 
+
+        <script type="text/javascript">
+            window.onload = function () {
+                // Instantiate new map object, place it in 'map' element
+                var map_object = new L.Map('map', {
+                    center: [40.7033127,-73.979681], // New York, NY
+                    zoom: 11,
+                    maxZoom: 16,
+                    minZoom: 10
+                });
+                L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map_object);
+// testing of adding Leaflet map layers onto html map 
+                var layer1;
+                var layer2;
+                var layer3;
+                var layer4;
+                var layer5;
+                var layer6;
+                var layer7;
+                cartodb.createLayer(map_object, 'https://andrewmartini.cartodb.com/api/v2/viz/deaa200a-2a5e-11e5-9ad8-0e9d821ea90d/viz.json')
+                .addTo(map_object)
+                .done(function(layer) {
+                  layer1 = layer;
+                  cartodb.createLayer(map_object, 'https://andrewmartini.cartodb.com/api/v2/viz/7ed0ef5a-29b0-11e5-9825-0e853d047bba/viz.json')
+                  //.addTo(map_object)
+                  .done(function(layer) {
+                    layer2 = layer;
+                    cartodb.createLayer(map_object, 'https://andrewmartini.cartodb.com/api/v2/viz/3f321284-29b0-11e5-a0f8-0e018d66dc29/viz.json')
+                    //.addTo(map_object)
+                    .done(function(layer) {
+                      layer3 = layer;
+                      cartodb.createLayer(map_object, 'https://andrewmartini.cartodb.com/api/v2/viz/394257cc-2a5e-11e5-9e3f-0e853d047bba/viz.json')
+                      //.addTo(map_object)
+                      .done(function(layer) {
+                        layer4 = layer;
+                        cartodb.createLayer(map_object, 'https://andrewmartini.cartodb.com/api/v2/viz/8aa5a57e-2a5e-11e5-9807-0e9d821ea90d/viz.json')
+                        //.addTo(map_object)
+                        .done(function(layer) {
+                          layer5 = layer;
+                          cartodb.createLayer(map_object, 'https://andrewmartini.cartodb.com/api/v2/viz/d0fb1b72-2a5d-11e5-a731-0e4fddd5de28/viz.json')
+                          //.addTo(map_object)
+                          .done(function(layer) {
+                          layer6 = layer;
+                            cartodb.createLayer(map_object, 'https://andrewmartini.cartodb.com/api/v2/viz/8e9dcb04-9821-11e4-a998-0e9d821ea90d/viz.json')
+                            //.addTo(map_object)
+                            .done(function(layer) {
+                            layer7 = layer;
+                              cartodb.createLayer(map_object, 'https://andrewmartini.cartodb.com/api/v2/viz/0546aec0-2a7f-11e5-9807-0e9d821ea90d/viz.json')
+                              .done(function(layer) {
+                              layer8 = layer;
+                            
+                    var overlayMaps = {
+                      "Neighborhoods": layer1,
+                      "City Council": layer2,
+                      "Community Districts": layer3,
+                      "State Senate": layer4,
+                      "State Assembly": layer5,
+                      "US Congressional": layer6,
+                      "US Census Tracts": layer7,
+                      "DOE School Zones": layer8
+                    };
+                    L.control.layers(null, overlayMaps).addTo(map_object);
+                            });
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            // Create layer selector
+            function createSelector(layer) {
+                var condition = ""; // SQL or CartoCSS string
+                var $options = $(".layer_selector").find("li");
+                $options.click(function(e) {
+                    var $li = $(e.target);
+                    var selected = $li.attr('data');
+                    var type = $li.data('type'); // 'sql' or 'cartocss'
+                    if (type === "cartocss") { // if a CartoCSS selector is chosen, set the style
+                        $options.removeClass('cartocss_selected');
+                        if (selected !== "simple") {
+                            $li.addClass('cartocss_selected');                            
+                        }
+                        condition = $('#'+selected).text();
+                        layer.setCartoCSS(condition);
+                    } else { // if a SQL selector is chosen, re-query the data
+                        $options.removeClass('sql_selected');
+                        if (selected !== "") {
+                            $li.addClass('sql_selected');
+                        }
+                        layer.setSQL("SELECT * FROM " + tableName + selected);
+                    }
+                });
+            }
+                var tableName = "schlang_merge_05_04";
+                // Put layer data into a JS object
+                var layerSource = {
+                        user_name: 'andrewmartini', 
+                        type: 'cartodb',
+                        sublayers: [{ 
+                            sql: "SELECT * FROM " + tableName, // SQL Filter
+                            cartocss: $("#simple").text(), // Simple visualization
+                            interactivity: "cartodb_id"
+                        }]
+                    }
+                // For storing the sublayer
+                var sublayer;
+                // Add data layer to your map
+                cartodb.createLayer(map_object,layerSource)
+                    .addTo(map_object)
+                    .done(function(layer) {
+                        // Activate desired data columns here to display in popup content
+                         var infowindow = cdb.vis.Vis.addInfowindow(map_object, layer.getSubLayer(0), ['_plura', '_plura_pcta', '_plura_grp', '_plura_qt', '_total', '_plurne', '_plurnes', '_plurne_qty', '_plurne_grp', '_plurne_pct', '_plurnes', '_nonensp_qy', '_nonensp_pt', '_non_en_qty', '_non_en_pct', '_plurnes_gr', 'school', '_plurnes_qt','_plurnes_pc', '_plurnes_pb', '_aa_all_qty', '_aa_all_pct', '_as_se_qty', '_as_se_pct', '_nc_ac_qty', '_nc_ac_pct', '_nc_m_qty', '_nc_m_pct', '_st_chi_qty', '_st_chi_pct', '_au_mp_qty', '_au_mp_pct', '_s_asia_qty', '_s_asia_pct', 'sch_name', 'sch_addr', 'sch_zip', 'sch_pcpl', 'sch_pcpl_ph', 'sch_type', '_p_ne_tie', '_p_ne_ti_n', '_p_nes_ti', '_p_nes_ti_n' ])
+                         infowindow.model.set('template', $('#infowindow_template').html());
+                        sublayer = layer.getSubLayer(0);
+                        createSelector(sublayer);
+                    })
+                    .error(function(err) {
+                        console.log("error: " + err);
+                    });
+            }
+        </script>
+    </body>
 </html>
