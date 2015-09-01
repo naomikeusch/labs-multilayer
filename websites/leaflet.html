@@ -82,7 +82,7 @@
 	sublayers: [ 
 	{
 	sql: 'select * from nycd',
-	cartocss: '#layer { polygon-fill: #FFF; polygon-opacity: 1; line-width: 2; line-color: #2167AB;}',
+	cartocss: '#layer { polygon-fill: #FFF; polygon-opacity: 0; line-width: 2; line-color: #2167AB;}',
 	interactivity: 'cartodb_id'}]
 	});
 	var dcyn = new L.LayerGroup();
@@ -95,7 +95,7 @@
 	sublayers: [ 
 	{
 	sql: 'select * from nycd',
-	cartocss: '#layer { polygon-fill: #FFF; polygon-opacity: 1; line-width: 2; line-color: #B40903;}',
+	cartocss: '#layer { polygon-fill: #FFF; polygon-opacity: 0; line-width: 2; line-color: #B40903;}',
 	interactivity: 'cartodb_id'}]
 	});
 	var mess = new L.LayerGroup();
@@ -106,7 +106,7 @@
 	type: 'cartodb',
 	sublayers: [{
 	sql: 'select * from city_council_districts',
-	cartocss: '#layer { polygon-fill: #FFF; polygon-opacity: 1; line-width: 2; line-color: #3B007F;}',
+	cartocss: '#layer { polygon-fill: #FFF; polygon-opacity: 0; line-width: 2; line-color: #3B007F;}',
 	interactivity: 'cartodb_id'}]
 	});
 	
