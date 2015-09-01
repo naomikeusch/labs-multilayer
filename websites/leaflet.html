@@ -46,7 +46,6 @@
 	var all = new L.LayerGroup();
 	
 	var nostops = new L.LayerGroup();
-	var clear = new L.LayerGroup();
 	
 	var grayscale = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
 	//	streets = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr});
@@ -198,14 +197,10 @@
 	  switch ( $( "button" ).index( this ) ) {
 	  case 0 :
 	    //edit
-	    all.addTo(map);
-	    clear.addTo(map);
 	    ouc.addTo(map);
 	    //removeLayer(dcyn);
 	    break;
 	  case 1 :
-	    all.addTo(map);
-	    clear.addTo(map);
 	    dcyn.addTo(map);
 	    //nostops.addTo(map);
 	    //addLayer(dcyn);
