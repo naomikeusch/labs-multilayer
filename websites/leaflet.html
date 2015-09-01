@@ -18,14 +18,11 @@
  <link href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
  -->
 
- 
- <!--new-->
  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
    <link rel="stylesheet" href="/resources/demos/style.css">
  
- <!--new-->
  <style>
   .ui-menu {position: absolute; top: 70px; left: 10px; width: 200px; }
   .ui-widget-header { padding: 0.2em; }
@@ -33,7 +30,6 @@
  </head>
 <body>
 	<div id="map"></div>
-
 	<script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
  
 	<script>
@@ -74,7 +70,6 @@
 	"Non": nostops
 	};
 	var pts = new L.LayerGroup();
-	
 	
 	//carto layers
 	var nycd = cartodb.createLayer(map, {user_name: 'naomikeusch',
@@ -151,9 +146,7 @@
 	var opp = new L.LayerGroup();
 	pop.addTo(opp);
 	pop.addTo(pts);
-	
-	
-	
+
 	//checkboxes
 	var overlays = {
 	"nycd": dcyn,
@@ -180,15 +173,10 @@
 	    $( "#menu" ).menu({
 	      items: "> :not(.ui-widget-header)"
 	    });
-	  //edit
-	  
-		
 	});
 	</script>
 	
-		<!-- new -->
 	<div id="menu">
-	
 	<!--<div class="menu-button">Menu</div> -->
 	  <li class="ui-widget-header">Borders</li>
 	  <li><button>City Council Districts</button></li>
@@ -204,15 +192,12 @@
 	  <li><button>Option 9</button></li>
 	 </div>
 	
-	 <!--edit-->
 	<script>
 	$( "button" ).click( function() {
 	  switch ( $( "button" ).index( this ) ) {
 	  case 0 :
-	    //edit
 	    //mess.addTo(map);
 	    ouc.addTo(map);
-	    
 	    //removeLayer(dcyn);
 	    break;
 	  case 1 :
@@ -228,8 +213,5 @@
 	  }
 	});
 	</script>
-	
-
-	
 </body>
 </html>
