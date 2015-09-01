@@ -89,6 +89,18 @@
 	nycd.addTo(dcyn);
 	nycd.addTo(all);
 	
+	//edit
+	var cheat = cartodb.createLayer(map, {user_name: 'naomikeusch',
+	type: 'cartodb',
+	sublayers: [ 
+	{
+	sql: 'select * from nycd',
+	cartocss: '#layer { polygon-fill: #F00; polygon-opacity: 0; line-width: 2; line-color: #2167AB; line-opacity: 0;}',
+	interactivity: 'cartodb_id'}]
+	});
+	var mess = new L.LayerGroup();
+	cheat.addTo(mess);
+	
 	var cou = cartodb.createLayer(map, {
 	user_name: 'naomikeusch',
 	type: 'cartodb',
@@ -198,12 +210,14 @@
 	  switch ( $( "button" ).index( this ) ) {
 	  case 0 :
 	    //edit
+	    mess.addTo(map);
 	    ouc.addTo(map);
+	    
 	    //removeLayer(dcyn);
 	    break;
 	  case 1 :
-	    //dcyn.addTo(map);
-	    clear.addTo(map);
+	    dcyn.addTo(map);
+	    //clear.addTo(map);
 	    //nostops.addTo(map);
 	    //addLayer(dcyn);
 	    break;
