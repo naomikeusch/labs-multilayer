@@ -200,13 +200,13 @@
 	    value = jQuery.data( div, "blah" );
 	    //edit
 	    ouc.addTo(map);
-	    removeLayer(dcyn);
+	    //removeLayer(dcyn);
 	    break;
 	  case 1 :
 	    jQuery.data( div, "blah", "hello" );
 	    value = "Stored!";
-	    //dcyn.addTo(map);
-	    addLayer(dcyn);
+	    dcyn.addTo(map);
+	    //addLayer(dcyn);
 	    break;
 	  case 2 :
 	    jQuery.data( div, "blah", 86 );
