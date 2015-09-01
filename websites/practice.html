@@ -1510,7 +1510,8 @@
                     var selected = $li.attr('data');
                     var type = $li.data('type'); // 'sql' or 'cartocss'
                     if (type === "cartocss") { // if a CartoCSS selector is chosen, set the style
-                        $options.removeClass('cartocss_selected');
+                    //edit
+                       // $options.removeClass('cartocss_selected');
                         if (selected !== "simple") {
                             $li.addClass('cartocss_selected');                            
                         }
