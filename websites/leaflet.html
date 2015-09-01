@@ -194,11 +194,11 @@
 	 <!--edit-->
 	<script>
 	$( "button" ).click( function() {
-	  var value,
-	    div = $( "div" )[ 0 ];
+	  //var value,
+	    //div = $( "div" )[ 0 ];
 	  switch ( $( "button" ).index( this ) ) {
 	  case 0 :
-	    value = jQuery.data( div, "blah" );
+	    //value = jQuery.data( div, "blah" );
 	    //edit
 	    ouc.addTo(map);
 	    //removeLayer(dcyn);
@@ -213,19 +213,19 @@
 	    //addLayer(dcyn);
 	    break;
 	  case 2 :
-	    jQuery.data( div, "blah", 86 );
-	    value = "Stored!";
+	   // jQuery.data( div, "blah", 86 );
+	   // value = "Stored!";
 	    break;
 	  case 3 :
-	    jQuery.removeData( div, "blah" );
-	    value = "Removed!";
+	  //  jQuery.removeData( div, "blah" );
+	   // value = "Removed!";
 	    //break;
 	  }
-	  $( "span" ).text( "" + value );
+	//  $( "span" ).text( "" + value );
 	});
 	</script>
 	
-	<p>The "blah" value of this div is <span>?</span></p>
+	<!--<p>The "blah" value of this div is <span>?</span></p> -->
 	
 </body>
 </html>
