@@ -199,12 +199,10 @@
 	    //edit
 	    //all.addTo(map);
 	    //nostops.addTo(map);
-	    $('.button').removeClass('selected');
 	    ouc.addTo(map);
 	    //removeLayer(dcyn);
 	    break;
 	  case 1 :
-	    $('.button').removeClass('selected');
 	    dcyn.addTo(map);
 	    //nostops.addTo(map);
 	    //addLayer(dcyn);
@@ -215,6 +213,13 @@
 	    break;
 	  }
 	});
+	//edit
+	$('.button').click(function() {
+        $('.button').removeClass('selected');
+        $(this).addClass('selected');
+        LayerActions[$(this).attr('id')]();
+      });
+      //end edit
 	</script>
 	
 </body>
