@@ -1511,14 +1511,14 @@
                     var type = $li.data('type'); // 'sql' or 'cartocss'
                     if (type === "cartocss") { // if a CartoCSS selector is chosen, set the style
                     //edit
-                       // $options.removeClass('cartocss_selected');
+                        $options.removeClass('cartocss_selected');
                         if (selected !== "simple") {
                             $li.addClass('cartocss_selected');                            
                         }
                         condition = $('#'+selected).text();
                         layer.setCartoCSS(condition);
                     } else { // if a SQL selector is chosen, re-query the data
-                        $options.removeClass('sql_selected');
+                      //  $options.removeClass('sql_selected');
                         if (selected !== "") {
                             $li.addClass('sql_selected');
                         }
