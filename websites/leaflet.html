@@ -178,10 +178,13 @@
 	      items: "> :not(.ui-widget-header)"
 	    });
 	});
+	
+	//variables for iterating, on/off for buttons
 	var i = 0;
 	var x = 0;
 	var y = 0;
 	var z = 0;
+	var a = 0;
 	</script>
 	
 	<div id="menu" class = "love">
@@ -195,7 +198,7 @@
 	  <li><button>NYC Subway Stops</button></li>
 	  <li><button>Option 6</button></li>
 	  <li class="ui-widget-header">Chloropleth</li>    
-	  <li><button>Option 7</button></li>
+	  <li><button>Total Population</button></li>
 	  <li><button>Option 8</button></li>
 	  <li><button>Option 9</button></li>
 	 </div>
@@ -243,6 +246,17 @@
 	    }else{
 	    	map.removeLayer(bus);
 	    	z--;
+	    }
+	    break;
+	    case 5:
+	    break;
+	    case 6:
+	     if (a<1){
+	    	opp.addTo(map);
+	    	a++;
+	     }else{
+	    	map.removeLayer(opp);
+	    	a--;
 	    }
 	    break;
 	  }
