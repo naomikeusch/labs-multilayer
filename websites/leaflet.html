@@ -256,7 +256,11 @@
 	     	map.removeLayer(uoh);
 	    	opp.addTo(map);
 	    	a++;
-	     }else{
+	     }else if(b==1){
+	     	uoh.addTo(map);
+	     	a++;
+	     }
+	     else{
 	    	map.removeLayer(opp);
 	    	map.removeLayer(uoh);
 	    	a--;
@@ -267,7 +271,11 @@
 	    	map.removeLayer(opp);
 	    	uoh.addTo(map);
 	    	b++;
-	      }else{
+	      }else if (a==1){
+	      	opp.addTo(map);
+	      	b++;
+	      }
+	      else{
 	    	map.removeLayer(uoh);
 	    	map.removeLayer(opp);
 	    	b--;
