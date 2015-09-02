@@ -122,6 +122,21 @@
 	
 	var uoh = new L.LayerGroup();
 	hou.addTo(uoh);
+	
+	//edit
+	var six = cartodb.createLayer(map, {
+	user_name: 'naomikeusch',
+	type: 'cartodb',
+	sublayers: [{
+	sql: 'select * from tracttemp_copy',
+	cartocss: '#tracttemp_copy{polygon-fill: #F1E6F1; polygon-opacity: 0.9; line-color: #FFF; line-width: 0.5; line-opacity: 1; } #tracttemp_copy [ over65 <= 6272] { polygon-fill: #8A4E8A; } #tracttemp_copy [ over65 <= 1070] { polygon-fill: #A05AA0; } #tracttemp_copy [ over65 <= 765] { polygon-fill: #B379B3; } #tracttemp_copy [ over65 <= 571] { polygon-fill: #C08FC0; } #tracttemp_copy [ over65 <= 434] { polygon-fill: #CCA5CC; } #tracttemp_copy [ over65 <= 304] { polygon-fill: #D8BBD8; } #tracttemp_copy [ over65 <= 175] { polygon-fill: #F1E6F1;}',
+	interactivity: 'cartodb_id'}]
+	});
+	
+	var xis = new L.LayerGroup();
+	six.addTo(xis);
+	
+	//end edit
 
 	$(function() {
 	    $( "#menu" ).menu({
@@ -136,6 +151,7 @@
 	var z = 0;
 	var a = 0;
 	var b = 0;
+	var c = 0;
 	</script>
 	
 	<div id="menu" class = "love">
@@ -151,7 +167,7 @@
 	  <li class="ui-widget-header">Chloropleth</li>    
 	  <li><button>Total Population</button></li>
 	  <li><button>Households</button></li>
-	  <li><button>Option 9</button></li>
+	  <li><button>Over 65</button></li>
 	 </div>
 	
 	<script>
@@ -214,44 +230,74 @@
 	    break;
 	    
 	    case 6:
-	     if (a<1 && b==0){
+	     if (b==0 && a==0 && c==0){
 	     	map.removeLayer(uoh);
+	     	map.removeLayer(xis);
 	    	opp.addTo(map);
 	    	a=1;
-	     }else if(b==1){
+	     }else if(b==1 || c==1){
 	     	map.removeLayer(uoh);
+	     	map.removeLayer(xis);
 	     	opp.addTo(map);
 	     	a=1;
 	     	b=0;
+	     	c=0;
 	     }
 	     else{
 	    	map.removeLayer(opp);
 	    	map.removeLayer(uoh);
+	    	map.removeLayer(xis);
 	    	a=0;
 	    	b=0;
+	    	c=0;
 	    }
 	    break;
 	    
 	    case 7: 
-	     if (b<1 && a==0){
+	     if (b==0 && a==0 && c==0){
 	    	map.removeLayer(opp);
+	    	map.removeLayer(xis);
 	    	uoh.addTo(map);
 	    	b=1;
-	      }else if (a==1){
+	      }else if (a==1 || c==1){
 	      	map.removeLayer(opp);
 	    	uoh.addTo(map);
 	      	b=1;
 	      	a=0;
+	      	c=0;
 	      }
 	      else{
 	    	map.removeLayer(uoh);
 	    	map.removeLayer(opp);
+	    	map.removeLayer(xis);
 	    	b=0;
 	    	a=0;
+	    	c=0;
 	    }
 	    break;
 	    
 	    case 8:
+	    	if (b==0 && a==0 && c==0){
+	    	map.removeLayer(opp);
+	    	map.removeLayer(uoh);
+	    	xis.addTo(map);
+	    	c=1;
+	      }else if (a==1 || b==1){
+	      	map.removeLayer(opp);
+	      	map.removeLayer(uoh);
+	    	xis.addTo(map);
+	      	c=1;
+	      	a=0;
+	      	b=0;
+	      }
+	      else{
+	    	map.removeLayer(uoh);
+	    	map.removeLayer(opp);
+	    	map.removeLayer(xis);
+	    	c=0;
+	    	a=0;
+	    	b=0;
+	    }
 	    break;
 	  }
 	});
