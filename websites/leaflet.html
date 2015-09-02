@@ -133,7 +133,21 @@
 	
 	var xis = new L.LayerGroup();
 	six.addTo(xis);
-
+	
+	//edit
+	var fac = cartodb.createLayer(map, {
+	user_name: 'naomikeusch',
+	type: 'cartodb',
+	sublayers: [{
+	sql: 'select * from facilities',
+	cartocss: '#facilities{marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 10; marker-fill: #41006D; marker-allow-overlap: true;}',
+	interactivity: 'cartodb_id'}]
+	});
+	
+	var caf = new L.LayerGroup();
+	fac.addTo(caf);
+	//end edit
+	
 	$(function() {
 	    $( "#menu" ).menu({
 	      items: "> :not(.ui-widget-header)"
@@ -148,6 +162,7 @@
 	var a = 0;
 	var b = 0;
 	var c = 0;
+	var d = 0;
 	</script>
 	
 	<div id="menu" class = "love">
@@ -223,6 +238,13 @@
 	    break;
 	    
 	    case 5:
+	    if (d<1){
+	    	caf.addTo(map);
+	    	d++;
+	    }else{
+	    	map.removeLayer(caf);
+	    	d--;
+	    }
 	    break;
 	    
 	    case 6:
