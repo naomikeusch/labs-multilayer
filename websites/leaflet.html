@@ -179,6 +179,9 @@
 	    });
 	});
 	var i = 0;
+	var x = 0;
+	var y = 0;
+	var z = 0;
 	</script>
 	
 	<div id="menu" class = "love">
@@ -202,8 +205,6 @@
 	  switch ( $( "button" ).index( this ) ) {
 	  
 	  case 0 :
-	   //edit
-	    
 	    if (i<1){
 	    	ouc.addTo(map);
 	    	i++;
@@ -211,15 +212,19 @@
 	    	map.removeLayer(ouc);
 	    	i--;
 	    }
-	    //end edit
-	   // map.removeLayer(ouc);
-	  //  ouc.addTo(map);
-	   // map.removeLayer(dcyn);
+	   map.removeLayer(dcyn);
 	    break;
 	  case 1 :
-	    map.removeLayer(dcyn);
-	    dcyn.addTo(map);
-	    map.removeLayer(ouc);
+	    if (x<1){
+	    	dcyn.addTo(map);
+	    	x++;
+	    }else{
+	    	map.removeLayer(dcyn);
+	    	x--;
+	    }
+	    //map.removeLayer(dcyn);
+	    //dcyn.addTo(map);
+	    //map.removeLayer(ouc);
 	    break;
 	  case 2 :
 	    break;
