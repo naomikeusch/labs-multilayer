@@ -25,7 +25,7 @@
  
  <style>
   .ui-menu {position: absolute; top: 70px; left: 10px; width: 200px; background: #E8E8E8;}
-  .ui-widget-header { padding: 0.2em; }
+  .ui-widget-header { padding: 0em; }
   .love li {color: #339966;}
   .love button {color: #339966; background-color:#E8E8E8; width: 180px; height: 50px; border:none; cursor: pointer; font-size:85%;}
   .love button:hover {background-color: #CCFFCC;}
@@ -134,7 +134,6 @@
 	var xis = new L.LayerGroup();
 	six.addTo(xis);
 	
-	//edit
 	var fac = cartodb.createLayer(map, {
 	user_name: 'naomikeusch',
 	type: 'cartodb',
@@ -146,6 +145,19 @@
 	
 	var caf = new L.LayerGroup();
 	fac.addTo(caf);
+	
+	//edit
+	var bik = cartodb.createLayer(map, {
+	user_name: 'naomikeusch',
+	type: 'cartodb',
+	sublayers: [{
+	sql: 'select * from bikeroutes_ny',
+	cartocss: '#bikeroutes_ny{ line-color: #FF6600; line-width: 2; line-opacity: 0.7;}',
+	interactivity: 'cartodb_id'}]
+	});
+	
+	var kib = new L.LayerGroup();
+	bik.addTo(kib);
 	//end edit
 	
 	$(function() {
@@ -163,6 +175,7 @@
 	var b = 0;
 	var c = 0;
 	var d = 0;
+	var f = 0;
 	</script>
 	
 	<div id="menu" class = "love">
@@ -215,6 +228,13 @@
 	    break;
 	    
 	  case 2 :
+	   if (x<1){
+	    	dcyn.addTo(map);
+	    	x++;
+	    }else{
+	    	map.removeLayer(dcyn);
+	    	x--;
+	    }
 	    break;
 	    
 	  case 3 :
