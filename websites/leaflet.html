@@ -200,10 +200,12 @@
 	$( "button" ).click( function() {
 	  switch ( $( "button" ).index( this ) ) {
 	  case 0 :
+	    map.removeLayer(ouc);
 	    ouc.addTo(map);
 	    map.removeLayer(dcyn);
 	    break;
 	  case 1 :
+	    map.removeLayer(dcyn);
 	    dcyn.addTo(map);
 	    map.removeLayer(ouc);
 	    break;
