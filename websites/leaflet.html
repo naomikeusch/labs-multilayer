@@ -228,12 +228,22 @@
 	  case 2 :
 	    break;
 	  case 3 :
-	  	map.removeLayer(era);
-	  	era.addTo(map);
+	   if (y<1){
+	    	era.addTo(map);
+	    	y++;
+	    }else{
+	    	map.removeLayer(era);
+	    	y--;
+	    }
 	    break;
 	  case 4 :
-	  	map.removeLayer(bus);
-	  	bus.addTo(map);
+	    if (z<1){
+	    	bus.addTo(map);
+	    	z++;
+	    }else{
+	    	map.removeLayer(bus);
+	    	z--;
+	    }
 	    break;
 	  }
 	});
