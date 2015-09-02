@@ -253,27 +253,24 @@
 	    break;
 	    case 6:
 	     if (a<1){
+	     	map.removeLayer(uoh);
 	    	opp.addTo(map);
 	    	a++;
-	    	if(i==1){
-	    	map.removeLayer(ouc);
-	    	 ouc.addTo(map);
-	    	}
 	     }else{
 	    	map.removeLayer(opp);
 	    	a--;
 	    }
-	    map.removeLayer(uoh);
 	    break;
 	    case 7: 
-	    	if (b<1){
+	     if (b<1){
+	    	map.removeLayer(opp);
 	    	uoh.addTo(map);
 	    	b++;
-	     }else{
+	      }else{
 	    	map.removeLayer(uoh);
 	    	b--;
 	    }
-	    map.removeLayer(opp);
+	    
 	    break;
 	    case 8:
 	    break;
