@@ -198,10 +198,12 @@
 	  case 0 :
 	    //mess.addTo(map);
 	    ouc.addTo(map);
+	    map.removeLayer(dcyn);
 	    //removeLayer(dcyn);
 	    break;
 	  case 1 :
 	    dcyn.addTo(map);
+	    map.removeLayer(ouc);
 	    //clear.addTo(map);
 	    //nostops.addTo(map);
 	    //addLayer(dcyn);
