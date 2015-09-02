@@ -205,6 +205,15 @@
 	 </div>
 	
 	<script>
+	
+	//This part is confusing but I will try to clarify:
+	//Each case matches up with a button (cases start at zero)
+	//for borders and points that can have multiple cases, or layers, at a time, the if part adds layer, else removes it
+	//for chloropleth, only one should be on, so you need if, else if, and else
+	//Think of 1 as "on" or "visible" and 0 as "off" or "hidden"
+	//if happens if no layers are on (a,b,c,etc... ==0) --> turns a on
+	//else if happens if another layer is on (a==0 and b,c, OR d... ==1) -->switches from b,c, OR d to a
+	//else happens if that layer is on(a==1 and b,c,etc ==0) -->turns a off, or "clears map"
 	$( "button" ).click( function() {
 	  switch ( $( "button" ).index( this ) ) {
 	  
@@ -217,6 +226,7 @@
 	    	i--;
 	    }
 	    break;
+	    
 	  case 1 :
 	    if (x<1){
 	    	dcyn.addTo(map);
@@ -225,12 +235,11 @@
 	    	map.removeLayer(dcyn);
 	    	x--;
 	    }
-	    //map.removeLayer(dcyn);
-	    //dcyn.addTo(map);
-	    //map.removeLayer(ouc);
 	    break;
+	    
 	  case 2 :
 	    break;
+	    
 	  case 3 :
 	   if (y<1){
 	    	era.addTo(map);
@@ -240,6 +249,7 @@
 	    	y--;
 	    }
 	    break;
+	    
 	  case 4 :
 	    if (z<1){
 	    	bus.addTo(map);
@@ -249,8 +259,10 @@
 	    	z--;
 	    }
 	    break;
+	    
 	    case 5:
 	    break;
+	    
 	    case 6:
 	     if (a<1 && b==0){
 	     	map.removeLayer(uoh);
@@ -269,6 +281,7 @@
 	    	b=0;
 	    }
 	    break;
+	    
 	    case 7: 
 	     if (b<1 && a==0){
 	    	map.removeLayer(opp);
@@ -286,8 +299,8 @@
 	    	b=0;
 	    	a=0;
 	    }
-	    
 	    break;
+	    
 	    case 8:
 	    break;
 	  }
