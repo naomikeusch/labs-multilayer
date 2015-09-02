@@ -199,10 +199,20 @@
 	<script>
 	$( "button" ).click( function() {
 	  switch ( $( "button" ).index( this ) ) {
+	  var i = 0;
 	  case 0 :
-	    map.removeLayer(ouc);
-	    ouc.addTo(map);
-	    map.removeLayer(dcyn);
+	   //edit
+	    if (i<1){
+	    	ouc.addTo(map);
+	    	i++;
+	    }else{
+	    	map.removeLayer(ouc);
+	    	i--;
+	    }
+	    //end edit
+	   // map.removeLayer(ouc);
+	  //  ouc.addTo(map);
+	   // map.removeLayer(dcyn);
 	    break;
 	  case 1 :
 	    map.removeLayer(dcyn);
