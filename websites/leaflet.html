@@ -252,7 +252,7 @@
 	    case 5:
 	    break;
 	    case 6:
-	     if (a<1){
+	     if (a<1 && b==0){
 	     	map.removeLayer(uoh);
 	    	opp.addTo(map);
 	    	a=1;
@@ -270,7 +270,7 @@
 	    }
 	    break;
 	    case 7: 
-	     if (b<1){
+	     if (b<1 && a==0){
 	    	map.removeLayer(opp);
 	    	uoh.addTo(map);
 	    	b=1;
