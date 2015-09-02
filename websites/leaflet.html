@@ -29,6 +29,7 @@
   .love li {color: #339966;}
   .love button {color: #339966; background-color:#E8E8E8; border:none; cursor: pointer;}
   .love button:hover {background-color: #CCFFCC;}
+  .love button:
   </style>
  </head>
 <body>
@@ -209,9 +210,11 @@
 	  case 2 :
 	    break;
 	  case 3 :
+	  	map.removeLayer(era);
 	  	era.addTo(map);
 	    break;
 	  case 4 :
+	  	map.removeLayer(bus);
 	  	bus.addTo(map);
 	    break;
 	  }
