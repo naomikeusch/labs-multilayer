@@ -88,18 +88,6 @@
 	nycd.addTo(dcyn);
 	nycd.addTo(all);
 	
-	//edit
-	var cheat = cartodb.createLayer(map, {user_name: 'naomikeusch',
-	type: 'cartodb',
-	sublayers: [ 
-	{
-	sql: 'select * from nycd',
-	cartocss: '#layer { polygon-fill: #FFF; polygon-opacity: 0; line-width: 2; line-color: #B40903;}',
-	interactivity: 'cartodb_id'}]
-	});
-	var mess = new L.LayerGroup();
-	cheat.addTo(mess);
-	
 	var cou = cartodb.createLayer(map, {
 	user_name: 'naomikeusch',
 	type: 'cartodb',
@@ -111,7 +99,7 @@
 	
 	var ouc = new L.LayerGroup();
 	cou.addTo(ouc);
-	cou.addTo(all);
+	//cou.addTo(all);
 	
 	var sub = cartodb.createLayer(map, {
 	user_name: 'naomikeusch',
@@ -123,7 +111,7 @@
 	});
 	var bus = new L.LayerGroup();
 	sub.addTo(bus);
-	sub.addTo(pts);
+	//sub.addTo(pts);
 	
 	var are = cartodb.createLayer(map, {
 	user_name: 'naomikeusch',
@@ -136,7 +124,7 @@
 	
 	var era = new L.LayerGroup();
 	are.addTo(era);
-	are.addTo(pts);
+	//are.addTo(pts);
 	
 	var pop = cartodb.createLayer(map, {
 	user_name: 'naomikeusch',
@@ -149,7 +137,20 @@
 	
 	var opp = new L.LayerGroup();
 	pop.addTo(opp);
-	pop.addTo(pts);
+	//pop.addTo(pts);
+	
+	//edit
+	var hou = cartodb.createLayer(map, {
+	user_name: 'naomikeusch',
+	type: 'cartodb',
+	sublayers: [{
+	sql: 'select * from tracttemp_copy',
+	cartocss: '#tracttemp_copy{polygon-fill: #FFFFCC; polygon-opacity: 0.9; line-color: #FFF; line-width: 0.5; line-opacity: 1; } #tracttemp_copy [ households <= 11696] { polygon-fill: #0C2C84; } #tracttemp_copy [ households <= 2530] { polygon-fill: #225EA8; } #tracttemp_copy [ households <= 1890] { polygon-fill: #1D91C0; } #tracttemp_copy [ households <= 1509] { polygon-fill: #41B6C4; } #tracttemp_copy [ households <= 1201] { polygon-fill: #7FCDBB; } #tracttemp_copy [ households <= 909] { polygon-fill: #C7E9B4; } #tracttemp_copy [ households <= 635] { polygon-fill: #FFFFCC;}',
+	interactivity: 'cartodb_id'}]
+	});
+	
+	var uoh = new L.LayerGroup();
+	hou.addTo(uoh);
 
 	//checkboxes
 	var overlays = {
@@ -168,11 +169,10 @@
 	};
 	
 	//L.control.layers(baseLayers1, overlays).addTo(map);
-	L.control.layers(baseLayers2, more).addTo(map);
-	L.control.layers(baseLayers3, many).addTo(map);
-	//edit
-	var trying = L.control.layers(baseLayers1, overlays).addTo(map);
-	//new
+	//L.control.layers(baseLayers2, more).addTo(map);
+	//L.control.layers(baseLayers3, many).addTo(map);
+	//var trying = L.control.layers(baseLayers1, overlays).addTo(map);
+
 	$(function() {
 	    $( "#menu" ).menu({
 	      items: "> :not(.ui-widget-header)"
@@ -185,6 +185,7 @@
 	var y = 0;
 	var z = 0;
 	var a = 0;
+	var b = 0;
 	</script>
 	
 	<div id="menu" class = "love">
@@ -262,8 +263,17 @@
 	    	map.removeLayer(opp);
 	    	a--;
 	    }
+	    map.removeLayer(uoh);
 	    break;
-	    case 7:
+	    case 7: 
+	    	if (b<1){
+	    	uoh.addTo(map);
+	    	b++;
+	     }else{
+	    	map.removeLayer(uoh);
+	    	b--;
+	    }
+	    map.removeLayer(opp);
 	    break;
 	    case 8:
 	    break;
