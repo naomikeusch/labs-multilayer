@@ -27,7 +27,6 @@
   .ui-menu {position: absolute; top: 70px; left: 10px; width: 200px; background: #E8E8E8;}
   .ui-widget-header { padding: 0.2em; }
   .love li {color: #339966;}
-  .love li:hover {background-color: #CCFFCC;}
   .love button {color: #339966; background-color:#E8E8E8; border:none; cursor: pointer;}
   .love button:hover {background-color: #CCFFCC;}
   </style>
@@ -187,7 +186,7 @@
 	  <li><button>Community Districts</button></li>
 	  <li><button>Option 3</button></li>
 	  <li class="ui-widget-header">Points</li>    
-	  <li><button>Option 4</button></li>
+	  <li><button>Areas of Interest</button></li>
 	  <li><button>Option 5</button></li>
 	  <li><button>Option 6</button></li>
 	  <li class="ui-widget-header">Chloropleth</li>    
@@ -210,6 +209,7 @@
 	  case 2 :
 	    break;
 	  case 3 :
+	  	era.addTo(map);
 	    break;
 	  }
 	});
