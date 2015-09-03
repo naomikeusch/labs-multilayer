@@ -205,6 +205,7 @@
 	$( "button" ).click( function() {
 	  switch ( $( "button" ).index( this ) ) {
 	  
+	  //City Council Districts
 	  case 0 :
 	    if (i<1){
 	    	ouc.addTo(map);
@@ -214,7 +215,8 @@
 	    	i--;
 	    }
 	    break;
-	    
+	  
+	  //Community Districts  
 	  case 1 :
 	    if (x<1){
 	    	dcyn.addTo(map);
@@ -224,7 +226,8 @@
 	    	x--;
 	    }
 	    break;
-	    
+	  
+	  //Bike Routes  
 	  case 2 :
 	   if (f<1){
 	    	kib.addTo(map);
@@ -234,7 +237,8 @@
 	    	f--;
 	    }
 	    break;
-	    
+	  
+	  //Areas of Interest  
 	  case 3 :
 	   if (y<1){
 	    	era.addTo(map);
@@ -244,7 +248,8 @@
 	    	y--;
 	    }
 	    break;
-	    
+	  
+	  //NYC Subway Stops  
 	  case 4 :
 	    if (z<1){
 	    	bus.addTo(map);
@@ -255,6 +260,7 @@
 	    }
 	    break;
 	    
+	    //Public Schools
 	    case 5:
 	    if (d<1){
 	    	caf.addTo(map);
@@ -265,6 +271,7 @@
 	    }
 	    break;
 	    
+	    //Total Populations
 	    case 6:
 	     if (b==0 && a==0 && c==0){
 	     	map.removeLayer(uoh);
@@ -287,6 +294,7 @@
 	    }
 	    break;
 	    
+	    //Households
 	    case 7: 
 	     if (b==0 && a==0 && c==0){
 	    	map.removeLayer(opp);
@@ -308,6 +316,7 @@
 	    }
 	    break;
 	    
+	    //Over 65
 	    case 8:
 	    	if (b==0 && a==0 && c==0){
 	    	map.removeLayer(opp);
