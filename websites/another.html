@@ -196,6 +196,7 @@
 	
 	//This part is confusing but I will try to clarify:
 	//Each case matches up with a button (cases start at zero)
+	//cases that belong to title don't do anything, but you CANNOT skip numbers.
 	//For each case, I commented the button name, corresponding increasing variable, and variable name of layer
 	//for borders and points that can have multiple cases, or layers, at a time, the "if" part adds layer, "else" removes it
 	//for chloropleth, only one should be on, so you need if, else if, and else
@@ -203,10 +204,13 @@
 	//if happens if no layers are on (a,b,c,etc... ==0) --> turns a on
 	//else if happens if another layer is on (a==0 and b,c, OR d... ==1) -->switches from b,c, OR d to a
 	//else happens if that layer is on(a==1 and b,c,etc ==0) -->turns a off, or "clears map"
-	//NOTE: use CASE 6 as an example for chloropleth!
+	//NOTE: only () of "if" and entire "else if" involve other layeers
+	//NOTE: use CASE 9 as an example for chloropleth!!!!!!
 	$( "li" ).click( function() {
 	  switch ( $( "li" ).index( this ) ) {
-	  	
+	  
+	//Borders
+	case 0: break;
 	  //City Council Districts: i: ouc
 	  case 1 :
 	    if (i<1){
@@ -239,7 +243,9 @@
 	    	f--;
 	    }
 	    break;
-	  
+
+	//Points
+	case 4: break;
 	  //Areas of Interest: y: era
 	  case 5 :
 	   if (y<1){
@@ -273,6 +279,8 @@
 	     }
 	    break;
 	    
+	//Chloropleths
+	case 8: break;
 	    //Total Populations: a : opp
 	    case 9:
 	     //if: used when no choloropleth layer is on (or all chloros are off)
