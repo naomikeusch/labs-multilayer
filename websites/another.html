@@ -210,7 +210,7 @@
 	  switch ( $( "li" ).index( this ) ) {
 	  	
 	  //City Council Districts: i: ouc
-	  case 0 :
+	  case 1 :
 	    if (i<1){
 	    	ouc.addTo(map);
 	    	i++;
@@ -221,7 +221,7 @@
 	    break;
 	  
 	  //Community Districts: x: dcyn
-	  case 1 :
+	  case 2 :
 	    if (x<1){
 	    	dcyn.addTo(map);
 	    	x++;
@@ -232,7 +232,7 @@
 	    break;
 	  
 	  //Bike Routes: f: kib
-	  case 2 :
+	  case 3 :
 	   if (f<1){
 	    	kib.addTo(map);
 	    	f++;
@@ -243,7 +243,7 @@
 	    break;
 	  
 	  //Areas of Interest: y: era
-	  case 3 :
+	  case 5 :
 	   if (y<1){
 	    	era.addTo(map);
 	    	y++;
@@ -254,7 +254,7 @@
 	    break;
 	  
 	  //NYC Subway Stops: z: bus
-	  case 4 :
+	  case 6 :
 	    if (z<1){
 	    	bus.addTo(map);
 	    	z++;
@@ -265,7 +265,7 @@
 	    break;
 	    
 	    //Public Schools: d: caf
-	    case 5:
+	    case 7:
 	     if (d<1){
 	    	caf.addTo(map);
 	    	d++;
@@ -276,7 +276,7 @@
 	    break;
 	    
 	    //Total Populations: a : opp
-	    case 6:
+	    case 9:
 	     //if: used when no choloropleth layer is on (or all chloros are off)
 	     if (a==0 && b==0 && c==0){
 	     	map.removeLayer(uoh); //remove all other layers
@@ -301,7 +301,7 @@
 	    break; //don't forget the break, it ends program and stops from moving onto other cases.
 	    
 	    //Households: b: uoh
-	    case 7: 
+	    case 10: 
 	     if (a==0 && b==0 && c==0){
 	    	map.removeLayer(opp);
 	    	map.removeLayer(xis);
@@ -321,7 +321,7 @@
 	    break;
 	    
 	    //Over 65: c: xis
-	    case 8:
+	    case 11:
 	     if (a==0 && b==0 && c==0){
 	    	map.removeLayer(opp);
 	    	map.removeLayer(uoh);
