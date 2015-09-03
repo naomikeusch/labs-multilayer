@@ -205,10 +205,12 @@
 	//if happens if no layers are on (a,b,c,etc... ==0) --> turns a on
 	//else if happens if another layer is on (a==0 and b,c, OR d... ==1) -->switches from b,c, OR d to a
 	//else happens if that layer is on(a==1 and b,c,etc ==0) -->turns a off, or "clears map"
+	//NOTE: use case 6 as an example for chloropleth!
 
 	$( "button" ).click( function() {
 	  switch ( $( "button" ).index( this ) ) {
-	  //City Council Districts
+	  	
+	  //City Council Districts: i: ouc
 	  case 0 :
 	    if (i<1){
 	    	ouc.addTo(map);
@@ -219,7 +221,7 @@
 	    }
 	    break;
 	  
-	  //Community Districts  
+	  //Community Districts: x: dcyn
 	  case 1 :
 	    if (x<1){
 	    	dcyn.addTo(map);
@@ -230,7 +232,7 @@
 	    }
 	    break;
 	  
-	  //Bike Routes  
+	  //Bike Routes: f: kib
 	  case 2 :
 	   if (f<1){
 	    	kib.addTo(map);
@@ -241,7 +243,7 @@
 	    }
 	    break;
 	  
-	  //Areas of Interest  
+	  //Areas of Interest: y: era
 	  case 3 :
 	   if (y<1){
 	    	era.addTo(map);
@@ -252,7 +254,7 @@
 	    }
 	    break;
 	  
-	  //NYC Subway Stops  
+	  //NYC Subway Stops: z: bus
 	  case 4 :
 	    if (z<1){
 	    	bus.addTo(map);
@@ -263,7 +265,7 @@
 	    }
 	    break;
 	    
-	    //Public Schools
+	    //Public Schools: d: caf
 	    case 5:
 	     if (d<1){
 	    	caf.addTo(map);
@@ -274,29 +276,33 @@
 	     }
 	    break;
 	    
-	    //Total Populations
+	    //Total Populations: a : opp
 	    case 6:
+	     //if: used when no choloropleth layer is on (or all chloros are off)
 	     if (a==0 && b==0 && c==0){
-	     	map.removeLayer(uoh);
+	     	map.removeLayer(uoh); //remove all other layers
 	     	map.removeLayer(xis);
-	    	opp.addTo(map);
-	    	a=1;
+	    	opp.addTo(map); //add layer in use
+	    	a=1; //this layer is on
+	    	
+	     //else if: used when a different chloropleth layer is on
 	     }else if(b==1 || c==1){
-	     	map.removeLayer(uoh);
+	     	map.removeLayer(uoh); //remove all other layers
 	     	map.removeLayer(xis);
-	     	opp.addTo(map);
-	     	a=1;
-	     	b=0; c=0;
+	     	opp.addTo(map); //add layer in use
+	     	a=1; //this layer is on
+	     	b=0; c=0; //other layers are off
 	     }
+	     //else: used when this layer is on/visible. Turns this layer off (clears map of all chloros)
 	     else{
-	    	map.removeLayer(opp);
+	    	map.removeLayer(opp); //remove every layer
 	    	map.removeLayer(uoh);
 	    	map.removeLayer(xis);
-	    	a=0; b=0; c=0;
+	    	a=0; b=0; c=0; //all layers off
 	    }
-	    break;
+	    break; //don't forget the break, it ends program and stops from moving onto other cases.
 	    
-	    //Households
+	    //Households: b: uoh
 	    case 7: 
 	     if (a==0 && b==0 && c==0){
 	    	map.removeLayer(opp);
@@ -317,7 +323,7 @@
 	    }
 	    break;
 	    
-	    //Over 65
+	    //Over 65: c: xis
 	    case 8:
 	     if (a==0 && b==0 && c==0){
 	    	map.removeLayer(opp);
