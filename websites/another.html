@@ -277,8 +277,8 @@
 	    case 9:
 	     //if: used when no choloropleth layer is on (or all chloros are off)
 	     if (a==0 && b==0 && c==0){
-	     	map.removeLayer(uoh); //remove all other layers
-	     	map.removeLayer(xis);
+	     	//map.removeLayer(uoh); //remove all other layers
+	     	//map.removeLayer(xis);
 	    	opp.addTo(map); //add layer in use
 	    	a=1; //this layer is on
 	    	
@@ -301,8 +301,8 @@
 	    //Households: b: uoh
 	    case 10: 
 	     if (a==0 && b==0 && c==0){
-	    	map.removeLayer(opp);
-	    	map.removeLayer(xis);
+	    	//map.removeLayer(opp);
+	    	//map.removeLayer(xis);
 	    	uoh.addTo(map);
 	    	b=1;
 	      }else if (a==1 || c==1){
@@ -321,8 +321,8 @@
 	    //Over 65: c: xis
 	    case 11:
 	     if (a==0 && b==0 && c==0){
-	    	map.removeLayer(opp);
-	    	map.removeLayer(uoh);
+	    	//map.removeLayer(opp);
+	    	//map.removeLayer(uoh);
 	    	xis.addTo(map);
 	    	c=1;
 	      }else if (a==1 || b==1){
