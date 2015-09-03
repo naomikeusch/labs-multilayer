@@ -175,6 +175,8 @@
 	var d = 0;
 	var f = 0;
 	
+	var turnChloroOff = a=0; b=0; c=0;
+	var removeChloros = map.removeLayer(uoh); map.removeLayer(opp); map.removeLayer(xis);
 </script>
 	
 	<div id="menu" class = "love">
@@ -203,8 +205,7 @@
 	//if happens if no layers are on (a,b,c,etc... ==0) --> turns a on
 	//else if happens if another layer is on (a==0 and b,c, OR d... ==1) -->switches from b,c, OR d to a
 	//else happens if that layer is on(a==1 and b,c,etc ==0) -->turns a off, or "clears map"
-	var turnChloroOff = a=0; b=0; c=0;
-	var removeChloros = map.removeLayer(uoh); map.removeLayer(opp); map.removeLayer(xis);
+
 	$( "button" ).click( function() {
 	  switch ( $( "button" ).index( this ) ) {
 	  //City Council Districts
