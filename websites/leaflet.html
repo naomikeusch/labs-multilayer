@@ -296,8 +296,8 @@
 	     //else: used when this layer is on/visible. Turns this layer off (clears map of all chloros)
 	     else{
 	    	map.removeLayer(opp); //remove every layer
-	    	map.removeLayer(uoh);
-	    	map.removeLayer(xis);
+	    	//map.removeLayer(uoh);
+	    	//map.removeLayer(xis);
 	    	a=0; b=0; c=0; //all layers off
 	    }
 	    break; //don't forget the break, it ends program and stops from moving onto other cases.
@@ -317,8 +317,8 @@
 	      }
 	      else{
 	    	map.removeLayer(uoh);
-	    	map.removeLayer(opp);
-	    	map.removeLayer(xis);
+	    	//map.removeLayer(opp);
+	    	//map.removeLayer(xis);
 	    	a=0; b=0; c=0;
 	    }
 	    break;
@@ -338,8 +338,6 @@
 	      	a=0; b=0;
 	      }
 	      else{
-	    	//map.removeLayer(uoh);
-	    	//map.removeLayer(opp);
 	    	map.removeLayer(xis);
 	    	a=0; b=0; c=0;
 	      }
