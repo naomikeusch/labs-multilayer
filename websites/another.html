@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+ <title>testing</title>
+ <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+ <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
+ <style> html, body, #map { height:100%; padding:0; margin:0 } </style>
+ <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+ <link rel="stylesheet" href="reset.css" />
+ <link rel="stylesheet" href="app-style.css" />
+
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+   <link rel="stylesheet" href="/resources/demos/style.css">
+   <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
+ 
+ <style>
+	  .ui-menu {position: absolute; top: 70px; left: 10px; width: 200px; background: #E8E8E8;}
+	  .ui-widget-header { padding: 0em; }
+	  .whole li {color: #339966;}
+	  .whole button {color: #339966; background-color:#E8E8E8; width: 180px; height: 50px; border:none; cursor: pointer; font-size:85%;}
+	  .whole button:hover {background-color: #CCFFCC;}
+  </style>
+ </head>
+<body>
+    <div id="map"></div>
+ 
+	<script>
+	
+	var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+	'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+	'Imagery © <a href="http://mapbox.com">Mapbox</a>,' + 'CartoDB <a href = "https://cartodb.com/attributions">Attributions</a>',
+	mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ';
+	
+	var nostops = new L.LayerGroup();
+	var grayscale = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
+	
+	var map = L.map('map', {
+	center: [40.70, -73.97],
+	zoom: 12,
+	layers: [grayscale, nostops]
+	});
+	
+	//CartoDB Layers
+	   //Borders	
+		//City Council Districts
+		var cou = cartodb.createLayer(map, {
+		user_name: 'naomikeusch',
+		type: 'cartodb',
+		sublayers: [{
+		sql: 'select * from city_council_districts',
+		cartocss: '#layer { polygon-fill: #FFF; polygon-opacity: 0; line-width: 2; line-color: #3B007F;}',
+		interactivity: 'cartodb_id'}]
+		});
+		var ouc = new L.LayerGroup();
+		cou.addTo(ouc);
+		
+		//Community districts
+		var nycd = cartodb.createLayer(map, {user_name: 'naomikeusch',
+		type: 'cartodb',
+		sublayers: [ 
+		{
+		sql: 'select * from nycd',
+		cartocss: '#layer { polygon-fill: #FFF; polygon-opacity: 0; line-width: 2; line-color: #2167AB;}',
+		interactivity: 'cartodb_id'}]
+		});
+		var dcyn = new L.LayerGroup();
+		nycd.addTo(dcyn);
+		
+		//Bike Routes
+		var bik = cartodb.createLayer(map, {
+		user_name: 'naomikeusch',
+		type: 'cartodb',
+		sublayers: [{
+		sql: 'select * from bikeroutes_ny',
+		cartocss: '#bikeroutes_ny{ line-color: #FF6600; line-width: 2; line-opacity: 0.7;}',
+		interactivity: 'cartodb_id'}]
+		});
+		var kib = new L.LayerGroup();
+		bik.addTo(kib);
+	  
+	   //Points	
+		//Areas of Interest
+		var are = cartodb.createLayer(map, {
+		user_name: 'naomikeusch',
+		type: 'cartodb',
+		sublayers: [{
+		sql: 'select * from areas_of_interest_newyork',
+		cartocss: '#layer { marker-fill-opacity: 1; marker-line-color: #5CA2D1; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 10; marker-fill: #F84F40; marker-allow-overlap: true;}',
+		interactivity: 'cartodb_id'}]
+		});
+		var era = new L.LayerGroup();
+		are.addTo(era);
+		
+		//NYC Subway Stops
+		var sub = cartodb.createLayer(map, {
+		user_name: 'naomikeusch',
+		type: 'cartodb',
+		sublayers: [{
+		sql: 'select * from nyc_subway_entrance',
+		cartocss: '#layer {marker-fill-opacity: 1; marker-line-color: #3B007F; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point;marker-type: ellipse; marker-width: 10; marker-fill: #229A00; marker-allow-overlap: true;}',
+		interactivity: 'cartodb_id'}]
+		});
+		var bus = new L.LayerGroup();
+		sub.addTo(bus);
+		
+		//Public Schools
+		var fac = cartodb.createLayer(map, {
+		user_name: 'naomikeusch',
+		type: 'cartodb',
+		sublayers: [{
+		sql: 'select * from facilities',
+		cartocss: '#facilities{marker-fill-opacity: 1; marker-line-color: #FFF; marker-line-width: 1; marker-line-opacity: 1; marker-placement: point; marker-type: ellipse; marker-width: 10; marker-fill: #41006D; marker-allow-overlap: true;}',
+		interactivity: 'cartodb_id'}]
+		});
+		var caf = new L.LayerGroup();
+		fac.addTo(caf);
+	
+	   //Chloropleths	
+		//Total Population
+		var pop = cartodb.createLayer(map, {
+		user_name: 'naomikeusch',
+		type: 'cartodb',
+		sublayers: [{
+		sql: 'select * from tracttemp_copy',
+		cartocss: '#tracttemp_copy{polygon-fill: #FFEDA0; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;} #tracttemp_copy [ totalpop <= 26908] { polygon-fill: #F03B20;} #tracttemp_copy [ totalpop <= 5723] { polygon-fill: #FEB24C;} #tracttemp_copy [ totalpop <= 2771] { polygon-fill: #FFEDA0;}',
+		interactivity: 'cartodb_id'}]
+		});
+		var opp = new L.LayerGroup();
+		pop.addTo(opp);
+		
+		//Households
+		var hou = cartodb.createLayer(map, {
+		user_name: 'naomikeusch',
+		type: 'cartodb',
+		sublayers: [{
+		sql: 'select * from tracttemp_copy',
+		cartocss: '#tracttemp_copy{polygon-fill: #FFFFCC; polygon-opacity: 0.9; line-color: #FFF; line-width: 0.5; line-opacity: 1; } #tracttemp_copy [ households <= 11696] { polygon-fill: #0C2C84; } #tracttemp_copy [ households <= 2530] { polygon-fill: #225EA8; } #tracttemp_copy [ households <= 1890] { polygon-fill: #1D91C0; } #tracttemp_copy [ households <= 1509] { polygon-fill: #41B6C4; } #tracttemp_copy [ households <= 1201] { polygon-fill: #7FCDBB; } #tracttemp_copy [ households <= 909] { polygon-fill: #C7E9B4; } #tracttemp_copy [ households <= 635] { polygon-fill: #FFFFCC;}',
+		interactivity: 'cartodb_id'}]
+		});
+		var uoh = new L.LayerGroup();
+		hou.addTo(uoh);
+		
+		//Over 65
+		var six = cartodb.createLayer(map, {
+		user_name: 'naomikeusch',
+		type: 'cartodb',
+		sublayers: [{
+		sql: 'select * from tracttemp_copy',
+		cartocss: '#tracttemp_copy{polygon-fill: #F1E6F1; polygon-opacity: 0.9; line-color: #FFF; line-width: 0.5; line-opacity: 1; } #tracttemp_copy [ over65 <= 6272] { polygon-fill: #8A4E8A; } #tracttemp_copy [ over65 <= 1070] { polygon-fill: #A05AA0; } #tracttemp_copy [ over65 <= 765] { polygon-fill: #B379B3; } #tracttemp_copy [ over65 <= 571] { polygon-fill: #C08FC0; } #tracttemp_copy [ over65 <= 434] { polygon-fill: #CCA5CC; } #tracttemp_copy [ over65 <= 304] { polygon-fill: #D8BBD8; } #tracttemp_copy [ over65 <= 175] { polygon-fill: #F1E6F1;}',
+		interactivity: 'cartodb_id'}]
+		});
+		var xis = new L.LayerGroup();
+		six.addTo(xis);
+		
+	$(function() {
+	    $( "#menu" ).menu({
+	      items: "> :not(.ui-widget-header)"
+	    });
+	});
+	
+	//variables for iterating, on/off for buttons. Ideally they should have better names.
+	var i = 0;
+	var x = 0;
+	var y = 0;
+	var z = 0;
+	var a = 0;
+	var b = 0;
+	var c = 0;
+	var d = 0;
+	var f = 0;
+	
+</script>
+	
+	<div id="menu" class = "whole">
+		  <li class="ui-widget-header">Borders</li>
+		  <li class="part"><button>City Council Districts</button></li>
+		  <li><button>Community Districts</button></li>
+		  <li><button>Bike Routes</button></li>
+		  <li class="ui-widget-header">Points</li>    
+		  <li><button>Areas of Interest</button></li>
+		  <li><button>NYC Subway Stops</button></li>
+		  <li><button>Public Schools</button></li>
+		  <li class="ui-widget-header">Chloropleth</li>    
+		  <li><button>Total Population</button></li>
+		  <li><button>Households</button></li>
+		  <li><button>Over 65</button></li>
+	 </div>
+	
+	<script>
+	
+	//This part is confusing but I will try to clarify:
+	//Each case matches up with a button (cases start at zero)
+	//For each case, I commented the button name, corresponding increasing variable, and variable name of layer
+	//for borders and points that can have multiple cases, or layers, at a time, the "if" part adds layer, "else" removes it
+	//for chloropleth, only one should be on, so you need if, else if, and else
+	//Think of 1 as "on" or "visible" and 0 as "off" or "hidden"
+	//if happens if no layers are on (a,b,c,etc... ==0) --> turns a on
+	//else if happens if another layer is on (a==0 and b,c, OR d... ==1) -->switches from b,c, OR d to a
+	//else happens if that layer is on(a==1 and b,c,etc ==0) -->turns a off, or "clears map"
+	//NOTE: use CASE 6 as an example for chloropleth!
+	$( "button" ).click( function() {
+	  switch ( $( "button" ).index( this ) ) {
+	  	
+	  //City Council Districts: i: ouc
+	  case 0 :
+	    if (i<1){
+	    	ouc.addTo(map);
+	    	i++;
+	    }else{
+	    	map.removeLayer(ouc);
+	    	i--;
+	    }
+	    break;
+	  
+	  //Community Districts: x: dcyn
+	  case 1 :
+	    if (x<1){
+	    	dcyn.addTo(map);
+	    	x++;
+	    }else{
+	    	map.removeLayer(dcyn);
+	    	x--;
+	    }
+	    break;
+	  
+	  //Bike Routes: f: kib
+	  case 2 :
+	   if (f<1){
+	    	kib.addTo(map);
+	    	f++;
+	    }else{
+	    	map.removeLayer(kib);
+	    	f--;
+	    }
+	    break;
+	  
+	  //Areas of Interest: y: era
+	  case 3 :
+	   if (y<1){
+	    	era.addTo(map);
+	    	y++;
+	    }else{
+	    	map.removeLayer(era);
+	    	y--;
+	    }
+	    break;
+	  
+	  //NYC Subway Stops: z: bus
+	  case 4 :
+	    if (z<1){
+	    	bus.addTo(map);
+	    	z++;
+	    }else{
+	    	map.removeLayer(bus);
+	    	z--;
+	    }
+	    break;
+	    
+	    //Public Schools: d: caf
+	    case 5:
+	     if (d<1){
+	    	caf.addTo(map);
+	    	d++;
+	     }else{
+	    	map.removeLayer(caf);
+	    	d--;
+	     }
+	    break;
+	    
+	    //Total Populations: a : opp
+	    case 6:
+	     //if: used when no choloropleth layer is on (or all chloros are off)
+	     if (a==0 && b==0 && c==0){
+	     	map.removeLayer(uoh); //remove all other layers
+	     	map.removeLayer(xis);
+	    	opp.addTo(map); //add layer in use
+	    	a=1; //this layer is on
+	    	
+	     //else if: used when a different chloropleth layer is on
+	     }else if(b==1 || c==1){
+	     	map.removeLayer(uoh); //remove all other layers
+	     	map.removeLayer(xis);
+	     	opp.addTo(map); //add layer in use
+	     	a=1; //this layer is on
+	     	b=0; c=0; //other layers are off
+	     }
+	     
+	     //else: used when this layer is on/visible. Turns this layer off (clears map of all chloros)
+	     else{
+	    	map.removeLayer(opp); //remove this layer
+	    	a=0; //this layer is off
+	      }
+	    break; //don't forget the break, it ends program and stops from moving onto other cases.
+	    
+	    //Households: b: uoh
+	    case 7: 
+	     if (a==0 && b==0 && c==0){
+	    	map.removeLayer(opp);
+	    	map.removeLayer(xis);
+	    	uoh.addTo(map);
+	    	b=1;
+	      }else if (a==1 || c==1){
+	      	map.removeLayer(opp);
+	      	map.removeLayer(xis);
+	    	uoh.addTo(map);
+	      	b=1;
+	      	a=0; c=0;
+	      }
+	      else{
+	    	map.removeLayer(uoh);
+	    	b=0;
+	    }
+	    break;
+	    
+	    //Over 65: c: xis
+	    case 8:
+	     if (a==0 && b==0 && c==0){
+	    	map.removeLayer(opp);
+	    	map.removeLayer(uoh);
+	    	xis.addTo(map);
+	    	c=1;
+	      }else if (a==1 || b==1){
+	      	map.removeLayer(opp);
+	      	map.removeLayer(uoh);
+	    	xis.addTo(map);
+	      	c=1;
+	      	a=0; b=0;
+	      }
+	      else{
+	    	map.removeLayer(xis);
+	    	c=0;
+	      }
+	    break;
+	  }
+	});
+	</script>
+</body>
+</html>
