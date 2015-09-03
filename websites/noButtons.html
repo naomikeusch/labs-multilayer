@@ -121,7 +121,7 @@
 		var caf = new L.LayerGroup();
 		fac.addTo(caf);
 	
-	   //Chloropleths	
+	   //Choropleths	
 		//Total Population
 		var pop = cartodb.createLayer(map, {
 		user_name: 'naomikeusch',
@@ -186,7 +186,7 @@
 		  <li style = "color: #F84F40;">Areas of Interest</li>
 		  <li style = "color: #229A00;">NYC Subway Stops</li>
 		  <li style = "color: #41006D;">Public Schools</li>
-		  <li style = "font-size: 113%;" class="ui-widget-header">Chloropleth</li>    
+		  <li style = "font-size: 113%;" class="ui-widget-header">Choropleth</li>    
 		  <li>Total Population</li>
 		  <li>Households</li>
 		  <li>Over 65</li>
@@ -199,13 +199,13 @@
 	//cases that belong to title don't do anything, but you CANNOT skip numbers.
 	//For each case, I commented the button name, corresponding increasing variable, and variable name of layer
 	//for borders and points that can have multiple cases, or layers, at a time, the "if" part adds layer, "else" removes it
-	//for chloropleth, only one should be on, so you need if, else if, and else
+	//for choropleth, only one should be on, so you need if, else if, and else
 	//Think of 1 as "on" or "visible" and 0 as "off" or "hidden"
 	//if happens if no layers are on (a,b,c,etc... ==0) --> turns a on
 	//else if happens if another layer is on (a==0 and b,c, OR d... ==1) -->switches from b,c, OR d to a
 	//else happens if that layer is on(a==1 and b,c,etc ==0) -->turns a off, or "clears map"
 	//NOTE: only () of "if" and entire "else if" involve other layeers
-	//NOTE: use CASE 9 as an example for chloropleth!!!!!!
+	//NOTE: use CASE 9 as an example for choropleth!!!!!!
 	$( "li" ).click( function() {
 	  switch ( $( "li" ).index( this ) ) {
 	  
@@ -279,16 +279,16 @@
 	     }
 	    break;
 	    
-	//Chloropleths
+	//Choropleths
 	case 8: break;
 	    //Total Populations: a : opp
 	    case 9:
-	     //if: used when no choloropleth layer is on (or all chloros are off)
+	     //if: used when no choloropleth layer is on (or all choros are off)
 	     if (a==0 && b==0 && c==0){
 	    	opp.addTo(map); //add layer in use
 	    	a=1; //this layer is on
 	    	
-	     //else if: used when a different chloropleth layer is on
+	     //else if: used when a different choropleth layer is on
 	     }else if(b==1 || c==1){
 	     	map.removeLayer(uoh); //remove all other layers
 	     	map.removeLayer(xis);
@@ -297,7 +297,7 @@
 	     	b=0; c=0; //other layers are off
 	     }
 	     
-	     //else: used when this layer is on/visible. Turns this layer off (clears map of all chloros)
+	     //else: used when this layer is on/visible. Turns this layer off (clears map of all choros)
 	     else{
 	    	map.removeLayer(opp); //remove this layer
 	    	a=0; //this layer is off
