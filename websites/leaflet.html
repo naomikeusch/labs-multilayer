@@ -175,7 +175,12 @@
 	var d = 0;
 	var f = 0;
 
-	var allZero = (b==0 && a==0 && c==0);
+	var clear = else{
+	    	map.removeLayer(uoh);
+	    	map.removeLayer(opp);
+	    	map.removeLayer(xis);
+	    	a=0; b=0; c=0;
+	      };
 </script>
 	
 	<div id="menu" class = "love">
@@ -330,13 +335,14 @@
 	      	c=1;
 	      	a=0; b=0;
 	      }
-	      else{
+	      /*else{
 	    	map.removeLayer(uoh);
 	    	map.removeLayer(opp);
 	    	map.removeLayer(xis);
 	    	a=0; b=0; c=0;
 	    	//turnChloroOff
-	      }
+	      }*/
+	      clear;
 	    break;
 	  }
 	});
