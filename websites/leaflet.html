@@ -284,16 +284,14 @@
 	     	map.removeLayer(uoh);
 	     	map.removeLayer(xis);
 	     	opp.addTo(map);
+	     	turnChloroOff;
 	     	a=1;
-	     	b=0;
-	     	c=0;
 	     }
 	     else{
 	    	map.removeLayer(opp);
 	    	map.removeLayer(uoh);
 	    	map.removeLayer(xis);
 	    	turnChloroOff;
-	    	//a=0; b=0; c=0;
 	    }
 	    break;
 	    
@@ -307,15 +305,14 @@
 	      }else if (a==1 || c==1){
 	      	map.removeLayer(opp);
 	    	uoh.addTo(map);
+	    	turnChloroOff;
 	      	b=1;
-	      	a=0;
-	      	c=0;
 	      }
 	      else{
 	    	map.removeLayer(uoh);
 	    	map.removeLayer(opp);
 	    	map.removeLayer(xis);
-	    	a=0; b=0; c=0;
+	    	turnChloroOff;
 	    }
 	    break;
 	    
@@ -330,15 +327,14 @@
 	      	map.removeLayer(opp);
 	      	map.removeLayer(uoh);
 	    	xis.addTo(map);
+	    	turnChloroOff;
 	      	c=1;
-	      	a=0;
-	      	b=0;
 	      }
 	      else{
 	    	map.removeLayer(uoh);
 	    	map.removeLayer(opp);
 	    	map.removeLayer(xis);
-	    	a=0; b=0; c=0;
+	    	turnChloroOff;
 	    }
 	    break;
 	  }
