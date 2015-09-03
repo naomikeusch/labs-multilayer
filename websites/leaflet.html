@@ -174,8 +174,9 @@
 	var c = 0;
 	var d = 0;
 	var f = 0;
-	//edit
+	//edit: variables for chloropleth else statements
 	var turnChloroOff = a=0; b=0; c=0;
+	var removeChloros = map.removeLayer(uoh); map.removeLayer(opp); map.removeLayer(xis);
 	</script>
 	
 	<div id="menu" class = "love">
@@ -264,13 +265,13 @@
 	    
 	    //Public Schools
 	    case 5:
-	    if (d<1){
+	     if (d<1){
 	    	caf.addTo(map);
 	    	d++;
-	    }else{
+	     }else{
 	    	map.removeLayer(caf);
 	    	d--;
-	    }
+	     }
 	    break;
 	    
 	    //Total Populations
@@ -288,9 +289,7 @@
 	     	b=0; c=0;
 	     }
 	     else{
-	    	map.removeLayer(opp);
-	    	map.removeLayer(uoh);
-	    	map.removeLayer(xis);
+	    	removeChloros
 	    	turnChloroOff;
 	    }
 	    break;
@@ -309,16 +308,14 @@
 	      	a=0; c=0;
 	      }
 	      else{
-	    	map.removeLayer(uoh);
-	    	map.removeLayer(opp);
-	    	map.removeLayer(xis);
+	    	removeChloros
 	    	turnChloroOff;
 	    }
 	    break;
 	    
 	    //Over 65
 	    case 8:
-	    	if (b==0 && a==0 && c==0){
+	     if (b==0 && a==0 && c==0){
 	    	map.removeLayer(opp);
 	    	map.removeLayer(uoh);
 	    	xis.addTo(map);
@@ -331,11 +328,9 @@
 	      	a=0; b=0;
 	      }
 	      else{
-	    	map.removeLayer(uoh);
-	    	map.removeLayer(opp);
-	    	map.removeLayer(xis);
+	    	removeChloros
 	    	turnChloroOff;
-	    }
+	      }
 	    break;
 	  }
 	});
